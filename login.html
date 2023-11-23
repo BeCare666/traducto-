@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <!-- Site Title-->
+    <title>Compte</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <!-- Link to import alert personnal -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="icon" href="images/logo.jpeg" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  </head>
+  <body>
+    <!-- Page Loader-->
+    <div class="preloader">
+      <div class="preloader-body"><img src="images/logo.jpeg" alt="" width="427" height="118"/>
+        <div class="cssload-wrapper">
+          <div class="cssload-border">
+            <div class="cssload-whitespace">
+              <div class="cssload-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+ <!-- Login Form-->
+      <section class="section section-md bg-white text-center">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+              <!-- RD Mailform-->
+              <form class="rd-mailform rd-mailform_label-centered">
+                <div class="form-wrap">
+                  <label class="form-label-outside" for="login-email">E-mail</label>
+                  <input class="form-input" id="login-email" type="email" name="email" data-constraints="@Email @Required">
+                </div>
+                <div class="form-wrap">
+                  <label class="form-label-outside" for="login-password">Mot de passe</label>
+                  <input class="form-input" id="login-password" type="password" name="pass" data-constraints="@Required">
+                </div>
+                <div class="form-wrap">
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0">
+                      
+                      <input type="checkbox" id="myCheckbox"/>
+                      Se souvenire de moi
+                      <div class="control__indicator"></div>
+                    </label>               
+                  </div>
+                </div>
+                <div class="row row-20 form-wrap">
+                  <div class="col-md-6">
+                    <button class="button button-primary button-block button-ujarak" type="submit" id="submitId1">Se connecter</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="button button-default-outline button-block button-ujarak" type="submit" id="submitId2">Créer un compte</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Footer-->
+      <footer class="section footer-classic context-dark">
+        <div class="footer-classic__main bg-gray-3" style="background-color: blue !important;">
+          <div class="container">
+            <div class="row row-50 align-items-sm-end justify-content-sm-center justify-content-lg-start">
+              <div class="col-lg-6">
+                <div class="footer-classic__custom-column">
+                  <div class="unit flex-sm-row unit-spacing-md">
+                    <div class="unit__left"><span class="icon icon-md icon-default icon-gradient fa fa-phone"></span></div>
+                    <div class="unit__body"><a class="link link-lg" href="tel:+1 (929) 592-5779">+1 (929) 592-5779</a>
+                      <p class="ls-1">Nous sommes disponibles pour une consultation 24/7</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-10 col-lg-6">
+                <div class="group-md">
+                  <h3>S'abonner</h3>
+                  <p class="large">Recevez les dernières mises à jour et offres.</p>
+                </div>
+                      <!-- RD Mailform-->
+                      <form class="rd-mailform form_inline form_lg" data-form-output="form-output-global" data-form-type="subscribe" method="post" action="bat/rd-mailform.php">
+                        <div class="form-wrap">
+                          <input class="form-input" id="subscribe-form-footer-form-email" type="email" name="email" data-constraints="@Email @Required">
+                          <label class="form-label" for="subscribe-form-footer-form-email">Your E-mail</label>
+                        </div>
+                        <div class="form-button">
+                          <button class="button button-lg button-primary button-ujarak" type="submit">S'abonner</button>
+                        </div>
+                      </form>
+              </div>
+            </div>
+            <div class="row row-50 justify-content-md-center justify-content-lg-start justify-content-xl-between">
+              <div class="col-md-6 col-lg-6">
+                <p class="custom-heading-1 custom-heading-bordered">À propos de nous</p>
+                <div class="divider"></div>
+                <p class="ls-05">traducto est une société de traduction de premier plan qui propose des services de traduction et de localisation de grande qualité.</p>
+                <ul class="list-inline list-inline-xs">
+                  <li><a class="icon icon-xxs icon-circle icon-filled icon-filled_brand fa fa-facebook" href="#"></a></li>
+                  <li><a class="icon icon-xxs icon-circle icon-filled icon-filled_brand fa fa-twitter" href="#"></a></li>
+                  <li><a style="background-color: green !important;" class="icon icon-xxs icon-circle icon-filled icon-filled_brand fa fa-whatsapp" href="#"></a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-6"> 
+                <p class="custom-heading-1 custom-heading-bordered">Liens utiles</p>
+                <div class="divider"></div>
+                <div class="row row-5">
+                  <div class="col-sm-6">
+                    <ul class="list-marked list-marked_primary">
+                      <li><a href="about-us.html">À propos de notre entreprise</a></li>
+                      <li><a href="about-us.html#team">Notre équipe</a></li>
+                      <li><a href="services.html">Services</a></li>
+                     
+                    </ul>
+                  </div>
+                  <div class="col-sm-6">
+                    <ul class="list-marked list-marked_primary">
+                      <li><a href="faq.html">FAQ</a></li>
+                      <li><a href="contact-us.html">Contactez-nous</a></li>
+                      <li><a href="privacy-policy.html">Politique de confidentialité</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-default__aside bg-gray-5">
+          <div class="container">
+            <div class="footer-default__aside-inner">
+              <!-- Rights-->
+              <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>traducto</span><span>.&nbsp;</span><span>All Rights Reserved</span></p>
+              <ul class="list-separated list-inline">
+                <li><a href="privacy-policy.html">Politique de confidentialité</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <svg class="svg-gradient" viewbox="0 0 79 79">
+      <defs>
+        <lineargradient id="linear-gradient">
+          <stop offset="0" stop-color="#f14f4a"></stop>
+          <stop offset="1" stop-color="#f0d51e"></stop>
+        </lineargradient>
+      </defs>
+    </svg>
+    <svg class="svg-gradient" viewbox="0 0 79 79">
+      <defs>
+        <lineargradient id="MyGradient">
+          <stop offset="5%" stop-color="#f14f4a"></stop>
+          <stop offset="95%" stop-color="#f0d51e"></stop>
+        </lineargradient>
+      </defs>
+    </svg>
+    <!-- Javascript-->
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/database.js"></script>
+</body>
+</html>

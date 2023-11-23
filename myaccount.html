@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myaccount</title>
+    <link rel="stylesheet" href="css/myaccount.css">
+    <link rel="icon" href="images/logo.jpeg" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-storage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+   <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Lato:300">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</head>
+<body>
+<section class="large-cta-section skrollable skrollable-between" 
+   id="skrollableId" style="height: 100vh !important; display: none;">
+  <div class="medium-large-wrapper skrollable skrollable-after">
+    <div class="medium-text-wrapper">
+      <h2 class="h2 large white" id="TableTitId"></h2>
+      <h3 class="h3 white" style="opacity: 0;">Material Design delivers a cleaner and flatter user interface</h3>
+      <a class="cta-link footer-cta-link" style="cursor: pointer;" alt="Try NeverBounce for free"    id="skrollableIdbtn">Nouvelle traduction</a>
+    </div>
+  </div>
+  <img class="cta-purple-email skrollable skrollable-after" src="https://neverbounce.com/images/background-images/cta-purple-email.png" alt="email illustration">
+  <img src="https://neverbounce.com/images/background-images/cta-left-line.svg" class="cta-left-line" alt="graphic line element">
+  <!--<img src="images/logo.jpeg" class="cta-teal-airplane" alt="paper airplane">-->
+  <button class="image-button btn-my-color circle-image " id="user-button" >
+  <i class="fa fa-user"></i>
+  </button>
+  <div class="profile-usermenu sidebar-sticky" id="modalMyDropdown">
+    <ul class="nav flex-column">
+      <li class="active nav-item">
+        <a href="#" class="nav-link active" id="modalMyDropdownx">
+         
+          </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" style="cursor:pointer" target="_blank" id="deletemyComptId">
+          <i class="fa fa-trash"></i> Supprimer
+           </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  style="cursor:pointer" id="logoutId">
+          <i class="fa fa-sign-out"></i> Se deconnecter
+           </a>
+      </li>
+    </ul>
+  </div>
+  <img class="cta-blue-email skrollable skrollable-between" src="https://neverbounce.com/images/background-images/cta-blue-email.png" alt="email illustration">
+<div id="stepMyId">
+<h2 style="opacity: 0;">Multi step form </h2>
+<h2>Suivi de votre projet</h2>
+<div class="form-steps">
+  <!-- First Step -->
+  <div class="form-steps__step " id="step1">
+    <div class="form-steps__step-circle" >
+      <span class="form-steps__step-number">1</span>
+      <span class="form-steps__step-check">&#x2713;</span>
+    </div>
+    <strong class="form-step__step-name" style="color: white;">Réçu</strong>
+  </div>
+  <!-- Second Step -->
+  <div class="form-steps__step " id="step2">
+    <div class="form-steps__step-circle">
+      <span class="form-steps__step-number">2</span>
+      <span class="form-steps__step-check">&#x2713;</span>
+    </div>
+    <strong class="form-step__step-name" style="color: white;">En cours</strong>
+  </div>
+  <!-- Thired Step -->
+  <div class="form-steps__step " id="step3">
+    <div class="form-steps__step-circle">
+      <span class="form-steps__step-number">3</span>
+      <span class="form-steps__step-check">&#x2713;</span>
+    </div>
+    <strong class="form-step__step-name" style="color: white;">Relecture</strong>
+  </div>
+  <!-- Thired Step -->
+  <div class="form-steps__step form-steps__step--last" id="step4">
+    <div class="form-steps__step-circle">
+      <span class="form-steps__step-number">4</span>
+      <span class="form-steps__step-check">&#x2713;</span>
+    </div>
+    <strong class="form-step__step-name" style="color: white;">Terminé</strong>
+  </div>
+</div>
+</div>
+</section>
+<section class="contact-wrap" id="showId">
+    <div class="container" id="contact-wrapId">
+        <div class="card">
+          <div class="drop_box">
+           <div id="toHiheId">
+            <header>
+              <h4>Sélectionnez le fichier ici</h4>
+            </header>
+            <p>Fichiers pris en charge : PDF, TEXTE, DOC , DOCX</p>
+            <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;">
+           </div>
+                
+          <div class="form" id="btnIdx" style="display: none;">
+            <h4 class="titleId"></h4>
+            <input type="text" placeholder="Nombre de mots ?" id="numberMoId" oninput="validerSaisie(this)">
+            <button class="btn" style="cursor: pointer;" id="btnId" >Envoyer</button>
+          </div>
+          <button class="btn btnx" style="cursor: pointer;" id="btnIdy">Choisir le fichier</button>
+          </div>
+        </div>
+      </div>
+</section>
+<div id="preloader"></div>
+<script type="module">
+// Configurer votre projet Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyAE3g0U59TzghjmeN-LOL6v70xYaTm3pAU",
+    authDomain: "traducto-b36fc.firebaseapp.com",
+    databaseURL: "https://traducto-b36fc-default-rtdb.firebaseio.com",
+    projectId: "traducto-b36fc",
+    storageBucket: "traducto-b36fc.appspot.com",
+    messagingSenderId: "560806060261",
+    appId: "1:560806060261:web:2b990c1bc8ec660715f40c"
+};
+const UserTraductoId = localStorage.getItem('userTraductoId');
+// Initialiser Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Initialiser Firebase Storage
+const storage = firebase.storage();
+
+// Récupérer une référence vers le dossier de stockage (par exemple, 'documents')
+const storageRef = storage.ref('documents');
+var skrollableIdbtn = document.getElementById('skrollableIdbtn');
+var skrollableId = document.getElementById('skrollableId');
+var showId = document.getElementById('showId');
+var preloader = document.getElementById('preloader');
+var deletemyComptId = document.getElementById('deletemyComptId');
+var logoutId = document.getElementById('logoutId');
+
+
+const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+
+// function to commeback
+if(!UserTraductoId){
+  window.location.href = "login.html"
+}
+// function to logout my compte
+logoutId.addEventListener('click', function(){
+  Swal.fire({
+    icon: 'info',
+    title: ' Deconnectez-vous ?',
+      allowOutsideClick : false,
+      showCancelButton : true,
+       }).then((result)=>{
+          if(result.isConfirmed){
+            localStorage.removeItem('userTraductoId')
+             window.location.href = "login.html"
+       }
+})
+})
+
+/// function to delete my compte
+deletemyComptId.addEventListener('click', function(){
+  Swal.fire({
+    icon: 'info',
+    title: ' Supprimer ?',
+      allowOutsideClick : false,
+      showCancelButton : true,
+       }).then((result)=>{
+          if(result.isConfirmed){
+            // Supprime l'utilisateur de la base de données
+          userRef.remove()
+            .then(() => {
+              Swal.fire({
+              icon: 'info',
+              text: ' Utilisateur supprimé avec succès',
+              allowOutsideClick : false,
+              }).then((result)=>{
+                if(result.isConfirmed){
+                  window.location.href = "index.html"  
+                }
+              })
+               
+            })
+            .catch((error) => {
+              Swal.fire("Erreur lors de la suppression.", "", "error");
+              
+            });
+       }
+})
+})
+
+// function to show showId 
+function getUserData(){
+userRef.once('value')
+  .then((snapshot) => {
+    // snapshot.val() contient les données de l'utilisateur
+    preloader.style.display = "none"
+    const userData = snapshot.val();
+    if(userData.MONPAYSDEPUBLICATION){
+    showId.style.display = "none"
+    skrollableId.style.display = "block"
+    var step1Element = document.getElementById('step1');
+    var step2Element = document.getElementById('step2');
+    var step3Element = document.getElementById('step3');
+    var step4Element = document.getElementById('step4');
+    var titleYouId = document.getElementById('TableTitId');
+    var ModalMyDropdown = document.getElementById('modalMyDropdownx');
+    ModalMyDropdown.innerHTML = ` <i class="fa fa-home"></i> Email : ${userData.email}`
+    // Ajoutez la classe "active"
+    if(userData.DOCSATUS1 == true){
+      step1Element.classList.add('form-steps__step--active');
+      titleYouId.innerHTML = `Traduction en <span class="yellow">cours</span>.`
+      console.log(userData.DOCSATUS1)
+    }
+    if(userData.DOCSATUS2 == true){
+      step2Element.classList.add('form-steps__step--active');
+    }
+    if(userData.DOCSATUS3 == true){
+      step3Element.classList.add('form-steps__step--active');
+    }
+    if(userData.DOCSATUS4 == true){
+      step4Element.classList.add('form-steps__step--active');
+      titleYouId.innerHTML = `Traduction <span class="yellow">Terminé</span>.`
+      skrollableIdbtn.addEventListener('click', function(){
+        Swal.fire({
+          text: "Achiver ce projet avant une autre demande.",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Achiver",
+        denyButtonText: `Ne pas Achiver`
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+       if (result.isConfirmed) {
+        const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+      // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+      userRef.update({
+      // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+        DOCSATUS1: true,
+        DOCSATUS2: false,
+        DOCSATUS3: false,
+        DOCSATUS4: false, 
+        isDefaultAccount: true,
+        isPaidAccount: false,
+        MONPAYSDEPUBLICATION:"",
+        VALIDERMONCOMPTE:false,
+        // ... ajoutez d'autres champs si nécessaire
+      }).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Achivée',
+          allowOutsideClick : false,  
+        }).then((result)=>{
+          if(result.isConfirmed){
+            window.location.href = "myaccount.html"
+          }
+        })
+        
+      }).catch((error) => {
+        console.error("Erreur lors de la mise à jour des données utilisateur :", error);
+      });
+        } else if (result.isDenied) {
+          Swal.fire("Achivation non éffectuée", "", "info");
+        }
+      });
+      })
+    }else{
+    skrollableIdbtn.addEventListener('click', function(){
+      Swal.fire({
+    toast: true,
+    icon: 'error',
+    title: 'Une traduction est en cours!',
+    animation: false,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+    })
+
+    }
+   
+    }
+    //console.log('Données de l\'utilisateur :', userData);
+  })
+  .catch((error) => {
+    console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
+  });
+}getUserData()
+skrollableIdbtn.addEventListener('click', function(){
+showId.style.display = "none"
+skrollableId.style.display = "block"  
+})
+
+const userButton = document.getElementById('user-button');
+const userDropdown = document.getElementById('modalMyDropdown');
+
+userButton.addEventListener('click', () => {
+  
+ if(userDropdown.style.display === "none"){
+  userDropdown.style.display = "block"
+  userButton.style.backgroundColor = "#fc7d90"
+ }else{
+  userDropdown.style.display = "none"
+  userButton.style.backgroundColor = "#FFB6C1"
+ }
+
+});
+
+const dropArea = document.querySelector(".drop_box")
+var button = document.querySelector(".btnx"),
+ input = document.querySelector("input");
+  var titleId = document.querySelector(".titleId"); 
+ var btnIdx = document.getElementById('btnIdx');
+ var fileID = document.getElementById('fileID');
+ var toHiheId = document.getElementById('toHiheId');
+ var btnIdy = document.getElementById('btnIdy');
+
+let file;
+var filename;
+
+button.onclick = () => {
+  fileID.click();
+};
+
+input.addEventListener("change", function (e) {
+  var payYourUnitybtn = document.getElementById('btnId');
+  payYourUnitybtn.disabled = true;
+  btnIdx.style.display = "block"
+  toHiheId.style.display = "none"
+  btnIdy.style.display = "none"
+  var fileName = e.target.files[0].name;
+  var fileNameNot = e.target.files[0];
+  let filedata = `${fileName}`;
+  titleId.innerHTML = filedata;
+  console.log(fileNameNot)
+  // Créer une référence unique pour le fichier (par exemple, en utilisant le nom du fichier)
+  const fileRef = storageRef.child(fileName); 
+  var btnId = document.getElementById('btnId');
+  var numberMoId = document.getElementById('numberMoId');
+  btnId.addEventListener('click', function(){
+    if(numberMoId.value != ""){
+ //console.log("sdfghjkfd")
+  // Envoyer le fichier
+  fileRef.put(fileNameNot).then((snapshot) => {
+    console.log('Fichier envoyé avec succès !');
+    showId.style.display = "none"
+    skrollableId.style.display = "block"
+    // Obtenir l'URL de téléchargement du fichier
+  fileRef.getDownloadURL().then((url) => {
+    // Utiliser l'URL comme source pour un lien, iframe, etc.
+    //console.log('URL de téléchargement du fichier : ', url);
+    const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+      // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+    userRef.update({
+    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+    MONPAYSDEPUBLICATION: url,
+    NUMBEROFMOT : numberMoId.value,
+    FILETYPE : fileName
+      // ... ajoutez d'autres champs si nécessaire
+    }).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Le fichier envoyé. ',
+          allowOutsideClick : false,  
+        }).then((result)=>{
+          if(result.isConfirmed){
+            window.location.href = "myaccount.html"
+          }
+        })
+    }).catch((error) => {
+      Swal.fire("Erreur lors de la mise à jour des données utilisateur", "", "info");
+    });
+
+    }).catch((error) => {
+      console.error('Erreur lors de la récupération de l\'URL de téléchargement : ', error);
+    });
+    }).catch((error) => {
+      Swal.fire("Erreur lors de l'envoi du fichier", "", "info");
+    });
+    }else{
+    Swal.fire({
+    toast: true,
+    icon: 'error',
+    text: 'Saisissez le nombre de mots.',
+    animation: false,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  }); 
+    }
+  })
+
+});
+</script>
+<script src="js/myaccount.js"></script>
+<script type="module" src="js/sendData.js"></script>
+</body>
+</html>

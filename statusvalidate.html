@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>status user</title>
+     <!-- Link to import alert personnal -->
+     <link rel="icon" href="images/logo.jpeg" type="image/x-icon">
+     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-storage.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Lato:300">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="css/uservalidate.css">
+</head>
+<body style="background-color: rgba(0, 0, 255, 0.445);"> 
+    <div id="stepMyId" class="centered-div">
+
+        <h2 style="text-align: center;">Suivi de la traduction.</h2>
+        <div class="form-steps">
+          <!-- First Step -->
+          <div class="form-steps__step " id="step1">
+            <div class="form-steps__step-circle " >
+              <span class="form-steps__step-number">1</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">Réçu</span>
+          </div>
+          <!-- Second Step -->
+          <div class="form-steps__step first" id="step2">
+            <div class="form-steps__step-circle  ">
+              <span class="form-steps__step-number">2</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">En cours</span>
+          </div>
+          <!-- Thired Step -->
+          <div class="form-steps__step second" id="step3">
+            <div class="form-steps__step-circle  ">
+              <span class="form-steps__step-number">3</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">Relecture</span>
+          </div>
+          <!-- Thired Step -->
+          <div class="form-steps__step form-steps__step--last  third" id="step4">
+            <div class="form-steps__step-circle">
+              <span class="form-steps__step-number">4</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">Terminé</span>
+          </div>
+        </div>
+        </div>
+        <div id="preloader"></div> 
+<script>
+function start(){
+    // Supposons que votre base de données Firebase soit configurée
+    const firebaseConfig = {
+    apiKey: "AIzaSyAE3g0U59TzghjmeN-LOL6v70xYaTm3pAU",
+    authDomain: "traducto-b36fc.firebaseapp.com",
+    databaseURL: "https://traducto-b36fc-default-rtdb.firebaseio.com",
+    projectId: "traducto-b36fc",
+    storageBucket: "traducto-b36fc.appspot.com",
+    messagingSenderId: "560806060261",
+    appId: "1:560806060261:web:2b990c1bc8ec660715f40c"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// Obtenez une référence vers votre base de données
+const database = firebase.database();
+const UserTraductoId = localStorage.getItem('userId');
+// Déclaration de la variable gogo
+let gogo = null;
+
+// Récupérez la valeur de gogo depuis la base de données
+const gogoRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+   var step1Element = document.getElementById('step1');
+    var step2Element = document.getElementById('step2');
+    var step3Element = document.getElementById('step3');
+    var step4Element = document.getElementById('step4');
+    var preloader = document.getElementById('preloader');
+  gogoRef.once('value')
+    .then((snapshot) => {
+        
+        preloader.style.display = "none"
+        // snapshot.val() contient la valeur de gogo depuis la base de données
+        gogo = snapshot.val();
+        // Affichez la boîte de dialogue avec la logique modifiée
+        
+      if(gogo.MONPAYSDEPUBLICATION){
+        if(gogo.DOCSATUS1 == true){
+        var DOCSATUS1 = gogo.DOCSATUS1
+        step1Element.classList.add('form-steps__step--active');  
+        step1Element.classList.add('disabled-divx');  
+        }
+        if(gogo.DOCSATUS2 == true){
+            var DOCSATUS2 = gogo.DOCSATUS2
+            step2Element.classList.add('form-steps__step--active');
+            step2Element.classList.add('disabled-divx');  
+        }
+        if(gogo.DOCSATUS3 == true){
+            var DOCSATUS3 = gogo.DOCSATUS3
+            step3Element.classList.add('form-steps__step--active');
+            step3Element.classList.add('disabled-divx');  
+        }
+        if(gogo.DOCSATUS4 == true){
+            var DOCSATUS4 = gogo.DOCSATUS4
+            step4Element.classList.add('form-steps__step--active');
+            step4Element.classList.add('disabled-divx');  
+        }
+            // Function to update Steps 2
+    document.querySelector(".first").addEventListener('click', function(){
+    const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+      // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+    userRef.update({
+    DOCSATUS2: true,
+    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+      // ... ajoutez d'autres champs si nécessaire
+    }).then(() => {
+    Swal.fire({
+    toast: true,
+    icon: 'success',
+    title: 'Données mises à jour avec succès !',
+    animation: false,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  setTimeout(()=>{
+    window.location.href = "statusvalidate.html"
+  },3500)
+  }).catch((error) => {
+      console.error("Erreur lors de la mise à jour des données utilisateur :", error);
+  }); 
+  });
+
+      // Function to update Steps 3
+      document.querySelector(".second").addEventListener('click', function(){
+    const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+      // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+    userRef.update({
+    DOCSATUS3: true,
+    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+      // ... ajoutez d'autres champs si nécessaire
+    }).then(() => {
+    Swal.fire({
+    toast: true,
+    icon: 'success',
+    title: 'Données mises à jour avec succès !',
+    animation: false,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  setTimeout(()=>{
+    window.location.href = "statusvalidate.html"
+  },3500)
+  }).catch((error) => {
+      console.error("Erreur lors de la mise à jour des données utilisateur :", error);
+  }); 
+  });
+
+      // Function to update Steps 4
+      document.querySelector(".third").addEventListener('click', function(){
+    const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+      // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+    userRef.update({
+    DOCSATUS4: true,
+    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+      // ... ajoutez d'autres champs si nécessaire
+    }).then(() => {
+    Swal.fire({
+    toast: true,
+    icon: 'success',
+    title: 'Données mises à jour avec succès !',
+    animation: false,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+  setTimeout(()=>{
+    window.location.href = "statusvalidate.html"
+  },3500)
+  }).catch((error) => {
+      console.error("Erreur lors de la mise à jour des données utilisateur :", error);
+  }); 
+  });
+ }else{
+    Swal.fire({
+    toast: true,
+    icon: 'error',
+    title: 'Aucun projet en cours pour cet utilisateur. ',
+    animation: false,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+    var formStep = document.querySelectorAll('.form-steps__step');
+    formStep.forEach((T)=>{
+        T.addEventListener('click', function(){
+    Swal.fire({
+    toast: true,
+    icon: 'error',
+    title: 'Aucun projet en cours pour cet utilisateur. ',
+    animation: false,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });       
+        })
+    })
+ }
+       
+    })
+    .catch((error) => {
+        console.error("Erreur lors de la récupération de la valeur de gogo:", error);
+    });
+    }start()
+</script> 
+  <script src="js/uservalidate.js"></script>
+</body>
+</html>

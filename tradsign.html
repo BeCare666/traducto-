@@ -1,0 +1,285 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+    <link rel="stylesheet" href="css/tradsign.css">
+    <link rel="icon" href="images/logo.jpeg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+   <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Lato:300">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</head>
+
+<body>
+    <form class="form" action="javascript:sendData()">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+            <div class="progress-step active" data-title="Personel"></div>
+            <div class="progress-step" data-title="Contact "></div>
+            <div class="progress-step" data-title="Experience"></div>
+            <div class="progress-step" data-title="Liens"></div>
+        </div>
+
+        <!-- Steps -->
+        <div class="form-step active">
+            <h3>Informations personnelles</h3>
+            <div class="input-group">
+                <label for="full-name">Nom et prénoms</label>
+                <input type="text" name="full-name" id="full-name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" required>
+            </div>
+            <div class="input-group">
+                <label for="birth-date">Date de naissance</label>
+                <input type="date" name="birth-date" id="birth-date" required>
+            </div>
+            <div class="">
+                <a class="btn btn-next">Suivant</a>
+            </div>
+        </div>
+        <div class="form-step ">
+            <h3>Contact Informations</h3>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label for="phone">Téléphone</label>
+                <input type="phone" name="phone" id="phone" required>
+            </div>
+            <div class="input-group">
+                <label for="summary" id="labelsummary">Résumé du profil</label>
+                <p style="text-align: start !important;" id="TextCounptys"></p>
+                <textarea name="summary" id="summary" oninput="countCharacters()"
+                maxlength="125" minlength="0" ></textarea>
+
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-prev">Précédent</a>
+                <a class="btn btn-next">Suivant</a>
+            </div>
+        </div>
+        <div class="form-step ">
+            <h3>Une experience</h3>
+            <div class="experiences-group">
+                <div class="experience-item">
+                    <div class="input-group">
+                        <label for="title">Nom de l'entreprise</label>
+                        <input type="text" name="job-title[]" id="job-title" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="start-date">Date de début</label>
+                        <input type="date" name="start-date[]" id="start-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="end-date">Date de fin</label>
+                        <input type="date" name="end-date[]" id="end-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="job-description" id="labelDES">Description</label>
+                        <p style="text-align: start !important;" id="TextCounpty"></p>
+                        <textarea name="job-description[]" id="job-description" oninput="countCharactersy()"
+                              maxlength="125" minlength="0" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="add-experience" style="display: none;">
+                <a class="add-exp-btn"> + Add Experience</a>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-prev">Précédent</a>
+                <a class="btn btn-next">Suivant</a>
+            </div>
+        </div>
+        <div class="form-step ">
+            <h3>Social Links</h3>
+            <div class="input-group">
+                <label for="linkedin">LinkedIn</label>
+                <div class="input-box">
+                    <span class="prefix"></span>
+                    <input id="linkedin" name="linkedin" type="text" placeholder="linkedin.com/in/USER123" required/>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="twitter">Twitter</label>
+                <div class="input-box">
+                    <span class="prefix"></span>
+                    <input id="twitter" name="twitter" type="text" placeholder="twitter.com/USER123" required/>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="github">Instagram</label>
+                <div class="input-box">
+                    <span class="prefix"></span>
+                    <input id="github" name="facebook" type="text" placeholder="stagram.com/USER123" required/>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-prev">Précédent</a>
+                <input type="submit" value="Valider" name="complete" class="btn btn-complete">
+            </div>
+        </div>
+    </form>
+    <script>
+        
+        // function to send candidate
+        function sendData(){
+            var name = document.getElementById('full-name').value;
+        var address = document.getElementById('address').value;
+        var birthdate = document.getElementById('birth-date').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var summary = document.getElementById('summary').value;
+        var jobtitle = document.getElementById('job-title').value;
+        var startdate = document.getElementById('start-date').value;
+        var enddate = document.getElementById('end-date').value;
+        var jobdescription = document.getElementById('job-description').value;
+        var linkedin = document.getElementById('linkedin').value;
+        var twitter = document.getElementById('twitter').value;
+        var github = document.getElementById('github').value;
+
+            console.log(name , address , birthdate , email  , phone , 
+             summary , jobtitle , startdate , enddate , 
+           jobdescription , linkedin)
+         if(name && address && birthdate && email  && phone && 
+             summary && jobtitle && startdate && enddate && 
+           jobdescription && linkedin && twitter && github){
+             //  envoi de mail de suspension
+             const apiKey = "34F593452254BAB8CACDA4A39FC9C44BFC0D3E63B8842CD369FF37BBE4AC5017DA7917B6E03C3C8EB379F906C80E9DED";
+                const apiUrl = "https://api.elasticemail.com/v2/email/send";
+                // Définir les paramètres de l'e-mail
+                const emailParams = {
+                  apiKey: apiKey ,
+                  subject: "Candidature",
+                  from:  "validation@illicolove.com",
+                  fromName: name,
+                  to: email ,
+                  bodyHtml: `
+                  <table cellpadding="10" cellspacing="0" style="background-color: #f1f1f1; padding: 20px;">
+                  <tr>
+                      <td>
+                      <div style="text-align: center;">
+                                <img src="https://illicolove.netlify.app/assets/img/logo_illico-removebg-preview.png" style="max-width: 17%; height: auto; display: inline-block;" />
+                      </div>
+                      <h1 style="color: #333; text-align: center !important;">Candidature.</h1>
+                      <p style="font-size: 16px; color: #666;">
+                       Voici quelques informations rélatives à ma canditature :   
+                      </p>
+                      <ul>
+                          <li><strong>Nom</strong>  : ${name} </li>
+                          <li><strong>Address</strong>  : ${address} </li>
+                          <li><strong>Date de naissance</strong>  : ${birthdate} </li>
+                          <li><strong>Email</strong>  : ${email} </li>
+                          <li><strong>Téléphone</strong>  : ${phone} </li>
+                          <li><strong>Résumé du profil</strong>  : ${summary} </li>
+                      </ul>
+                      <p style="font-size: 16px; color: #666;">
+                       Une de ses expériences :   
+                      </p>
+                      <ul>
+                        <li><strong>Le titre de jobe</strong>  : ${jobtitle} </li>
+                          <li><strong>Date de debut</strong>  : ${startdate} </li>
+                          <li><strong>Date de fin</strong>  : ${enddate} </li>
+                          <li><strong>La description</strong>  : ${jobdescription} </li> 
+                      </ul>
+                      <p style="font-size: 16px; color: #666;">
+                       Ces réseaux sociaux:   
+                      </p>
+                      <ul>
+                        <li><a href="${linkedin}"><strong>Linkedin</strong>  : ${linkedin}</a> </li>
+                        <li><a href=" ${twitter}"><strong>Twitter</strong>  : ${twitter}</a> </li>
+                        <li><a href=" ${github}"><strong>Instagram</strong> : ${github}</a> </li>
+                      </ul>
+
+                      <p style="font-size: 14px; color: #999;">
+                          Cordialement,     
+                      </p>
+                      <p style="font-size: 14px; color: #999;">
+                          L'équipe TRDUCTO.      
+                      </p>
+                      </td>
+                  </tr>
+                  </table>
+                  `
+                };
+
+                // Effectuer une requête POST vers l'API ElasticEmail
+                fetch(apiUrl, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                  },
+                  body: new URLSearchParams(emailParams)
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    console.log(data); // Afficher la réponse de l'API ElasticEmail
+                    if (data.success) {
+                        Swal.fire({
+                        icon: 'success',
+                        text: 'Votre candidature envoyée avec succès.',
+                        allowOutsideClick : false,
+                        }).then((result)=>{
+                            if(result.isConfirmed){
+                             localStorage.removeItem('userTraductoId')
+                         window.location.href = "index.html"
+                        }
+                    })
+                    
+                    } else {
+                        Swal.fire({
+                        icon: 'error',
+                        text: `Erreur lors de l'envoi de votre candidature.`,
+                        allowOutsideClick : false,
+                       
+                        }).then((result)=>{
+                            if(result.isConfirmed){
+                             localStorage.removeItem('userTraductoId')
+                         window.location.href = "tradsign.html"
+                        }
+                    })
+                    }
+                  })
+                  .catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        text: `Erreur lors de la requête`,
+                        allowOutsideClick : false,
+                       
+                        }).then((result)=>{
+                            if(result.isConfirmed){
+                             localStorage.removeItem('userTraductoId')
+                         window.location.href = "tradsign.html"
+                        }
+                    })
+                  });
+                 // end envoi de mail de suspension
+               }else{
+            Swal.fire({
+         toast: true,
+        icon: 'error',
+        title: 'Tout les champs ne sont pas remplir. ',
+      animation: false,
+     position: 'top',
+     showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  }); 
+         }
+        }
+    </script>
+    <script src="js/tradsign.js" defer></script>
+</body>
+
+</html>

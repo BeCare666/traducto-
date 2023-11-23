@@ -1,0 +1,10 @@
+.disclaimer{width: 480px; color:#646464;margin:20px auto;padding:0 16px;text-align:center;font:400 12px Roboto,Helvetica,Arial,sans-serif}.disclaimer a{color:#009688}#credit{display:none}
+
+#menuId{
+    position: fixed;
+    bottom: 10px !important;
+    right: 10px !important;
+}
+body{
+    width: 100% !important;
+}

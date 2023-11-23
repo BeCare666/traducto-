@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Link to import alert personnal -->
+     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-storage.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Lato:300">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    
+
+    
+    <title>uservalidate</title>
+    <link rel="stylesheet" href="css/uservalidate.css">
+</head>
+<body>
+    <div class="container " style="display: none;">
+        <div class="row">
+            <div class="col-12">
+                <button class="first">  Etape 1</button>
+                <button class="second">  Etape 2</button>
+                <button class="third">  Etape 3</button>
+            </div>
+        </div>
+    </div>
+    <div id="stepMyId" class="centered-div">
+        <h2 style="opacity: 0;">Multi step form </h2>
+        <h2>Suivi de votre projet</h2>
+        <div class="form-steps">
+          <!-- First Step -->
+          <div class="form-steps__step " id="step1">
+            <div class="form-steps__step-circle" >
+              <span class="form-steps__step-number">1</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">Réçu</span>
+          </div>
+          <!-- Second Step -->
+          <div class="form-steps__step " id="step2">
+            <div class="form-steps__step-circle">
+              <span class="form-steps__step-number">2</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">En cours</span>
+          </div>
+          <!-- Thired Step -->
+          <div class="form-steps__step " id="step3">
+            <div class="form-steps__step-circle">
+              <span class="form-steps__step-number">3</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">Relecture</span>
+          </div>
+          <!-- Thired Step -->
+          <div class="form-steps__step form-steps__step--last" id="step4">
+            <div class="form-steps__step-circle">
+              <span class="form-steps__step-number">4</span>
+              <span class="form-steps__step-check">&#x2713;</span>
+            </div>
+            <span class="form-step__step-name">Terminé</span>
+          </div>
+        </div>
+    </div>
+<script>
+    function start(){
+    // Supposons que votre base de données Firebase soit configurée
+    const firebaseConfig = {
+    apiKey: "AIzaSyAE3g0U59TzghjmeN-LOL6v70xYaTm3pAU",
+    authDomain: "traducto-b36fc.firebaseapp.com",
+    databaseURL: "https://traducto-b36fc-default-rtdb.firebaseio.com",
+    projectId: "traducto-b36fc",
+    storageBucket: "traducto-b36fc.appspot.com",
+    messagingSenderId: "560806060261",
+    appId: "1:560806060261:web:2b990c1bc8ec660715f40c"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// Obtenez une référence vers votre base de données
+const database = firebase.database();
+const UserTraductoId = localStorage.getItem('userTraductoId');
+// Déclaration de la variable gogo
+let gogo = null;
+
+// Récupérez la valeur de gogo depuis la base de données
+const gogoRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+ 
+gogoRef.once('value')
+    .then((snapshot) => {
+        // snapshot.val() contient la valeur de gogo depuis la base de données
+        gogo = snapshot.val();
+        // Affichez la boîte de dialogue avec la logique modifiée
+        
+        if(gogo.DOCSATUS1 == true){
+        var DOCSATUS1 = gogo.DOCSATUS1       
+        }
+        if(gogo.DOCSATUS2 == true){
+            var DOCSATUS2 = gogo.DOCSATUS2
+        }
+        if(gogo.DOCSATUS3 == true){
+            var DOCSATUS3 = gogo.DOCSATUS3
+        }
+        if(gogo.DOCSATUS4 == true){
+            var DOCSATUS4 = gogo.DOCSATUS4
+        }
+       
+    })
+    .catch((error) => {
+        console.error("Erreur lors de la récupération de la valeur de gogo:", error);
+    });
+
+    }start()
+</script> 
+  <script src="js/uservalidate.js"></script>
+</body>
+</html>
