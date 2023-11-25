@@ -212,6 +212,10 @@ userRef.once('value')
     var step3Element = document.getElementById('step3');
     var step4Element = document.getElementById('step4');
     var titleYouId = document.getElementById('TableTitId');
+    var takeTheUserM = userData.email
+    var takeTheUserN = userData.username
+    localStorage.setItem('userMailMy', takeTheUserM);
+    localStorage.setItem('userNameMy', takeTheUserN);
     var ModalMyDropdown = document.getElementById('modalMyDropdownx');
     ModalMyDropdown.innerHTML = ` <i class="fa fa-home"></i> Email : ${userData.email}`
     // Ajoutez la classe "active"
@@ -369,16 +373,111 @@ input.addEventListener("change", function (e) {
     NUMBEROFMOT : numberMoId.value,
     FILETYPE : fileName
       // ... ajoutez d'autres champs si nécessaire
-    }).then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Le fichier envoyé. ',
-          allowOutsideClick : false,  
-        }).then((result)=>{
-          if(result.isConfirmed){
-            window.location.href = "myaccount.html"
-          }
-        })
+    }).then(() => {               
+   Swal.fire({
+   icon: 'success',
+   text: 'Le fichier envoyé. ',
+   confirmButtonText: "Confirmer le mail",
+    allowOutsideClick : false,  
+    }).then((result)=>{
+    if(result.isConfirmed){
+    var UserMailMy = localStorage.getItem('userMailMy')
+    var UserNameMy = localStorage.getItem('userNameMy')
+       //  envoi de mail de suspension
+       const apiKey = "34F593452254BAB8CACDA4A39FC9C44BFC0D3E63B8842CD369FF37BBE4AC5017DA7917B6E03C3C8EB379F906C80E9DED";
+          const apiUrl = "https://api.elasticemail.com/v2/email/send";
+          // Définir les paramètres de l'e-mail
+          const emailParams = {
+            apiKey: apiKey ,
+            subject: "Document à Traduire Envoyé",
+            from: "validation@illicolove.com",
+            fromName: UserNameMy,
+            to: UserMailMy,
+            bodyHtml: `
+            <table cellpadding="10" cellspacing="0" style="background-color: #f1f1f1; padding: 20px;">
+            <tr>
+                <td>
+                <div style="text-align: center;">
+                <img src="https://traducto.netlify.app/../images/Traducto1-1.png" 
+                style="max-width: 17%; height: auto; display: inline-block;" />
+                </div>
+                <strong style="color: #333; text-align: center !important;">Document à Traduire Envoyé</strong>
+                <p style="font-size: 16px; color: #666;">
+                  Chère équipe de traducto,
+                  J'espère que ce message vous trouve bien. Je vous informe par la présente que 
+                  j'ai envoyé le document à traduire via ce lien. <a href="${url}" style="color:blue;" download="${fileName}">Cliquer pour télécharger.</a>  Merci de confirmer la réception et de me 
+                  faire part des prochaines étapes.
+                </p>
+             
+                <p style="font-size: 16px; color: #666;">
+                  Restant à votre disposition pour toute information supplémentaire.
+                </p>
+                  
+                <p style="font-size: 14px; color: #999;">
+                    Cordialement,     
+                </p>
+                <p style="font-size: 14px; color: #999;">
+                  ${UserNameMy}.
+                </p>
+                </td>
+            </tr>
+            </table>
+            `
+          };
+
+          // Effectuer une requête POST vers l'API ElasticEmail
+          fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams(emailParams)
+          })
+            .then((response) => response.json())
+            .then((data) => {
+            console.log(data); // Afficher la réponse de l'API ElasticEmail
+              if (data.success) {
+                  Swal.fire({
+                  icon: 'success',
+                  text: 'Votre Email envoyé avec succès.',
+                  confirmButtonText: "Oui, Confirmer",
+                  allowOutsideClick : false,
+                  }).then((result)=>{
+                      if(result.isConfirmed){
+                   window.location.href = "myaccount.html"
+                  }
+              })
+              
+              } else {
+                  Swal.fire({
+                  icon: 'error',
+                  text: `Erreur lors de l'envoi de votre demande.`,
+                  allowOutsideClick : false,
+                 
+                  }).then((result)=>{
+                      if(result.isConfirmed){
+                   window.location.href = "myaccount.html"
+                  }
+              })
+              }
+            })
+            .catch((error) => {
+              Swal.fire({
+                  icon: 'error',
+                  text: `Erreur lors de la requête`,
+                  allowOutsideClick : false,
+                 
+                  }).then((result)=>{
+                      if(result.isConfirmed){
+                   window.location.href = "myaccount.html"
+                  }
+              })
+            });
+           // end envoi de mail de suspension
+
+}
+     
+    }) 
     }).catch((error) => {
       Swal.fire("Erreur lors de la mise à jour des données utilisateur", "", "info");
     });
