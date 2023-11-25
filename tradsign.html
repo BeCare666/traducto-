@@ -59,7 +59,11 @@
                 <p style="text-align: start !important;" id="TextCounptys"></p>
                 <textarea name="summary" id="summary" oninput="countCharacters()"
                 maxlength="125" minlength="0" ></textarea>
-
+            </div>
+            <div class="input-group">
+                <label for="summary" id="labelsummary">Listez vos paires de langues.</label>
+                <textarea name="summary" id="summaryLang"
+               ></textarea>
             </div>
             <div class="btn-group">
                 <a class="btn btn-prev">Précédent</a>
@@ -104,21 +108,21 @@
                 <label for="linkedin">LinkedIn</label>
                 <div class="input-box">
                     <span class="prefix"></span>
-                    <input id="linkedin" name="linkedin" type="text" placeholder="linkedin.com/in/USER123" required/>
+                    <input id="linkedin" name="linkedin" type="text" placeholder="linkedin.com/in/USER123"  />
                 </div>
             </div>
             <div class="input-group">
                 <label for="twitter">Twitter</label>
                 <div class="input-box">
                     <span class="prefix"></span>
-                    <input id="twitter" name="twitter" type="text" placeholder="twitter.com/USER123" required/>
+                    <input id="twitter" name="twitter" type="text" placeholder="twitter.com/USER123"  />
                 </div>
             </div>
             <div class="input-group">
                 <label for="github">Instagram</label>
                 <div class="input-box">
                     <span class="prefix"></span>
-                    <input id="github" name="facebook" type="text" placeholder="stagram.com/USER123" required/>
+                    <input id="github" name="facebook" type="text" placeholder="stagram.com/USER123"  />
                 </div>
             </div>
             <div class="btn-group">
@@ -128,15 +132,15 @@
         </div>
     </form>
     <script>
-        
         // function to send candidate
         function sendData(){
             var name = document.getElementById('full-name').value;
         var address = document.getElementById('address').value;
         var birthdate = document.getElementById('birth-date').value;
         var email = document.getElementById('email').value;
-        var phone = document.getElementById('phone').value;
+        var phone = document.getElementById('phone').value; 
         var summary = document.getElementById('summary').value;
+        var summaryLang = document.getElementById('summaryLang').value;
         var jobtitle = document.getElementById('job-title').value;
         var startdate = document.getElementById('start-date').value;
         var enddate = document.getElementById('end-date').value;
@@ -145,12 +149,12 @@
         var twitter = document.getElementById('twitter').value;
         var github = document.getElementById('github').value;
 
-            console.log(name , address , birthdate , email  , phone , 
-             summary , jobtitle , startdate , enddate , 
-           jobdescription , linkedin)
+        console.log(name , address , birthdate , email  , phone , 
+        summary , jobtitle , startdate , enddate , 
+        jobdescription , linkedin)
          if(name && address && birthdate && email  && phone && 
              summary && jobtitle && startdate && enddate && 
-           jobdescription && linkedin && twitter && github){
+           jobdescription && summaryLang){
              //  envoi de mail de suspension
              const apiKey = "34F593452254BAB8CACDA4A39FC9C44BFC0D3E63B8842CD369FF37BBE4AC5017DA7917B6E03C3C8EB379F906C80E9DED";
                 const apiUrl = "https://api.elasticemail.com/v2/email/send";
@@ -166,7 +170,8 @@
                   <tr>
                       <td>
                       <div style="text-align: center;">
-                                <img src="https://illicolove.netlify.app/assets/img/logo_illico-removebg-preview.png" style="max-width: 17%; height: auto; display: inline-block;" />
+                        <img src="https://traducto.netlify.app/images/logo.jpeg" 
+                                style="max-width: 17%; height: auto; display: inline-block;" />
                       </div>
                       <h1 style="color: #333; text-align: center !important;">Candidature.</h1>
                       <p style="font-size: 16px; color: #666;">
@@ -177,14 +182,15 @@
                           <li><strong>Address</strong>  : ${address} </li>
                           <li><strong>Date de naissance</strong>  : ${birthdate} </li>
                           <li><strong>Email</strong>  : ${email} </li>
-                          <li><strong>Téléphone</strong>  : ${phone} </li>
+                          <li><strong>Téléphone</strong>  : ${phone} </li> 
                           <li><strong>Résumé du profil</strong>  : ${summary} </li>
+                          <li><strong>Mes paires de langues</strong>  : ${summaryLang} </li>
                       </ul>
                       <p style="font-size: 16px; color: #666;">
-                       Une de ses expériences :   
+                       Une de mes expériences :   
                       </p>
                       <ul>
-                        <li><strong>Le titre de jobe</strong>  : ${jobtitle} </li>
+                        <li><strong>Nom de l'entreprise</strong>  : ${jobtitle} </li>
                           <li><strong>Date de debut</strong>  : ${startdate} </li>
                           <li><strong>Date de fin</strong>  : ${enddate} </li>
                           <li><strong>La description</strong>  : ${jobdescription} </li> 
@@ -202,7 +208,7 @@
                           Cordialement,     
                       </p>
                       <p style="font-size: 14px; color: #999;">
-                          L'équipe TRDUCTO.      
+                          L'équipe TRADUCTO.      
                       </p>
                       </td>
                   </tr>
@@ -220,7 +226,7 @@
                 })
                   .then((response) => response.json())
                   .then((data) => {
-                    console.log(data); // Afficher la réponse de l'API ElasticEmail
+                  console.log(data); // Afficher la réponse de l'API ElasticEmail
                     if (data.success) {
                         Swal.fire({
                         icon: 'success',
@@ -280,6 +286,7 @@
         }
     </script>
     <script src="js/tradsign.js" defer></script>
+    <script src="js/sendData.js"></script>
 </body>
 
 </html>

@@ -22,25 +22,6 @@
     </head>
 
     <body id="idbody">
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
-        data-backdrop="static" data-keyboard="false">
-       <div class="modal-dialog modal-dialog-centered" role="document">
-           <div class="modal-content">
-               <div class="modal-header">
-                <h5>Traducteurs</h5>
-                 <input type="text" id="SearchId" placeholder="Recherche" style="display: none;"> 
-               </div>
-               <div class="modal-body" style="height: 300px; overflow: auto;" id="getAllTraductorId">
-                 
-               </div>
-               <div class="modal-footer">
-                   <button type="button" class="btn btn-primary" data-dismiss="modal">Retour </button>
-               </div>
-           </div>
-       </div>
-   </div>
-
         <!-- Dashboard --> 
         <div class="d-flex flex-column flex-lg-row h-lg-full
             bg-surface-secondary" id="dashbody">
@@ -137,7 +118,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="loginadmin.html"
+                                <a class="nav-link" href="./../logintrad.html"
                                     id="logoutid">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
@@ -471,8 +452,82 @@
                 </div>
             </div>
         </div>
+        <a data-toggle="modal" data-target="#exampleModalCenterId" class="back-to-top d-flex align-items-center justify-content-center" id="user-button"><i class="bi bi-person-fill"></i></a>
+        
+      
+            <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenterId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+ 
+                <div class="modal-body">
+                    <ul class="nav flex-column">
+                        <li class="nav-item ">
+                            <a style="cursor:pointer"  class="nav-link" id="modalMyDropdownwxc">
+                             
+                              </a>
+                          </li>
+                      <li class="nav-item ">
+                        <a style="cursor:pointer"  class="nav-link" id="modalMyDropdownx">
+                         
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-dismiss="modal"
+                        aria-label="Close" style="cursor:pointer" data-toggle="modal" data-target="#exampleModalCenterIdpaid">
+                            <i class="bi bi-wallet2"></i> Paiement
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" style="cursor:pointer" target="_blank" id="deletemyComptId">
+                            <i class="bi bi-trash-fill"></i> Supprimer
+                           </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link"  style="cursor:pointer" id="logoutId">
+                            <i class="bi bi-box-arrow-left"></i> Se deconnecter
+                           </a>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+           <!-- Modal -->
+           <div class="modal fade" id="exampleModalCenterIdpaid" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+ 
+                <div class="modal-body" style="display: flex !important;">
+                    <input type="text" class="form-control" placeholder="Mettez le montant." id="paieMymoney" oninput="validerSaisie(this)"> 
+                    <button type="button" class="btn btn-primary" style="margin-left: 3px;"  id="btnpaieMymoney" data-dismiss="modal">Envoyer</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
         <div id="preloader"></div>
         <script>
+            function validerSaisie(input) {
+            const valeurSaisie = input.value;
+            const regexLettresAvecEspaces = /^\d+$/;
+
+            if (!regexLettresAvecEspaces.test(valeurSaisie)) {
+            //alert("ne fait pas ça")
+            // Effacez la saisie incorrecte
+            input.value = input.value.replace(/\D/g, '');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: "Mettez uniquement des chiffres.",
+              showConfirmButton: false,
+              timer: 1500
+            // footer: '<a href="">Why do I have this issue?</a>'
+            })
+            } else {
+            }
+        }
+        
         function countCharacters() {
         var textarea = document.getElementById("message-text");
         var TextCounpt = document.getElementById("TextCounpt")
@@ -510,7 +565,6 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
 
-
         import {
             getDatabase,
             ref,
@@ -531,74 +585,151 @@
         // function to get all messages in Real Time 
         function getAllDataRealtime() {
             var div = document.getElementById('createAllproduct');
-            var divspan = document.getElementById('getAllTraductorId');
-            var SearchId = document.getElementById('SearchId');
             var myalldatas = [];
-            var utilisateursIdTaketable = [];
-            var IdTaketabletheUserIdTra = [];
             const UserConnectIdToBuy = localStorage.getItem("storageName");
+            const TraductoIdVA = localStorage.getItem("TraductoId"); 
 
             if (!UserConnectIdToBuy) {
                 window.location.href = "loginadmin.html"
             }
-            // start function to get all traductor
-            const dbreftraductor = ref(db, "traducteurs");
-            onValue(dbreftraductor, (snopshot) => {
-                snopshot.forEach((childsnopshot) => {
-                    //myalldatas.push(childsnopshot.val());
-                    var traductorData = childsnopshot.val()
-                    let trowspan = document.createElement("span");
-                    trowspan.addEventListener('click', function () {                   
-                    trowspan.id = `${traductorData.userId}`
-                     var theUserIdTra = traductorData.userId
-                    IdTaketabletheUserIdTra.push(theUserIdTra)
-                    //localStorage.setItem('userId', theUserId)
-                    //window.location.href = "./../statusvalidate.html"
-                    toAsignedtraductor()
+
+            //function to get all data for traductor
+            const dbreftraOnvalu = ref(db, "traducteurs/" + TraductoIdVA);
+            onValue(dbreftraOnvalu, (snopshot) => { 
+                //var traduData =  childsnopshot.val()            
+                var ModalMyDropdown = document.getElementById('modalMyDropdownx');
+                ModalMyDropdown.innerHTML = ` <i class="bi bi-envelope-fill"></i> Email : ${snopshot.val().email}`
+                if(snopshot.val().GENDER){
+                     //var traduData =  childsnopshot.val()            
+                var modalMyDropdownwxc = document.getElementById('modalMyDropdownwxc');
+                modalMyDropdownwxc.innerHTML = ` <i class="bi bi-person-fill" style="color:green"></i> Actif `
+                }else{
+                //var traduData =  childsnopshot.val()            
+                var modalMyDropdownwxc = document.getElementById('modalMyDropdownwxc');
+                modalMyDropdownwxc.innerHTML = ` <i class="bi bi-person-fill" style="color:red"></i> inactif`
+                }
+
+            var btnpaieMymoney =  document.getElementById('btnpaieMymoney');
+            
+            btnpaieMymoney.addEventListener('click', function(){
+            var  paieMymoney =  document.getElementById('paieMymoney').value;
+            if(paieMymoney){
+             //  envoi de mail de suspension
+             const apiKey = "34F593452254BAB8CACDA4A39FC9C44BFC0D3E63B8842CD369FF37BBE4AC5017DA7917B6E03C3C8EB379F906C80E9DED";
+                const apiUrl = "https://api.elasticemail.com/v2/email/send";
+                // Définir les paramètres de l'e-mail
+                const emailParams = {
+                  apiKey: apiKey ,
+                  subject: "Demande de paiement.",
+                  from:  "validation@illicolove.com",
+                  fromName: snopshot.val().username,
+                  to: "developperfullstacksenou@gmail.com",
+                  bodyHtml: `
+                  <table cellpadding="10" cellspacing="0" style="background-color: #f1f1f1; padding: 20px;">
+                  <tr>
+                      <td>
+                      <div style="text-align: center;">
+                                <img src="https://traducto.netlify.app/images/logo.jpeg" 
+                                style="max-width: 17%; height: auto; display: inline-block;" />
+                      </div>
+                      <strong style="color: #333; text-align: center !important;">Demande de paiement.</strong>
+                      <p style="font-size: 16px; color: #666;">
+                        Chère traducto,
+                        J'espère que ce message vous trouve bien. Je souhaite attirer votre attention sur le paiement d'un montant de ${paieMymoney} FCFA.
+                      </p>
+                   
+                      <p style="font-size: 16px; color: #666;">
+                        Merci de votre attention à cette demande, et nous apprécions votre coopération continue.
+                      </p>
+                        
+                      <p style="font-size: 14px; color: #999;">
+                          Cordialement,     
+                      </p>
+                      <p style="font-size: 14px; color: #999;">
+                        ${snopshot.val().username}.
+                      </p>
+                      </td>
+                  </tr>
+                  </table>
+                  `
+                };
+
+                // Effectuer une requête POST vers l'API ElasticEmail
+                fetch(apiUrl, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                  },
+                  body: new URLSearchParams(emailParams)
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                  console.log(data); // Afficher la réponse de l'API ElasticEmail
+                    if (data.success) {
+                        Swal.fire({
+                        icon: 'success',
+                        text: 'Votre demande envoyée avec succès.',
+                        allowOutsideClick : false,
+                        }).then((result)=>{
+                            if(result.isConfirmed){
+                             localStorage.removeItem('userTraductoId')
+                         window.location.href = "traductor.html"
+                        }
                     })
-                    trowspan.innerHTML = `  <button type="button" class="list-group-item list-group-item-action"><i class="bi bi-person-fill" style="color: blue; background-color: aquamarine; border-radius: 100%; padding: 10px; width: 7vh; height: 7vh;"></i>  ${traductorData.username} <small style="position: absolute; right: 4px !important;">&nbsp; ${traductorData.email}</small></button>`
-
-                    divspan.append(trowspan) 
-                });
-            } )
-            // end function to get all traductor
-
-            //start function to asigned traductor
-            function toAsignedtraductor(){
-            const KIdTaketabletheUserIdTra = IdTaketabletheUserIdTra.slice(-1).pop();
-            const KutilisateursIdTaketable = utilisateursIdTaketable.slice(-1).pop();
-            // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
-            console.log(KIdTaketabletheUserIdTra)
-            console.log(KutilisateursIdTaketable)
-                
-            update(ref(db, "utilisateurs/" + KutilisateursIdTaketable), {
-                MYTRADUCTORID: KIdTaketabletheUserIdTra,
-                
-            })
-            .then(() => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Réussir',
-                    allowOutsideClick : false,  
-                    }).then((result)=>{
-                    if(result.isConfirmed){
-                        window.location.href = "admin.html"
+                    
+                    } else {
+                        Swal.fire({
+                        icon: 'error',
+                        text: `Erreur lors de l'envoi de votre demande.`,
+                        allowOutsideClick : false,
+                       
+                        }).then((result)=>{
+                            if(result.isConfirmed){
+                             localStorage.removeItem('userTraductoId')
+                         window.location.href = "traductor.html"
+                        }
+                    })
                     }
+                  })
+                  .catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        text: `Erreur lors de la requête`,
+                        allowOutsideClick : false,
+                       
+                        }).then((result)=>{
+                            if(result.isConfirmed){
+                             localStorage.removeItem('userTraductoId')
+                         window.location.href = "traductor.html"
+                        }
                     })
-             window.location.reload();
+                  });
+                 // end envoi de mail de suspension
+               }else{
+            Swal.fire({
+         toast: true,
+        icon: 'error',
+        title: `Le champs n'est pas valide.`,
+      animation: false,
+     position: 'top',
+     showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  }); }
+})
             })
-            .catch((error) => {
-            alert("les données ne sont pas mise à jour " + error);
-            });
-            }
-            //end function to asigned traductor
 
             const dbref = ref(db, "utilisateurs");
+            const dbreftra = ref(db, "traducteurs");
             onValue(dbref, (snopshot) => {
                 snopshot.forEach((childsnopshot) => {
-                    myalldatas.push(childsnopshot.val());
-                    document.getElementById('preloader').style.display = "none"
-                });
+                myalldatas.push(childsnopshot.val());
+                document.getElementById('preloader').style.display = "none"
+            });
 
                 // Convertir l'objet d'utilisateurs en un tableau d'objets
                 const userArray = Object.entries(myalldatas).map(([key, value]) => ({ id: key, ...value }));
@@ -619,47 +750,14 @@
                 });
                 if (userArray.length != 0) {
                     return userArray.forEach((k) => {
+                    if(TraductoIdVA == k.MYTRADUCTORID){                             
                     let trow = document.createElement("tr");
-                    if(!k.MYTRADUCTORID){
-                        
-                    }else{
-                        trow.style.backgroundColor ="lemonchiffon"
-                    }
                     if(k.DOCSATUS4 == false){
-                    
                     trow.addEventListener('click', function () {                   
                     trow.id = `${k.userId}`
                     var theUserId = k.userId
-                    utilisateursIdTaketable.push(theUserId)
-                    //localStorage.setItem('userId', theUserId)
-                    //window.location.href = "./../statusvalidate.html"
-                     // Affiche le modal au chargement de la page
-                    if(!k.MYTRADUCTORID){
-                        $('#exampleModalCenter').modal('show');
-            
-                        // Empêche la fermeture du modal en cliquant à l'extérieur
-                        $('#exampleModalCenter').modal({
-                            backdrop: 'static',
-                            keyboard: false
-                        });
-                    }else{
-                    trow.addEventListener('click', function(){
-                    Swal.fire({
-                    toast: true,
-                    icon: 'info',
-                    text:`Desolé cette traduction est en cours.`,
-                    animation: false,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                    })
-                    })  
-                    }
+                    localStorage.setItem('userId', theUserId)
+                    window.location.href = "./../statusvalidate.html"
                     
                     })
                     }else{
@@ -721,6 +819,7 @@
                     </td>                                                          
                     `
                     div.append(trow)
+                        }
                     })
                     } else {
                         document.getElementById('preloader').style.display = "none"
@@ -733,13 +832,62 @@
                     `
                     }
                     });
-                  
+                   
                 }
 
                 window.onload = getAllDataRealtime;
-
+ 
       
+                /// function to delete my compte
+                var deletemyComptId = document.getElementById('deletemyComptId')
+                deletemyComptId.addEventListener('click', function(){
+                Swal.fire({
+                    icon: 'info',
+                    title: ' Supprimer ?',
+                    allowOutsideClick : false,
+                    showCancelButton : true,
+                    }).then((result)=>{
+                        if(result.isConfirmed){
+                            // Supprime l'utilisateur de la base de données
+                            dbreftra.remove()
+                            .then(() => {
+                            Swal.fire({
+                            icon: 'info',
+                            text: ' Utilisateur supprimé avec succès',
+                            allowOutsideClick : false,
+                            }).then((result)=>{
+                                if(result.isConfirmed){
+                                window.location.href = "index.html"  
+                                }
+                            })
+                            
+                            })
+                            .catch((error) => {
+                            Swal.fire("Erreur lors de la suppression.", "", "error");
+                            
+                            });
+                    }
+                })
+                })
+
+ 
+                // function to logout my compte
+                logoutId.addEventListener('click', function(){
+                Swal.fire({
+                    icon: 'info',
+                    title: ' Deconnectez-vous ?',
+                    allowOutsideClick : false,
+                    showCancelButton : true,
+                    }).then((result)=>{
+                        if(result.isConfirmed){
+                            localStorage.removeItem('TraductoId')
+                            window.location.href = "./../logintrad.html"
+                    }
+                })
+                })
+
         </script>
+        
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -755,10 +903,6 @@
             crossorigin="anonymous"></script>
         <script src="database.js"></script>
         <script src="admin.js"></script>
-        
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     </body>
 
 </html>

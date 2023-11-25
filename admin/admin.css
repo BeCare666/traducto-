@@ -53,3 +53,143 @@
       transform: rotate(360deg);
     }
   }
+
+  @media (min-width: 350px){
+    #logoId{
+      height: 100% !important; 
+      width: 100vh !important; 
+      align-items: center !important;
+    }
+
+    #navbarVertical{
+      padding: 23px !important;
+      margin: 23px !important;
+    }
+    #traductoId{
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    #mytraductId{
+      height: 45.5vh; width: 100% !important; 
+    }
+    #allMyFillId{
+     
+      margin: 23px !important;
+    }
+
+    #modalMyDropdown{
+      
+      margin-right: 9px !important;
+      bottom: 0 !important;
+      background-color: blue !important;
+      display: none;
+      color: white;
+      border-radius: 12px;
+     
+    }
+    #modalMyDropdown li {
+      text-align: left !important;
+    }
+  }
+
+  @media (min-width: 600px){
+    #logoId{
+      height: 100% !important; 
+      width: 100vh !important; 
+      align-items: center !important;
+    }
+    #navbarVertical{
+      padding: 23px !important;
+      margin: 23px !important;
+    }
+    #traductoId{
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    #mytraductId{
+      height: 45.5vh !important; width: 100% !important; 
+    }
+    #allMyFillId{
+     
+      margin: 23px !important;
+    }
+
+    #modalMyDropdown{
+      margin-right: 9px !important;
+      bottom: 0 !important;
+      background-color: blue !important;
+      display: none;
+      color: white;
+      border-radius: 12px;
+       
+    }
+    #modalMyDropdown li {
+      text-align: left !important;
+    }
+  }
+
+#navbarVertical{
+  padding: 23px !important;
+  margin: 23px !important;
+  
+}
+ 
+#traductoId{
+  height: 30.5vh !important;
+}
+
+#mytraductId{
+  height: 30vh !important; width: 100% !important; 
+}
+
+
+.back-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 99999;
+  background: #FFB6C1;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.back-to-top i {
+  font-size: 24px;
+  color: #fff;
+  line-height: 0;
+}
+
+.back-to-top:hover {
+  background: #6776f4;
+  color: #fff;
+}
+
+.back-to-top.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+#modalMyDropdown{
+  
+  bottom: 11vh !important;
+  background-color: blue !important;
+  display: none;
+  color: white;
+  border-radius: 12px;
+}
+#modalMyDropdown li {
+  text-align: left !important;
+}
+
+#SearchId{
+  position: absolute;
+  right: 4px !important;
+  border: #5ab652 solid 1px;
+  border-radius: 5px !important;
+  color: black;
+  outline: none;
+  border: 1px solid #84A2FA;
+}

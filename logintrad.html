@@ -46,9 +46,44 @@
                   <input class="form-input" id="login-email" type="email" name="email" data-constraints="@Email @Required">
                 </div>
                 <div class="form-wrap">
-                  <label class="form-label-outside" for="login-email">Nom d'utilisateur</label>
-                  <input class="form-input" id="login-username" type="text" name="text" data-constraints=" @Required"  oninput="validerSaisie(this)">
-              </div>
+                    <label class="form-label-outside" for="login-email">Nom d'utilisateur</label>
+                    <input class="form-input" id="login-username" type="text" name="text" data-constraints=" @Required"  oninput="validerSaisie(this)">
+                </div>
+                  <div class="form-wrap" style="display: none;">
+                    <label class="form-label-outside" for="login-email">E-mail</label>
+                    <select name="langage" id="login-langage" class="form-input" style="max-height: 100px !important; overflow: auto !important;">
+                        <option value="anglais-français">Anglais - Français</option>
+                        <option value="espagnol-allemand">Espagnol - Allemand</option>
+                        <option value="italien-portugais">Italien - Portugais</option>
+                        <option value="russe-chinois">Russe - Chinois</option>
+                        <option value="japonais-coréen">Japonais - Coréen</option>
+                        <option value="arabe-néerlandais">Arabe - Néerlandais</option>
+                        <option value="turc-suédois">Turc - Suédois</option>
+                        <option value="hindi-finnois">Hindi - Finnois</option>
+                        <option value="polonais-danois">Polonais - Danois</option>
+                        <option value="grec-tchèque">Grec - Tchèque</option>
+                        <option value="norvégien-hongrois">Norvégien - Hongrois</option>
+                        <option value="thaï-hébreu">Thaï - Hébreu</option>
+                        <option value="indonésien-vietnamien">Indonésien - Vietnamien</option>
+                        <option value="malaisien-catalan">Malaisien - Catalan</option>
+                        <option value="roumain-slovaque">Roumain - Slovaque</option>
+                        <option value="bulgare-croate">Bulgare - Croate</option>
+                        <option value="serbe-letton">Serbe - Letton</option>
+                        <option value="estonien-lituanien">Estonien - Lituanien</option>
+                        <option value="slovène-macédonien">Slovène - Macédonien</option>
+                        <option value="gallois-gaélique">Gallois - Gaélique</option>
+                        <option value="maltais-luxembourgeois">Maltais - Luxembourgeois</option>
+                        <option value="islandais-basque">Islandais - Basque</option>
+                        <option value="frison-géorgien">Frison - Géorgien</option>
+                        <option value="albanais-arménien">Albanais - Arménien</option>
+                        <option value="azerbaïdjanais-kazakh">Azerbaïdjanais - Kazakh</option>
+                        <option value="ouzbek-kirghize">Ouzbek - Kirghize</option>
+                        <option value="kurdish-mongol">Kurde - Mongol</option>
+                        <option value="swahili-amharique">Swahili - Amharique</option>
+                        <option value="malgache-sesotho">Malgache - Sesotho</option>
+                    </select>
+                    
+                  </div>
                 <div class="form-wrap">
                   <label class="form-label-outside" for="login-password">Mot de passe</label>
                   <input class="form-input" id="login-password" type="password" name="pass" data-constraints="@Required">
@@ -157,7 +192,7 @@
         </div>
       </footer>
 
-    </div>
+    </div> 
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <svg class="svg-gradient" viewbox="0 0 79 79">
@@ -192,6 +227,6 @@
     </script>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/database.js"></script>
+    <script src="js/sendData.js"></script>
 </body>
 </html>

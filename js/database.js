@@ -19,6 +19,7 @@ function submitmy(){
 const emailRef = firebase.database().ref('utilisateurs');
 const email = document.getElementById('login-email').value;
 var password = document.getElementById('login-password').value
+var loginusername = document.getElementById('login-username').value
 //alert(numberphoneuser)
 console.log(email)
 console.log(password)
@@ -43,6 +44,7 @@ const emailInput = document.getElementById('login-email').value;
       const email = emails[emailKey];
       document.getElementById('login-email').value = ""
       document.getElementById('login-password').value = ""
+      document.getElementById('login-username').value = ""
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -63,7 +65,7 @@ const emailInput = document.getElementById('login-email').value;
     .substring(1);
     }
     const userId = id();
-    var userID =  userId
+    var userID =  userId + loginusername
     // Récupération de l'adresse mail entrée par l'utilisateur
     // Envoi de l'adresse mail à Firebase
 
@@ -79,6 +81,7 @@ const emailInput = document.getElementById('login-email').value;
     firebase.database().ref('utilisateurs/' + userID).set({
         userId : userID,
         email: email,
+        username:loginusername,
         password : password,
         DOCSATUS1: true,
         DOCSATUS2: false,
@@ -98,6 +101,7 @@ const emailInput = document.getElementById('login-email').value;
     }).then(() => {
       document.getElementById('login-email').value = ""
       document.getElementById('login-password').value = ""
+      document.getElementById('login-username').value = ""
       Swal.fire({
       icon: 'success',
       title: 'Félicitations',
@@ -126,19 +130,22 @@ const emailInput = document.getElementById('login-email').value;
   }
   }
 
-function submitmyx(){ 
+  function submitmyx(){ 
     const emailRef = firebase.database().ref('utilisateurs');
     const email = document.getElementById('login-email').value;
     var password = document.getElementById('login-password').value
     //alert(numberphoneuser)
-    console.log(email)
-    console.log(password)
+   
     // Ajoutez un gestionnaire d'événements pour l'événement "input"
     const emailInput = document.getElementById('login-email').value;
-    
-      if(email  && password ){
+    const usernameKEy = document.getElementById('login-username').value;
+    console.log(email)
+    console.log(password)
+    console.log(usernameKEy)
+      if(email  && password && usernameKEy){
       let emailKey = null;
       let passwordkey = null;
+      let loginusernameKy = null;
     
       // Filtrage des données pour trouver l'adresse e-mail spécifique
       emailRef.once('value', (snapshot) => {
@@ -150,17 +157,25 @@ function submitmyx(){
           }
         }
 
-        for (const keyphone in emails) {
+        for (const keyphoneuser in emails) {
+            if (emails.hasOwnProperty(keyphoneuser) && emails[keyphoneuser].username === usernameKEy ) {
+                loginusernameKy  = keyphoneuser;
+              break; 
+            }
+          }
+          
+          for (const keyphone in emails) {
             if (emails.hasOwnProperty(keyphone) && emails[keyphone].password === password ) {
-                passwordkey = keyphone;
+                passwordkey  = keyphone;
               break;
             }
           }
-       
-        if (emailKey && passwordkey) {
+          
+        if (emailKey && passwordkey && loginusernameKy) {
           localStorage.setItem("userTraductoId", emailKey)
           document.getElementById('login-email').value = ""
           document.getElementById('login-password').value = ""
+          document.getElementById('login-username').value = ""
           Swal.fire({
             icon: 'success',
             title: 'Connexion',
@@ -170,16 +185,29 @@ function submitmyx(){
            // footer: '<a href="">Why do I have this issue?</a>'
           })
           setTimeout(()=>{
-            window.location.href = "myaccount.html"
+            const userRef = firebase.database().ref('traducteurs/' + emailKey);
+            userRef.once('value')
+            .then((snapshot) => { 
+                const userData = snapshot.val();
+                if(userData.isDefaultAccount === true){
+                    window.location.href = "tradsign.html"
+                }else{
+                    window.location.href = "myaccount.html"
+                }
+            }).catch((error)=>{
+                console.log(error)
+            })
+           
           },2000)
         } else {
           
           document.getElementById('login-email').value = ""
           document.getElementById('login-password').value = ""
+          document.getElementById('login-username').value = ""
           Swal.fire({
             icon: 'error',
             title: 'Ooops',
-            text: "Le mot de passe est ou email incorrect",
+            text: "Le mot de passe ou email incorrect",
             showConfirmButton: false,
             timer: 1500
            // footer: '<a href="">Why do I have this issue?</a>'
@@ -191,7 +219,7 @@ function submitmyx(){
     }else{
     //alert("les données ne sont pas")
       }
-      }
+}
  
 
  

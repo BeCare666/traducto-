@@ -239,7 +239,7 @@ userRef.once('value')
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
        if (result.isConfirmed) {
-        const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
+      const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
       // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
       userRef.update({
       // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
@@ -287,7 +287,7 @@ userRef.once('value')
     toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-    })
+  })
 
     }
    
@@ -413,3 +413,5 @@ input.addEventListener("change", function (e) {
 <script type="module" src="js/sendData.js"></script>
 </body>
 </html>
+
+ 
