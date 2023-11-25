@@ -87,6 +87,7 @@ const emailInput = document.getElementById('login-email').value;
         DOCSATUS2: false,
         DOCSATUS3: false,
         DOCSATUS4: false, 
+        CANDIDATURESTATUS: false, 
         isDefaultAccount: true,
         isPaidAccount: false,
         MONPAYSDEPUBLICATION:"",
@@ -177,29 +178,39 @@ function submitmyx(){
           document.getElementById('login-email').value = ""
           document.getElementById('login-password').value = ""
           document.getElementById('login-username').value = ""
-          Swal.fire({
-            icon: 'success',
-            title: 'Connexion',
-            text: "Vous êtes connecté avec succèss",
-            showConfirmButton: false,
-            timer: 1500
-           // footer: '<a href="">Why do I have this issue?</a>'
-          })
-          setTimeout(()=>{
+
+        const userRef = firebase.database().ref('traducteurs/' + emailKey);
+        // Utilisation de update() pour mettre à jour les données
+        userRef.update({
+            isDefaultAccount: false, // Nouvelle valeur
+        })
+        .then(() => { 
+        Swal.fire({
+         icon: 'success',
+        title: 'Connexion',
+        text: "Vous êtes connecté avec succèss",
+         showConfirmButton: true,
+        timer: 1500
+        // footer: '<a href="">Why do I have this issue?</a>'
+        })
+        setTimeout(()=>{
             const userRef = firebase.database().ref('traducteurs/' + emailKey);
             userRef.once('value')
-            .then((snapshot) => { 
-                const userData = snapshot.val();
-                if(userData.isDefaultAccount){
-                    window.location.href = "tradsign.html"
+           .then((snapshot) => { 
+            const userData = snapshot.val();
+            if(userData.traducto.inter@gmail.com){
+                window.location.href = "tradsign.html"
                 }else{
-                    window.location.href = "./admin/traductor.html"
-                }
-            }).catch((error)=>{
-                console.log(error)
-            })
-           
-          },2000)
+               window.location.href = "./admin/traductor.html"
+               }
+           }).catch((error)=>{
+            console.log(error)
+           })
+        },2000)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
         } else {
           
           document.getElementById('login-email').value = ""

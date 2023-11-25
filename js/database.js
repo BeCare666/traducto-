@@ -172,7 +172,6 @@ const emailInput = document.getElementById('login-email').value;
           }
           
         if (emailKey && passwordkey && loginusernameKy) {
-          localStorage.setItem("userTraductoId", emailKey)
           document.getElementById('login-email').value = ""
           document.getElementById('login-password').value = ""
           document.getElementById('login-username').value = ""
@@ -185,6 +184,7 @@ const emailInput = document.getElementById('login-email').value;
            // footer: '<a href="">Why do I have this issue?</a>'
           })
           setTimeout(()=>{
+             localStorage.setItem("userTraductoIdpId", emailKey)
             window.location.href = "myaccount.html"      
           },2000)
         } else {

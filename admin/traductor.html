@@ -587,9 +587,8 @@
             var myalldatas = [];
             //const UserConnectIdToBuy = localStorage.getItem("storageName");
             const TraductoIdVA = localStorage.getItem("TraductoId"); 
-
             if (!TraductoIdVA) {
-                window.location.href = "../logintrad.html"
+               window.location.href = "../logintrad.html"
             }
 
             //function to get all data for traductor
@@ -611,6 +610,8 @@
             var btnpaieMymoney =  document.getElementById('btnpaieMymoney');
             
             btnpaieMymoney.addEventListener('click', function(){
+                alert(snopshot.val().email),
+                alert(snopshot.val().username);
             var  paieMymoney =  document.getElementById('paieMymoney').value;
             if(paieMymoney){
              //  envoi de mail de suspension
@@ -620,7 +621,7 @@
                 const emailParams = {
                   apiKey: apiKey ,
                   subject: "Demande de paiement.",
-                  from:  snopshot.val().email,
+                  from:   "traducto.inter@gmail.com",
                   fromName: snopshot.val().username,
                   to: "traducto.inter@gmail.com",
                   bodyHtml: `
@@ -671,7 +672,7 @@
                         allowOutsideClick : false,
                         }).then((result)=>{
                             if(result.isConfirmed){
-                             localStorage.removeItem('userTraductoId')
+                            
                          window.location.href = "traductor.html"
                         }
                     })
@@ -684,7 +685,7 @@
                        
                         }).then((result)=>{
                             if(result.isConfirmed){
-                             localStorage.removeItem('userTraductoId')
+                            
                          window.location.href = "traductor.html"
                         }
                     })
@@ -698,7 +699,7 @@
                        
                         }).then((result)=>{
                             if(result.isConfirmed){
-                             localStorage.removeItem('userTraductoId')
+                            
                          window.location.href = "traductor.html"
                         }
                     })
@@ -818,17 +819,18 @@
                     </td>                                                          
                     `
                     div.append(trow)
-                        }
-                    })
-                    } else {
+                        } else {
                         document.getElementById('preloader').style.display = "none"
                         var CreateAllproductnodata = document.getElementById('createAllproductnodata')
-                            CreateAllproductnodata.innerHTML = ` 
+                            CreateAllproductnodata.innerHTML = `
+                            <span style="opacity: 0;">sdfghjklkjhgfd</span>
                             <div style = "display: flex; justify-content: center; margin: auto;">
-                            <img src="../images/no_data.svg" alt="" style = "width: 100%; height: 20vh;">
-                        </div> 
+                            <img src="./../images/no_data.svg" alt="" style = "width: 100%; height: 20vh;">
+                             </div> 
                         <p style="text-align: center;">Vous n'avez pas encore de Projet à traduire.</p>
                     `
+                    }
+                    })
                     }
                     });
                    
@@ -886,7 +888,6 @@
                 })
 
         </script>
-        
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

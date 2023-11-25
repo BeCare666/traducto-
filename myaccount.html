@@ -120,21 +120,22 @@
 <script type="module">
 // Configurer votre projet Firebase
 const firebaseConfig = {
-            apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
-            authDomain: "traducto-2fab6.firebaseapp.com",
-            databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
-            projectId: "traducto-2fab6",
-            storageBucket: "traducto-2fab6.appspot.com",
-            messagingSenderId: "914618680771",
-            appId: "1:914618680771:web:24eb2877454b80188ea976"
+  apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+  authDomain: "traducto-2fab6.firebaseapp.com",
+  databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+  projectId: "traducto-2fab6",
+  storageBucket: "traducto-2fab6.appspot.com",
+  messagingSenderId: "914618680771",
+  appId: "1:914618680771:web:24eb2877454b80188ea976"
 };
-const UserTraductoId = localStorage.getItem('userTraductoId');
+
 // Initialiser Firebase
 firebase.initializeApp(firebaseConfig);
 
 // Initialiser Firebase Storage
 const storage = firebase.storage();
-
+const UserTraductoId = localStorage.getItem('userTraductoIdpId');
+alert(UserTraductoId)
 // Récupérer une référence vers le dossier de stockage (par exemple, 'documents')
 const storageRef = storage.ref('documents');
 var skrollableIdbtn = document.getElementById('skrollableIdbtn');
@@ -148,9 +149,9 @@ var logoutId = document.getElementById('logoutId');
 const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
 
 // function to commeback
-if(!UserTraductoId){
-  window.location.href = "login.html"
-}
+//if(!UserTraductoId){
+//  window.location.href = "login.html"
+//}
 // function to logout my compte
 logoutId.addEventListener('click', function(){
   Swal.fire({
@@ -260,11 +261,13 @@ userRef.once('value')
         Swal.fire({
           icon: 'success',
           title: 'Achivée',
-          allowOutsideClick : false,  
+          allowOutsideClick : false, 
+          showConfirmButton: false,
+         timer: 3000,
         }).then((result)=>{
-          if(result.isConfirmed){
+         
             window.location.href = "myaccount.html"
-          }
+        
         })
         
       }).catch((error) => {
