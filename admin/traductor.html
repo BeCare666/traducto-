@@ -586,11 +586,11 @@
         function getAllDataRealtime() {
             var div = document.getElementById('createAllproduct');
             var myalldatas = [];
-            const UserConnectIdToBuy = localStorage.getItem("storageName");
+            //const UserConnectIdToBuy = localStorage.getItem("storageName");
             const TraductoIdVA = localStorage.getItem("TraductoId"); 
 
-            if (!UserConnectIdToBuy) {
-                window.location.href = "loginadmin.html"
+            if (!TraductoIdVA) {
+                window.location.href = "../login.html"
             }
 
             //function to get all data for traductor

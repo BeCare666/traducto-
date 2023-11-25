@@ -185,19 +185,7 @@ const emailInput = document.getElementById('login-email').value;
            // footer: '<a href="">Why do I have this issue?</a>'
           })
           setTimeout(()=>{
-            const userRef = firebase.database().ref('traducteurs/' + emailKey);
-            userRef.once('value')
-            .then((snapshot) => { 
-                const userData = snapshot.val();
-                if(userData.isDefaultAccount === true){
-                    window.location.href = "tradsign.html"
-                }else{
-                    window.location.href = "myaccount.html"
-                }
-            }).catch((error)=>{
-                console.log(error)
-            })
-           
+            window.location.href = "myaccount.html"      
           },2000)
         } else {
           
