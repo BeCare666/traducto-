@@ -120,13 +120,13 @@
 <script type="module">
 // Configurer votre projet Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyAE3g0U59TzghjmeN-LOL6v70xYaTm3pAU",
-    authDomain: "traducto-b36fc.firebaseapp.com",
-    databaseURL: "https://traducto-b36fc-default-rtdb.firebaseio.com",
-    projectId: "traducto-b36fc",
-    storageBucket: "traducto-b36fc.appspot.com",
-    messagingSenderId: "560806060261",
-    appId: "1:560806060261:web:2b990c1bc8ec660715f40c"
+            apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+            authDomain: "traducto-2fab6.firebaseapp.com",
+            databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+            projectId: "traducto-2fab6",
+            storageBucket: "traducto-2fab6.appspot.com",
+            messagingSenderId: "914618680771",
+            appId: "1:914618680771:web:24eb2877454b80188ea976"
 };
 const UserTraductoId = localStorage.getItem('userTraductoId');
 // Initialiser Firebase
@@ -384,22 +384,22 @@ input.addEventListener("change", function (e) {
     var UserMailMy = localStorage.getItem('userMailMy')
     var UserNameMy = localStorage.getItem('userNameMy')
        //  envoi de mail de suspension
-       const apiKey = "34F593452254BAB8CACDA4A39FC9C44BFC0D3E63B8842CD369FF37BBE4AC5017DA7917B6E03C3C8EB379F906C80E9DED";
+       const apiKey = "785B4029FA0EA1FB573C09903D5D557568F868BD402BE1746D1852EDFBC87D0249E623331ADD62923850AE601C019743";
           const apiUrl = "https://api.elasticemail.com/v2/email/send";
           // Définir les paramètres de l'e-mail
           const emailParams = {
             apiKey: apiKey ,
             subject: "Document à Traduire Envoyé",
-            from: "validation@illicolove.com",
+            from: UserMailMy,
             fromName: UserNameMy,
-            to: UserMailMy,
+            to: "traducto.inter@gmail.com",
             bodyHtml: `
             <table cellpadding="10" cellspacing="0" style="background-color: #f1f1f1; padding: 20px;">
             <tr>
                 <td>
                 <div style="text-align: center;">
                 <img src="https://traductoa.netlify.app/images/Traducto1-1.png" 
-                style="max-width: 17%; height: auto; display: inline-block;" />
+                style="max-width: 30%; height: auto; display: inline-block;" />
                 </div>
                 <strong style="color: #333; text-align: center !important;">Document à Traduire Envoyé</strong>
                 <p style="font-size: 16px; color: #666;">

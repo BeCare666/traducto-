@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyAE3g0U59TzghjmeN-LOL6v70xYaTm3pAU",
-    authDomain: "traducto-b36fc.firebaseapp.com",
-    databaseURL: "https://traducto-b36fc-default-rtdb.firebaseio.com",
-    projectId: "traducto-b36fc",
-    storageBucket: "traducto-b36fc.appspot.com",
-    messagingSenderId: "560806060261",
-    appId: "1:560806060261:web:2b990c1bc8ec660715f40c"
+  apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+  authDomain: "traducto-2fab6.firebaseapp.com",
+  databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+  projectId: "traducto-2fab6",
+  storageBucket: "traducto-2fab6.appspot.com",
+  messagingSenderId: "914618680771",
+  appId: "1:914618680771:web:24eb2877454b80188ea976"
 };
 firebase.initializeApp(firebaseConfig);
 
