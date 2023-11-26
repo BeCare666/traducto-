@@ -21,8 +21,8 @@ const email = document.getElementById('login-email').value;
 var password = document.getElementById('login-password').value
 var loginusername = document.getElementById('login-username').value
 //alert(numberphoneuser)
-console.log(email)
-console.log(password)
+//console.log(email)
+//console.log(password)
 // Ajoutez un gestionnaire d'événements pour l'événement "input"
 const emailInput = document.getElementById('login-email').value;
 
@@ -141,9 +141,9 @@ function submitmyx(){
     // Ajoutez un gestionnaire d'événements pour l'événement "input"
     const emailInput = document.getElementById('login-email').value;
     const usernameKEy = document.getElementById('login-username').value;
-    console.log(email)
-    console.log(password)
-    console.log(usernameKEy)
+   // console.log(email)
+   // console.log(password)
+   // console.log(usernameKEy)
       if(email  && password && usernameKEy){
       let emailKey = null;
       let passwordkey = null;
@@ -198,7 +198,8 @@ function submitmyx(){
             userRef.once('value')
            .then((snapshot) => { 
             const userData = snapshot.val();
-            if(userData.traducto.inter@gmail.com){
+            //console.log(userData.CANDIDATURESTATUS)
+            if(userData.CANDIDATURESTATUS){
                 window.location.href = "tradsign.html"
                 }else{
                window.location.href = "./admin/traductor.html"

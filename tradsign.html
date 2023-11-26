@@ -150,7 +150,7 @@
      const TraductoId = localStorage.getItem("TraductoId");
         // function to send candidate
         function sendData(){
-            var name = document.getElementById('full-name').value;
+        var name = document.getElementById('full-name').value;
         var address = document.getElementById('address').value;
         var birthdate = document.getElementById('birth-date').value;
         var email = document.getElementById('email').value;
@@ -164,10 +164,7 @@
         var linkedin = document.getElementById('linkedin').value;
         var twitter = document.getElementById('twitter').value;
         var github = document.getElementById('github').value;
-
-        console.log(name , address , birthdate , email  , phone , 
-        summary , jobtitle , startdate , enddate , 
-        jobdescription , linkedin)
+ 
          if(name && address && birthdate && email  && phone && 
              summary && jobtitle && startdate && enddate && 
            jobdescription && summaryLang){
