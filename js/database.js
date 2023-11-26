@@ -82,6 +82,7 @@ const emailInput = document.getElementById('login-email').value;
         userId : userID,
         email: email,
         username:loginusername,
+        MYTRADUCTORID:"",
         password : password,
         DOCSATUS1: true,
         DOCSATUS2: false,

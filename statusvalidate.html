@@ -59,38 +59,38 @@
 function start(){
     // Supposons que votre base de données Firebase soit configurée
     const firebaseConfig = {
-    apiKey: "AIzaSyAE3g0U59TzghjmeN-LOL6v70xYaTm3pAU",
-    authDomain: "traducto-b36fc.firebaseapp.com",
-    databaseURL: "https://traducto-b36fc-default-rtdb.firebaseio.com",
-    projectId: "traducto-b36fc",
-    storageBucket: "traducto-b36fc.appspot.com",
-    messagingSenderId: "560806060261",
-    appId: "1:560806060261:web:2b990c1bc8ec660715f40c"
+  apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+  authDomain: "traducto-2fab6.firebaseapp.com",
+  databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+  projectId: "traducto-2fab6",
+  storageBucket: "traducto-2fab6.appspot.com",
+  messagingSenderId: "914618680771",
+  appId: "1:914618680771:web:24eb2877454b80188ea976"
 };
 
 firebase.initializeApp(firebaseConfig);
 
 // Obtenez une référence vers votre base de données
-const database = firebase.database();
+//const database = firebase.database();
 const UserTraductoId = localStorage.getItem('userId');
 // Déclaration de la variable gogo
 let gogo = null;
 
 // Récupérez la valeur de gogo depuis la base de données
-const gogoRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
    var step1Element = document.getElementById('step1');
     var step2Element = document.getElementById('step2');
     var step3Element = document.getElementById('step3');
     var step4Element = document.getElementById('step4');
     var preloader = document.getElementById('preloader');
+  const gogoRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
   gogoRef.once('value')
-    .then((snapshot) => {
+  .then((snapshot) => {
         
         preloader.style.display = "none"
         // snapshot.val() contient la valeur de gogo depuis la base de données
-        gogo = snapshot.val();
+      var gogo = snapshot.val();
         // Affichez la boîte de dialogue avec la logique modifiée
-        
+        console.log(gogo) 
       if(gogo.MONPAYSDEPUBLICATION){
         if(gogo.DOCSATUS1 == true){
         var DOCSATUS1 = gogo.DOCSATUS1

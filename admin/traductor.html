@@ -361,7 +361,7 @@
                                             <th scope="col">Nom</th>
                                             <th scope="col">Date</th>
                                             <th scope="col">Status</th>
-                                           <th scope="col">Nbre de mot</th>
+                                           <th scope="col">Traducteur</th>
                                             <!--- <th scope="col">Prix promo fcfa</th>-->
                                             <th scope="col">Nom du fichier</th>
                                             <th scope="col">Id</th>
@@ -610,8 +610,8 @@
             var btnpaieMymoney =  document.getElementById('btnpaieMymoney');
             
             btnpaieMymoney.addEventListener('click', function(){
-                alert(snopshot.val().email),
-                alert(snopshot.val().username);
+               // alert(snopshot.val().email),
+               // alert(snopshot.val().username);
             var  paieMymoney =  document.getElementById('paieMymoney').value;
             if(paieMymoney){
              //  envoi de mail de suspension
@@ -802,13 +802,13 @@
                         </a>
                     </td>
                     <td>
-                        ${k.NUMBEROFMOT} 
+                        ${k.MYTRADUCTORID}
                     </td>
                     <td>
                         <div style="width: 20vh !important; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${k.FILETYPE}</div> 
                     </td>
                     <td class="text-end">
-                        <a class=" neutralMyclass">${k.userId} </a>
+                        <a class=" neutralMyclass">${k.username} </a>
                     </td>
                     <td class="text-end" style="display:none;">
                         <a class="btn btn-sm btn-neutral neutralMyclass">Mise à jour</a>

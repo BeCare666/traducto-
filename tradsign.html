@@ -33,16 +33,16 @@
             <h3>Informations personnelles</h3>
             <div class="input-group">
                 <label for="full-name">Nom et prénoms</label>
-                <input type="text" name="full-name" id="full-name" required>
+                <input type="text" name="full-name" id="full-name" >
             </div>
 
             <div class="input-group">
                 <label for="address">Address</label>
-                <input type="text" name="address" id="address" required>
+                <input type="text" name="address" id="address" >
             </div>
             <div class="input-group">
                 <label for="birth-date">Date de naissance</label>
-                <input type="date" name="birth-date" id="birth-date" required>
+                <input type="date" name="birth-date" id="birth-date" >
             </div>
             <div class="">
                 <a class="btn btn-next">Suivant</a>
@@ -52,11 +52,11 @@
             <h3>Contact Informations</h3>
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" >
             </div>
             <div class="input-group">
                 <label for="phone">Téléphone</label>
-                <input type="phone" name="phone" id="phone" required>
+                <input type="phone" name="phone" id="phone" >
             </div>
             <div class="input-group">
                 <label for="summary" id="labelsummary">Résumé du profil</label>
@@ -80,15 +80,15 @@
                 <div class="experience-item">
                     <div class="input-group">
                         <label for="title">Nom de l'entreprise</label>
-                        <input type="text" name="job-title[]" id="job-title" required>
+                        <input type="text" name="job-title[]" id="job-title" >
                     </div>
                     <div class="input-group">
                         <label for="start-date">Date de début</label>
-                        <input type="date" name="start-date[]" id="start-date" required>
+                        <input type="date" name="start-date[]" id="start-date" >
                     </div>
                     <div class="input-group">
                         <label for="end-date">Date de fin</label>
-                        <input type="date" name="end-date[]" id="end-date" required>
+                        <input type="date" name="end-date[]" id="end-date" >
                     </div>
                     <div class="input-group">
                         <label for="job-description" id="labelDES">Description</label>
@@ -165,10 +165,9 @@
         var twitter = document.getElementById('twitter').value;
         var github = document.getElementById('github').value;
  
-         if(name && address && birthdate && email  && phone && 
+         if(name && name  && address && birthdate && email  && phone && 
              summary && jobtitle && startdate && enddate && 
            jobdescription && summaryLang){
-            alert(email)
              //  envoi de mail de suspension
              const apiKey = "785B4029FA0EA1FB573C09903D5D557568F868BD402BE1746D1852EDFBC87D0249E623331ADD62923850AE601C019743";
                 const apiUrl = "https://api.elasticemail.com/v2/email/send";
@@ -184,7 +183,7 @@
                   <tr>
                       <td>
                       <div style="text-align: center;">
-                        <img src="https://traducto.netlify.app/images/Traducto1-1.png" 
+                        <img src="https://traductoa.netlify.app/images/Traducto1-1.png" 
                                 style="max-width: 17%; height: auto; display: inline-block;" />
                       </div>
                       <h1 style="color: #333; text-align: center !important;">Candidature.</h1>
@@ -213,9 +212,9 @@
                        Ces réseaux sociaux:   
                       </p>
                       <ul>
-                        <li><a href="${linkedin}"><strong>Linkedin</strong>  : ${linkedin}</a> </li>
-                        <li><a href="${twitter}"><strong>Twitter</strong>  : ${twitter}</a> </li>
-                        <li><a href="${github}"><strong>Instagram</strong> : ${github}</a> </li>
+                        <li><strong>Linkedin</strong>  : ${linkedin ? `<a href="${linkedin}">${linkedin}</a>` : 'N/A'}</li>
+                        <li><strong>Twitter</strong>  : ${twitter ? `<a href="${twitter}">${twitter}</a>` : 'N/A'}</li>
+                        <li><strong>GitHub</strong>  : ${github ? `<a href="${github}">${github}</a>` : 'N/A'}</li>
                       </ul>
 
                       <p style="font-size: 14px; color: #999;">
@@ -298,22 +297,16 @@
                   });
                  // end envoi de mail de suspension
                }else{
-            Swal.fire({
-         toast: true,
-        icon: 'error',
-        title: 'Tout les champs ne sont pas remplir. ',
-      animation: false,
-     position: 'top',
-     showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  }); 
-         }
-        }
+                Swal.fire({
+                 icon: 'error',
+                text: 'Tout les champs ne sont pas remplis.',
+                allowOutsideClick : false,
+                timer: 3000,
+                showConfirmButton : false
+                })
+     
+}
+}
     </script>
     <script src="js/tradsign.js" defer></script>
     <!---<script src="js/sendData.js"></script>-->

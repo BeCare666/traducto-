@@ -108,7 +108,7 @@
                 
           <div class="form" id="btnIdx" style="display: none;">
             <h4 class="titleId"></h4>
-            <input type="text" placeholder="Nombre de mots ?" id="numberMoId" oninput="validerSaisie(this)">
+           <!-- <input type="text" placeholder="Nombre de mots ?" id="numberMoId" oninput="validerSaisie(this)">--->
             <button class="btn" style="cursor: pointer;" id="btnId" >Envoyer</button>
           </div>
           <button class="btn btnx" style="cursor: pointer;" id="btnIdy">Choisir le fichier</button>
@@ -135,7 +135,7 @@ firebase.initializeApp(firebaseConfig);
 // Initialiser Firebase Storage
 const storage = firebase.storage();
 const UserTraductoId = localStorage.getItem('userTraductoIdpId');
-alert(UserTraductoId)
+//alert(UserTraductoId)
 // Récupérer une référence vers le dossier de stockage (par exemple, 'documents')
 const storageRef = storage.ref('documents');
 var skrollableIdbtn = document.getElementById('skrollableIdbtn');
@@ -207,7 +207,7 @@ userRef.once('value')
     const userData = snapshot.val();
     if(userData.MONPAYSDEPUBLICATION){
     showId.style.display = "none"
-    skrollableId.style.display = "block"
+    skrollableId.style.display = "none"
     var step1Element = document.getElementById('step1');
     var step2Element = document.getElementById('step2');
     var step3Element = document.getElementById('step3');
@@ -298,6 +298,29 @@ userRef.once('value')
 
     }
    
+    }else{
+      const localData = localStorage.getItem('aceptSmsWelcome');
+      if(!localData){
+      showId.style.display = "none"
+      skrollableId.style.display = "none"
+      Swal.fire({  
+      text: `Nous sommes ravis de vous accueillir sur notre plateforme de traduction. 
+      Chez Traducto, nous mettons tout en œuvre pour faciliter vos besoins en traduction 
+      avec précision et efficacité.`,
+      imageUrl: "images/Traducto1-1.png",
+      imageWidth: 300,
+      imageHeight: 300,
+      imageAlt: "Custom image",
+      allowOutsideClick:false
+    }).then((result)=>{
+      if(result.isConfirmed){
+        var choisewelCome = 200
+        localStorage.setItem("aceptSmsWelcome", choisewelCome)
+        showId.style.display = "block"
+       skrollableId.style.display = "none"
+      }
+    })
+      }
     }
     //console.log('Données de l\'utilisateur :', userData);
   })
@@ -343,7 +366,6 @@ button.onclick = () => {
 
 input.addEventListener("change", function (e) {
   var payYourUnitybtn = document.getElementById('btnId');
-  payYourUnitybtn.disabled = true;
   btnIdx.style.display = "block"
   toHiheId.style.display = "none"
   btnIdy.style.display = "none"
@@ -357,7 +379,6 @@ input.addEventListener("change", function (e) {
   var btnId = document.getElementById('btnId');
   var numberMoId = document.getElementById('numberMoId');
   btnId.addEventListener('click', function(){
-    if(numberMoId.value != ""){
  //console.log("sdfghjkfd")
   // Envoyer le fichier
   fileRef.put(fileNameNot).then((snapshot) => {
@@ -373,7 +394,7 @@ input.addEventListener("change", function (e) {
     userRef.update({
     // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
     MONPAYSDEPUBLICATION: url,
-    NUMBEROFMOT : numberMoId.value,
+    // NUMBEROFMOT : numberMoId.value,
     FILETYPE : fileName
       // ... ajoutez d'autres champs si nécessaire
     }).then(() => {               
@@ -491,22 +512,7 @@ input.addEventListener("change", function (e) {
     }).catch((error) => {
       Swal.fire("Erreur lors de l'envoi du fichier", "", "info");
     });
-    }else{
-    Swal.fire({
-    toast: true,
-    icon: 'error',
-    text: 'Saisissez le nombre de mots.',
-    animation: false,
-    position: 'top',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  }); 
-    }
+  
   })
 
 });

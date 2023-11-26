@@ -180,26 +180,23 @@ function submitmyx(){
           document.getElementById('login-username').value = ""
 
         const userRef = firebase.database().ref('traducteurs/' + emailKey);
-        // Utilisation de update() pour mettre à jour les données
-        userRef.update({
-            isDefaultAccount: false, // Nouvelle valeur
-        })
-        .then(() => { 
         Swal.fire({
-         icon: 'success',
-        title: 'Connexion',
-        text: "Vous êtes connecté avec succèss",
-         showConfirmButton: true,
-        timer: 1500
-        // footer: '<a href="">Why do I have this issue?</a>'
-        })
+            icon: 'success',
+           title: 'Connexion',
+           text: "Vous êtes connecté avec succèss",
+            showConfirmButton: true,
+           timer: 1500
+           // footer: '<a href="">Why do I have this issue?</a>'
+           })
+
         setTimeout(()=>{
             const userRef = firebase.database().ref('traducteurs/' + emailKey);
             userRef.once('value')
            .then((snapshot) => { 
             const userData = snapshot.val();
-            //console.log(userData.CANDIDATURESTATUS)
-            if(userData.CANDIDATURESTATUS){
+            var myStausCompt = userData.isDefaultAccount
+            //alert(myStausCompt)
+            if(myStausCompt){
                 window.location.href = "tradsign.html"
                 }else{
                window.location.href = "./admin/traductor.html"
@@ -208,10 +205,6 @@ function submitmyx(){
             console.log(error)
            })
         },2000)
-        })
-        .catch((error) => {
-            console.log(error);
-        });
         } else {
           
           document.getElementById('login-email').value = ""

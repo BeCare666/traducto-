@@ -6,8 +6,8 @@ function validerSaisie(input) {
     // Effacez la saisie incorrecte
     input.value = input.value.replace(/\D/g, ''); // Remplace tous les caractères non numériques
   } else {
-    var payYourUnitybtn = document.getElementById('btnId');
-    payYourUnitybtn.disabled = false;
+   // var payYourUnitybtn = document.getElementById('btnId');
+   // payYourUnitybtn.disabled = false;
   }
 }
 

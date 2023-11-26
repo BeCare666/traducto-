@@ -380,7 +380,7 @@
                                             <th scope="col">Nom</th>
                                             <th scope="col">Date</th>
                                             <th scope="col">Status</th>
-                                           <th scope="col">Nbre de mot</th>
+                                           <th scope="col">Traducteur</th>
                                             <!--- <th scope="col">Prix promo fcfa</th>-->
                                             <th scope="col">Nom du fichier</th>
                                             <th scope="col">Id</th>
@@ -704,7 +704,8 @@
                         </a>
                     </td>
                     <td>
-                        ${k.NUMBEROFMOT} 
+                        ${k.MYTRADUCTORID ? `${k.MYTRADUCTORID}` : 'Pas encore'}
+                         
                     </td>
                     <td>
                         <div style="width: 20vh !important; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${k.FILETYPE}</div> 
