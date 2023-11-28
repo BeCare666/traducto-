@@ -421,15 +421,11 @@ input.addEventListener("change", function (e) {
             <table cellpadding="10" cellspacing="0" style="background-color: #f1f1f1; padding: 20px;">
             <tr>
                 <td>
-                <div style="text-align: center;">
-                <img src="https://traductoa.netlify.app/images/Traducto1-1.png" 
-                style="max-width: 30%; height: auto; display: inline-block;" />
-                </div>
                 <strong style="color: #333; text-align: center !important;">Document à Traduire Envoyé</strong>
                 <p style="font-size: 16px; color: #666;">
                   Chère équipe de traducto,
                   J'espère que ce message vous trouve bien. Je vous informe par la présente que 
-                  j'ai envoyé le document à traduire via ce lien. <a href="${url}" style="color:blue;" download="${fileName}">Cliquer pour télécharger.</a>  Merci de confirmer la réception et de me 
+                  j'ai envoyé le document à traduire. Merci de confirmer la réception et de me 
                   faire part des prochaines étapes.
                 </p>
              
@@ -460,7 +456,8 @@ input.addEventListener("change", function (e) {
             .then((response) => response.json())
             .then((data) => {
             console.log(data); // Afficher la réponse de l'API ElasticEmail
-              if (data.success) {
+              {/*
+                         if (data.success) {
                   Swal.fire({
                   icon: 'success',
                   text: 'Votre Email envoyé avec succès.',
@@ -483,10 +480,10 @@ input.addEventListener("change", function (e) {
                    window.location.href = "myaccount.html"
                   }
               })
-              }
+              }*/}
             })
             .catch((error) => {
-              Swal.fire({
+              {/*Swal.fire({
                   icon: 'error',
                   text: `Erreur lors de la requête`,
                   allowOutsideClick : false,
@@ -495,7 +492,7 @@ input.addEventListener("change", function (e) {
                       if(result.isConfirmed){
                    window.location.href = "myaccount.html"
                   }
-              })
+              })*/}
             });
            // end envoi de mail de suspension
 

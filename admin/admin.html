@@ -34,6 +34,8 @@
                  
                </div>
                <div class="modal-footer">
+                
+                   <button type="button" class="btn btn-danger" id="docDownloadId" > </button>
                    <button type="button" class="btn btn-primary" data-dismiss="modal">Retour </button>
                </div>
            </div>
@@ -630,7 +632,13 @@
                     trow.addEventListener('click', function () {                   
                     trow.id = `${k.userId}`
                     var theUserId = k.userId
+                    var URLUSERV = k.MONPAYSDEPUBLICATION
                     utilisateursIdTaketable.push(theUserId)
+                    document.getElementById('docDownloadId').innerHTML = `
+                    <a href="${URLUSERV}" download="${k.FILETYPE}" style="color: white !important;">Télécharger le fichier</a>`
+                    console.log(URLUSERV)
+                    console.log(k.FILETYPE)
+                    
                     //localStorage.setItem('userId', theUserId)
                     //window.location.href = "./../statusvalidate.html"
                      // Affiche le modal au chargement de la page
@@ -708,7 +716,7 @@
                          
                     </td>
                     <td>
-                        <div style="width: 20vh !important; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${k.FILETYPE}</div> 
+                        <div style="width: 20vh !important; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${k.FILETYPE ? `${k.FILETYPE}` : 'Pas encore'}</div> 
                     </td>
                     <td class="text-end">
                         <a class=" neutralMyclass">${k.userId} </a>
