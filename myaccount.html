@@ -206,8 +206,8 @@ userRef.once('value')
     preloader.style.display = "none"
     const userData = snapshot.val();
     if(userData.MONPAYSDEPUBLICATION){
-    showId.style.display = "none"
-    skrollableId.style.display = "none"
+      skrollableId.style.display = "block"
+      showId.style.display = "none"
     var step1Element = document.getElementById('step1');
     var step2Element = document.getElementById('step2');
     var step3Element = document.getElementById('step3');
@@ -256,6 +256,7 @@ userRef.once('value')
         isPaidAccount: false,
         MONPAYSDEPUBLICATION:"",
         VALIDERMONCOMPTE:false,
+        MYTRADUCTORID:"",
         // ... ajoutez d'autres champs si nécessaire
       }).then(() => {
         Swal.fire({
@@ -280,7 +281,7 @@ userRef.once('value')
       })
     }else{
     skrollableIdbtn.addEventListener('click', function(){
-      Swal.fire({
+    Swal.fire({
     toast: true,
     icon: 'error',
     title: 'Une traduction est en cours!',
@@ -298,29 +299,6 @@ userRef.once('value')
 
     }
    
-    }else{
-      const localData = localStorage.getItem('aceptSmsWelcome');
-      if(!localData){
-      showId.style.display = "none"
-      skrollableId.style.display = "none"
-      Swal.fire({  
-      text: `Nous sommes ravis de vous accueillir sur notre plateforme de traduction. 
-      Chez Traducto, nous mettons tout en œuvre pour faciliter vos besoins en traduction 
-      avec précision et efficacité.`,
-      imageUrl: "images/Traducto1-1.png",
-      imageWidth: 300,
-      imageHeight: 300,
-      imageAlt: "Custom image",
-      allowOutsideClick:false
-    }).then((result)=>{
-      if(result.isConfirmed){
-        var choisewelCome = 200
-        localStorage.setItem("aceptSmsWelcome", choisewelCome)
-        showId.style.display = "block"
-       skrollableId.style.display = "none"
-      }
-    })
-      }
     }
     //console.log('Données de l\'utilisateur :', userData);
   })
@@ -456,8 +434,8 @@ input.addEventListener("change", function (e) {
             .then((response) => response.json())
             .then((data) => {
             console.log(data); // Afficher la réponse de l'API ElasticEmail
-              {/*
-                         if (data.success) {
+              
+                   if (data.success) {
                   Swal.fire({
                   icon: 'success',
                   text: 'Votre Email envoyé avec succès.',
@@ -470,29 +448,11 @@ input.addEventListener("change", function (e) {
               })
               
               } else {
-                  Swal.fire({
-                  icon: 'error',
-                  text: `Erreur lors de l'envoi de votre demande.`,
-                  allowOutsideClick : false,
-                 
-                  }).then((result)=>{
-                      if(result.isConfirmed){
-                   window.location.href = "myaccount.html"
-                  }
-              })
-              }*/}
+                 window.location.href = "myaccount.html"
+              } 
             })
             .catch((error) => {
-              {/*Swal.fire({
-                  icon: 'error',
-                  text: `Erreur lors de la requête`,
-                  allowOutsideClick : false,
-                 
-                  }).then((result)=>{
-                      if(result.isConfirmed){
-                   window.location.href = "myaccount.html"
-                  }
-              })*/}
+              window.location.href = "myaccount.html"
             });
            // end envoi de mail de suspension
 

@@ -28,7 +28,12 @@
            <div class="modal-content">
                <div class="modal-header">
                 <h5>Traducteurs</h5>
+               
                  <input type="text" id="SearchId" placeholder="Recherche" style="display: none;"> 
+               </div>
+               <div class="modal-body" style="display: none; " id="getAllTraductorIdx2">
+                <p style="color: red; text-align: center;" id="smsIdTradAsso" >Nous vous avertissons qu'un traducteur est déjà associé à ce client. Mais si vous voulez changer,
+                <strong id="docDownloadIdx2" style="color: blue; cursor: pointer;">cliquez ici.</strong></p>
                </div>
                <div class="modal-body" style="height: 300px; overflow: auto;" id="getAllTraductorId">
                  
@@ -569,8 +574,8 @@
             const KIdTaketabletheUserIdTra = IdTaketabletheUserIdTra.slice(-1).pop();
             const KutilisateursIdTaketable = utilisateursIdTaketable.slice(-1).pop();
             // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
-            console.log(KIdTaketabletheUserIdTra)
-            console.log(KutilisateursIdTaketable)
+            //console.log(KIdTaketabletheUserIdTra)
+           // console.log(KutilisateursIdTaketable)
                 
             update(ref(db, "utilisateurs/" + KutilisateursIdTaketable), {
                 MYTRADUCTORID: KIdTaketabletheUserIdTra,
@@ -642,20 +647,31 @@
                     //localStorage.setItem('userId', theUserId)
                     //window.location.href = "./../statusvalidate.html"
                      // Affiche le modal au chargement de la page
-                    if(!k.MYTRADUCTORID){
-                        $('#exampleModalCenter').modal('show');
+                     if(k.MYTRADUCTORID){
+                      var docDownloadIdx2 = document.getElementById("docDownloadIdx2");
+                      document.getElementById('getAllTraductorId').style.display = "none"
+                      document.getElementById('getAllTraductorIdx2').style.display = "block "
+                      docDownloadIdx2.addEventListener('click', function(){
+                        document.getElementById('getAllTraductorId').style.display = "block"
+                      document.getElementById('getAllTraductorIdx2').style.display = "none"
+
+           
+                      })
+                     }
+                    if(k.MONPAYSDEPUBLICATION ){
+                    $('#exampleModalCenter').modal('show');
             
-                        // Empêche la fermeture du modal en cliquant à l'extérieur
-                        $('#exampleModalCenter').modal({
-                            backdrop: 'static',
-                            keyboard: false
-                        });
+                    // Empêche la fermeture du modal en cliquant à l'extérieur
+                    $('#exampleModalCenter').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                    });
                     }else{
                     trow.addEventListener('click', function(){
                     Swal.fire({
                     toast: true,
-                    icon: 'info',
-                    text:`Desolé cette traduction est en cours.`,
+                    icon: 'error',
+                    text:`Desolé aucun document trouvé.`,
                     animation: false,
                     position: 'top',
                     showConfirmButton: false,
