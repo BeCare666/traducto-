@@ -107,8 +107,11 @@
            </div>
                 
           <div class="form" id="btnIdx" style="display: none;">
-            <h4 class="titleId"></h4>
+            <h4 class="titleId">coller votre Texte</h4>
            <!-- <input type="text" placeholder="Nombre de mots ?" id="numberMoId" oninput="validerSaisie(this)">--->
+           <hr> 
+           <textarea  id="numberMoId" placeholder="Coller votre Texte" style="border-color: blue; width: 100% !important;"></textarea>
+           <hr> 
             <button class="btn" style="cursor: pointer;" id="btnId" >Envoyer</button>
           </div>
           <button class="btn btnx" style="cursor: pointer;" id="btnIdy">Choisir le fichier</button>
@@ -205,7 +208,7 @@ userRef.once('value')
     // snapshot.val() contient les données de l'utilisateur
     preloader.style.display = "none"
     const userData = snapshot.val();
-    if(userData.MONPAYSDEPUBLICATION){
+    if(!userData.MONPAYSDEPUBLICATION){
       skrollableId.style.display = "block"
       showId.style.display = "none"
     var step1Element = document.getElementById('step1');
@@ -372,7 +375,7 @@ input.addEventListener("change", function (e) {
     userRef.update({
     // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
     MONPAYSDEPUBLICATION: url,
-    // NUMBEROFMOT : numberMoId.value,
+    NUMBEROFMOT : numberMoId.value,
     FILETYPE : fileName
       // ... ajoutez d'autres champs si nécessaire
     }).then(() => {               

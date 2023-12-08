@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <link href="../images/Traducto1-1.png" rel="icon">       
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href=" https://fonts.googleapis.com/css?family=Lato:300">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+    <link rel="stylesheet" href="adstext.css">
+    <link rel="stylesheet" href="admin.css">
+    <title>ads</title>
+</head>
+<body>
+    <div id="container">
+       <div class="row">
+        <div class="col-12">
+            <textarea name="" id="text" cols="30" rows="10"></textarea>
+        </div>
+       </div>
+       <button id="copy" tooltip="Copy to clipboard">Copier</button>
+
+      </div>
+    <div id="preloader"></div> 
+  <script type="module">
+ 
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+            authDomain: "traducto-2fab6.firebaseapp.com",
+            databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+            projectId: "traducto-2fab6",
+            storageBucket: "traducto-2fab6.appspot.com",
+            messagingSenderId: "914618680771",
+            appId: "1:914618680771:web:24eb2877454b80188ea976"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        import {
+            getDatabase,
+            ref,
+            set,
+            update,
+            child,
+            onValue,
+            remove,
+            get,
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        import { getStorage, getDownloadURL 
+        
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+        const db = getDatabase(); 
+
+    function getUser() {
+        const userId = localStorage.getItem('userId')
+        const userDataElement = document.getElementById('text');
+
+        // Get user data from Firestore
+
+        const dbreftra = ref(db, "utilisateurs");
+            onValue(dbreftra, (snopshot) => {
+                snopshot.forEach((childsnopshot) => {
+              var userData = childsnopshot.val()
+               document.getElementById('preloader').style.display = "none"
+
+                userDataElement.innerHTML = `
+                ${userData.NUMBEROFMOT ? `${userData.NUMBEROFMOT}` : ''}
+
+                    `;       
+
+            });
+        }) 
+        const textElement = document.getElementById("text");
+        const copyButton = document.getElementById("copy");
+
+        const copyText = (e) => {
+        window.getSelection().selectAllChildren(textElement);
+        document.execCommand("copy");
+        e.target.setAttribute("tooltip", "Copié! ✅");
+        };
+
+        const resetTooltip = (e) => {
+        e.target.setAttribute("tooltip", "Copier dans le presse-papiers");
+        };
+
+        copyButton.addEventListener("click", (e) => copyText(e));
+        copyButton.addEventListener("mouseover", (e) => resetTooltip(e));
+
+    }
+    getUser()
+</script>  
+</body>
+</html>

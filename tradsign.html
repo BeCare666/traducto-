@@ -168,81 +168,27 @@
          if(name && name  && address && birthdate && email  && phone && 
              summary && jobtitle && startdate && enddate && 
            jobdescription && summaryLang){
-             //  envoi de mail de suspension
-             const apiKey = "785B4029FA0EA1FB573C09903D5D557568F868BD402BE1746D1852EDFBC87D0249E623331ADD62923850AE601C019743";
-                const apiUrl = "https://api.elasticemail.com/v2/email/send";
-                // Définir les paramètres de l'e-mail
-                const emailParams = {
-                  apiKey: apiKey ,
-                  subject: "Candidature",
-                  from: "traducto.inter@gmail.com",
-                  fromName: name,
-                  to:  "traducto.inter@gmail.com",
-                  bodyHtml: `
-                  <table cellpadding="10" cellspacing="0" style="background-color: #f1f1f1; padding: 20px;">
-                  <tr>
-                      <td>
-                      <h1 style="color: #333; text-align: center !important;">Candidature.</h1>
-                      <p style="font-size: 16px; color: #666;">
-                       Voici quelques informations rélatives à ma canditature :   
-                      </p>
-                      <ul>
-                          <li><strong>Nom</strong>  : ${name} </li>
-                          <li><strong>Address</strong>  : ${address} </li>
-                          <li><strong>Date de naissance</strong>  : ${birthdate} </li>
-                          <li><strong>Email</strong>  : ${email} </li>
-                          <li><strong>Téléphone</strong>  : ${phone} </li> 
-                          <li><strong>Résumé du profil</strong>  : ${summary} </li>
-                          <li><strong>Mes paires de langues</strong>  : ${summaryLang} </li>
-                      </ul>
-                      <p style="font-size: 16px; color: #666;">
-                       Une de mes expériences :   
-                      </p>
-                      <ul>
-                        <li><strong>Nom de l'entreprise</strong>  : ${jobtitle} </li>
-                          <li><strong>Date de debut</strong>  : ${startdate} </li>
-                          <li><strong>Date de fin</strong>  : ${enddate} </li>
-                          <li><strong>La description</strong>  : ${jobdescription} </li> 
-                      </ul>
-                      <p style="font-size: 14px; color: #999;">
-                          Cordialement,     
-                      </p>
-                      <p style="font-size: 14px; color: #999;">
-                          L'équipe TRADUCTO.      
-                      </p>
-                      </td>
-                  </tr>
-                  </table>
-                  `
-                };
-
-                // Effectuer une requête POST vers l'API ElasticEmail
-                fetch(apiUrl, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                  },
-                  body: new URLSearchParams(emailParams)
-                })
-                  .then((response) => response.json())
-                  .then((data) => {
-                  console.log(data); // Afficher la réponse de l'API ElasticEmail
-                    if (data.success) {
-                        Swal.fire({
-                        icon: 'success',
-                        text: 'Votre candidature envoyée avec succès.',
-                        allowOutsideClick : false,
-                        }).then((result)=>{
-                        if(result.isConfirmed){  
-                            const userRef = firebase.database().ref('traducteurs/' + TraductoId);
+            const userRef = firebase.database().ref('traducteurs/' + TraductoId);
                         // Utilisation de update() pour mettre à jour les données
                         userRef.update({
-                            isDefaultAccount: false, // Nouvelle valeur
+                            isDefaultAccount: false, // Nouvelle valeur              
+                            Adress : address,
+                            Naissance : birthdate,
+                            Fullname : name,
+                            Email : email,
+                            Phone : phone,
+                            Profil : summary,
+                            Langues : summaryLang,
+                            Campany : jobtitle,
+                            Start : startdate,
+                            End : enddate,
+                            Description : jobdescription,
+
                         }).then(() => { 
                         Swal.fire({
                         icon: 'success',
-                        title: 'Status',
-                        text: "Votre status est mis à jour.",
+                        title: 'Félicitations',
+                        text: "Votre candidature envoyée avec succès.",
                         showConfirmButton: true,
                         timer: 1500
                         // footer: '<a href="">Why do I have this issue?</a>'
@@ -254,35 +200,7 @@
                         .catch((error) => {
                             console.log(error);
                         });
-                        }
-                    })
-                    
-                    } else {
-                        Swal.fire({
-                        icon: 'error',
-                        text: `Erreur lors de l'envoi de votre candidature.`,
-                        allowOutsideClick : false,
-                       
-                        }).then((result)=>{
-                            if(result.isConfirmed){
-                         window.location.href = "tradsign.html"
-                        }
-                    })
-                    }
-                  })
-                  .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        text: `Erreur lors de la requête`,
-                        allowOutsideClick : false,
-                       
-                        }).then((result)=>{
-                            if(result.isConfirmed){  
-                         window.location.href = "tradsign.html"
-                        }
-                    })
-                  });
-                 // end envoi de mail de suspension
+  
                }else{
                 Swal.fire({
                  icon: 'error',

@@ -92,12 +92,25 @@ const emailInput = document.getElementById('login-email').value;
         isPaidAccount: false,
         MONPAYSDEPUBLICATION:"",
         VALIDERMONCOMPTE:false,
+        Adress : "",
+        Naissance : "",
+        Fllname : "",
+        Email : "",
+        Phone : "",
+        Profil : "",
+        Langues : "",
+        Campany : "",
+        Start : "",
+        End : "",
+        Description : "",
+
         NUMBEROFMOT : "",
         FILETYPE : "",
         MONCOMPTESUSPENDU:false,
         COMPTEFACEBOOK:"",
         COMPTEINSATAGRAMME:"",
         USERCONNECT : false,
+
         DATETIME : `${day}/${month}/${year}`,
         GENDER:"TRADUCTOR"
     }).then(() => {
