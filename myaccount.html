@@ -205,10 +205,11 @@ deletemyComptId.addEventListener('click', function(){
 function getUserData(){
 userRef.once('value')
   .then((snapshot) => {
-    // snapshot.val() contient les données de l'utilisateur
+    // snapshot.val() contient les données de l'utilisateur  
+    
     preloader.style.display = "none"
     const userData = snapshot.val();
-    if(!userData.MONPAYSDEPUBLICATION){
+    if(userData.MONPAYSDEPUBLICATION){
       skrollableId.style.display = "block"
       showId.style.display = "none"
     var step1Element = document.getElementById('step1');
