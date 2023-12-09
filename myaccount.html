@@ -206,7 +206,7 @@ function getUserData(){
 userRef.once('value')
   .then((snapshot) => {
     // snapshot.val() contient les données de l'utilisateur  
-    
+
     preloader.style.display = "none"
     const userData = snapshot.val();
     if(userData.MONPAYSDEPUBLICATION){
@@ -301,11 +301,22 @@ userRef.once('value')
   })
   })
 
-    }
+  }
    
-    }
+} else {
+  Swal.fire({
+   icon: 'success',
+   text: `Bienvenue chez traducto, nous sommes heureux de vous 
+   annoncer que vos traductions seront faites avec les meilleurs 
+   traducteurs du monde et si possible avec les meilleurs outils de traduction.
+   Nous vous remerçions pour votre confiance.`,
+   confirmButtonText: "D'accord",
+   allowOutsideClick : false,  
+})
+   
+}
     //console.log('Données de l\'utilisateur :', userData);
-  })
+})
   .catch((error) => {
     console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
   });
@@ -438,7 +449,6 @@ input.addEventListener("change", function (e) {
             .then((response) => response.json())
             .then((data) => {
             console.log(data); // Afficher la réponse de l'API ElasticEmail
-              
                    if (data.success) {
                   Swal.fire({
                   icon: 'success',
