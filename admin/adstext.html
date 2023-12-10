@@ -69,24 +69,26 @@
         const db = getDatabase(); 
 
     function getUser() {
-        const userId = localStorage.getItem('userId')
+        const UserIdText = localStorage.getItem('userIdText')
         const userDataElement = document.getElementById('text');
-
-        // Get user data from Firestore
-
+          // alert(UserIdText)
+        // Get user data from Firestore -        
+        var tableUser = []
         const dbreftra = ref(db, "utilisateurs");
-            onValue(dbreftra, (snopshot) => {
-                snopshot.forEach((childsnopshot) => {
-              var userData = childsnopshot.val()
+
+        onValue(dbreftra, (snopshot) => {
+            //  console.log(snopshot)
+            snopshot.forEach((childsnopshot) => {
+              var userIdValval = childsnopshot.val().userId
                document.getElementById('preloader').style.display = "none"
-
+               if(userIdValval === UserIdText){
                 userDataElement.innerHTML = `
-                ${userData.NUMBEROFMOT ? `${userData.NUMBEROFMOT}` : ''}
-
-                    `;       
-
+                ${childsnopshot.val().NUMBEROFMOT} `;
+               }
             });
+           
         }) 
+
         const textElement = document.getElementById("text");
         const copyButton = document.getElementById("copy");
 
