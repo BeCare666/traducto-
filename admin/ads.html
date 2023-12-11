@@ -71,7 +71,7 @@
         const db = getDatabase(); 
 
     function getUser() {
-        const userId = localStorage.getItem('userId')
+        const UserIdxxx = localStorage.getItem('userIdxxx')
         const userDataElement = document.getElementById('userData');
 
         // Get user data from Firestore
@@ -79,18 +79,20 @@
         const dbreftra = ref(db, "traducteurs");
             onValue(dbreftra, (snopshot) => {
                 snopshot.forEach((childsnopshot) => {
-              var userData = childsnopshot.val()
+                var userDataMyId = childsnopshot.val().userId
                document.getElementById('preloader').style.display = "none"
-
+               //console.log(userDataMyId , UserIdxxx)
+               //alert(UserIdxxx)
+               if(userDataMyId === UserIdxxx){
                 userDataElement.innerHTML = `
                     <div class="col-12">
                     <h1><i class="fa fa-diamond animated infinite jello" aria-hidden="true"></i>  Personnelles
                     </h1>
                     <hr> 
                     <ul>
-                        <li><strong>Nom et prénoms : </strong> ${userData.Fullname} </li>
-                        <li><strong>Address : </strong> ${userData.Adress}</li>
-                        <li><strong>Date de naissance :</strong>${userData.Naissance}</li>
+                        <li><strong>Nom et prénoms : </strong> ${childsnopshot.val().Fullname} </li>
+                        <li><strong>Address : </strong> ${childsnopshot.val().Adress}</li>
+                        <li><strong>Date de naissance :</strong>${childsnopshot.val().Naissance}</li>
                         
                     </ul>
 
@@ -98,22 +100,23 @@
                     </h1>
                     <hr>
                     <ul>
-                        <li><strong>Email : </strong> ${userData.Email}</li>
-                        <li><strong>Téléphone : </strong> ${userData.Phone}</li>
-                        <li><strong>Résumé du profil : </strong> ${userData.Profil}</li>
-                        <li><strong>Listez vos paires de langues : </strong> ${userData.Langues}</li>
+                        <li><strong>Email : </strong> ${childsnopshot.val().Email}</li>
+                        <li><strong>Téléphone : </strong> ${childsnopshot.val().Phone}</li>
+                        <li><strong>Résumé du profil : </strong> ${childsnopshot.val().Profil}</li>
+                        <li><strong>Listez vos paires de langues : </strong> ${childsnopshot.val().Langues}</li>
                     </ul>
                     <h1><i class="fa fa-bolt animated infinite tada" aria-hidden="true"></i> Une experience </h1>
                     <hr>
                     <ul>
-                        <li><strong>Nom de l'entreprise :   </strong> ${userData.Campany}</li>
-                        <li><strong>Date de début : </strong> ${userData.Start}</li>
-                        <li><strong>Date de fin : </strong> ${userData.End}</li>
-                        <li><strong>Description : </strong> ${userData.Description}</li>
+                        <li><strong>Nom de l'entreprise :   </strong> ${childsnopshot.val().Campany}</li>
+                        <li><strong>Date de début : </strong> ${childsnopshot.val().Start}</li>
+                        <li><strong>Date de fin : </strong> ${childsnopshot.val().End}</li>
+                        <li><strong>Description : </strong> ${childsnopshot.val().Description}</li>
                     </ul>
                     </div>
                     
-                    `;       
+                    `;   
+               } 
 
             });
         }) 
