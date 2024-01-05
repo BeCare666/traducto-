@@ -366,12 +366,13 @@ input.addEventListener("change", function (e) {
   var fileNameNot = e.target.files[0];
   let filedata = `${fileName}`;
   titleId.innerHTML = filedata;
-  console.log(fileNameNot)
+  
   // Créer une référence unique pour le fichier (par exemple, en utilisant le nom du fichier)
   const fileRef = storageRef.child(fileName); 
   var btnId = document.getElementById('btnId');
   var numberMoId = document.getElementById('numberMoId');
   btnId.addEventListener('click', function(){
+  console.log(fileNameNot)
  //console.log("sdfghjkfd")
   // Envoyer le fichier
   fileRef.put(fileNameNot).then((snapshot) => {
@@ -482,6 +483,8 @@ input.addEventListener("change", function (e) {
     });
     }).catch((error) => {
       Swal.fire("Erreur lors de l'envoi du fichier", "", "info");
+      console.log("Erreur lors de l'envoi du fichier")
+      console.log("voici le truc" + error)
     });
   
   })
