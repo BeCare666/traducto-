@@ -396,7 +396,7 @@
                                             <th scope="col">Date</th>
                                             <th scope="col">Status</th>
                                            <th scope="col">Candidature</th>
-                                            <!--- <th scope="col">Prix promo fcfa</th>-->
+                                             <th scope="col">Abonnement</th>
                                             <th scope="col">Nom du traducteur</th>
                                             <th scope="col">Id du traducteur</th>
 
@@ -634,8 +634,10 @@
                 });
                 if (userArray.length != 0) {
                     return userArray.forEach((k) => {
+                    
                     let trow = document.createElement("tr");
-                    if(!k.MYTRADUCTORID){
+                    if(k.TYPEABONNEMENT){
+                        if(!k.MYTRADUCTORID){
                         
                     }else{
                         trow.style.backgroundColor ="lemonchiffon"
@@ -674,9 +676,13 @@
                         <a class="text-heading font-semibold" href="#">
                             Actif
                         </a>
-                    </td>
+                    </td>  
                     <td>
                         ${k.Adress ? `Candidature envoyé` : 'Pas encore envoyé'}
+                         
+                    </td>
+                    <td>
+                        ${k.TYPEABONNEMENT}
                          
                     </td>
                     <td>
@@ -694,8 +700,18 @@
                     </td>                                                          
                     `
                     div.append(trow)
+                    }
+                    
+     
                     })
-                    } else {
+                    }
+                    });
+                  
+                }
+
+                window.onload = getAllDataRealtime;
+
+      {/* else {
                         document.getElementById('preloader').style.display = "none"
                         var CreateAllproductnodata = document.getElementById('createAllproductnodata')
                             CreateAllproductnodata.innerHTML = ` 
@@ -704,14 +720,7 @@
                         </div> 
                         <p style="text-align: center;">Vous n'avez pas encore de Projet à traduire.</p>
                     `
-                    }
-                    });
-                  
-                }
-
-                window.onload = getAllDataRealtime;
-
-      
+                    }*/}
         </script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>

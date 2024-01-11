@@ -97,6 +97,8 @@ const emailInput = document.getElementById('login-email').value;
         MONCOMPTESUSPENDU:false,
         COMPTEFACEBOOK:"",
         COMPTEINSATAGRAMME:"",
+        ABONNEMENT:"",
+        TYPEABONNEMENT:"",
         USERCONNECT : false,
         DATETIME : `${day}/${month}/${year}`,
     }).then(() => {

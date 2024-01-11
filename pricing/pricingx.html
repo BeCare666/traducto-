@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pricing</title>
+    <link rel="icon" href="../images/Traducto1-1.png" type="image/x-icon">
+</head>
+<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="stylesheet" href="pricing.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-storage.js"></script>
+
+<title>Pricing component</title>
+</head>
+
+<body>
+  <header>
+    <h1>Nos tarifs</h1>
+    <div class="toggle">
+      <label>Annuel </label>
+      <div class="toggle-btn">
+        <input type="checkbox" class="checkbox" id="checkbox" />
+        <label class="sub" id="sub" for="checkbox">
+          <div class="circle"></div>
+        </label>
+      </div>
+      <label> Trimestre</label>
+    </div>
+  </header>
+  <div class="cards">
+    <div class="card shadow">
+      <ul>
+        <li class="pack">Gratuit</li>
+        <li id="basic" class="price bottom-bar">&dollar;0</li>
+        <li style="width: 200px !important;
+        padding: 0% !important;">
+          Cet abonnement est graduit et est offert à toutes nos utilisatrices et à tous nos 
+          utilisateurs ayant déjà un compte traducto valide.
+          Avec ceci, vous n'allez pas bénéficier de nos avantages.
+        </li>
+        <li><button class="btn" style="cursor: none !important; opacity: 0.25;">Payer</button></li>
+      </ul>
+    </div>
+    <div class="card active">
+      <ul>
+        <li class="pack" style="text-align: center;">Abonnement Pro <br> (Correcteur)</li>
+        <li id="master" class="price bottom-bar">&dollar;550</li>
+
+        <li id="textContentId" style="width: 200px !important;
+        padding: 0% !important;">
+       1. Rôle Essentiel : Acteur majeur du système, certification des commandes. <br>
+       2. Avantages : Formations gratuites, quota élevé d'expertise.
+        </li>
+        <li id="textContentId1" style="width: 200px !important;
+        padding: 0% !important; display: none;">
+        1. Réduction Gratuite : Bénéficiez de réductions sur tous vos projets de traduction, et le deuxième mois est entièrement gratuit.<br> 2. Page Gratuite (Trimestre) : Obtenez gratuitement la traduction d'une page complète au cours de la validité de l'abonnement trimestriel.
+       </li>
+        <li><button class="btn active-btn classPayer" id="paidToPro">Payer</button></li>
+        <input type="text" id="hideInputy" class="hideInputClass" value="550">
+        <input type="text" id="hideInputz" class="hideInputClass" value="Abonnement Premieum Annuel">
+        
+
+      </ul>
+    </div>
+    <div class="card shadow">
+      <ul>
+        <li class="pack" style="text-align: center;">Abonnement Premium <br> (Traducteur)</li>
+        <li id="professional" class="price bottom-bar">&dollar;375</li>
+
+        <li id="textContentIdx" style="width: 200px !important;
+        padding: 0% !important;">
+        Rôle Principal : Premier intervenant sur les commandes de traduction.
+        </li>
+        <li id="textContentIdx1" style="width: 200px !important;
+        padding: 0% !important; display: none;">
+        1. Réductions sur Traduction : Bénéficiez de réductions spéciales sur les paires de langues (Anglais-Français et Français-Portugais). <br> 2. Intervention Rapide : Obtenez une intervention plus rapide, assurant un traitement rapide de vos traductions.
+      </li>
+        <li><button class="btn classPayer" id="paidToPre">Payer</button></li>
+        <input type="text" id="hideInput" class="hideInputClass" value="375">
+        <input type="text" id="hideInputx" class="hideInputClass" value="Abonnement Professionel Annuel">
+
+        
+      </ul>
+    </div>
+  </div>
+  <div style="opacity: 0 !important;">
+  <div >jfdklfjdlfjfdlkkdfdifs</div><hr>
+  <div >jfdklfjdlfjfdlkkdfdifs</div><hr>
+  <div >jfdklfjdlfjfdlkkdfdifs</div><hr>
+  <div >jfdklfjdlfjfdlkkdfdifs</div><hr>
+  </div>
+  <script type="module">
+    // Configurer votre projet Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+  authDomain: "traducto-2fab6.firebaseapp.com",
+  databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+  projectId: "traducto-2fab6",
+  storageBucket: "traducto-2fab6.appspot.com",
+  messagingSenderId: "914618680771",
+  appId: "1:914618680771:web:24eb2877454b80188ea976"
+};
+
+// Initialiser Firebase
+firebase.initializeApp(firebaseConfig);
+
+const UserTraductoId = localStorage.getItem('TraductoId');
+//alert(UserTraductoId)
+// Récupérer une référence vers le dossier de stockage (par exemple, 'documents')
+var skrollableIdbtn = document.getElementById('skrollableIdbtn');
+var skrollableId = document.getElementById('skrollableId');
+var showId = document.getElementById('showId');
+var preloader = document.getElementById('preloader');
+var deletemyComptId = document.getElementById('deletemyComptId');
+var logoutId = document.getElementById('logoutId');
+
+const userRef = firebase.database().ref('traducteurs/' + UserTraductoId);
+function onStart(){
+   if(UserTraductoId){
+
+const checkbox = document.getElementById("checkbox");
+const professional = document.getElementById("professional");
+const master = document.getElementById("master");
+const basic = document.getElementById("basic");
+const hideInput = document.getElementById("hideInput");
+const hideInputx = document.getElementById("hideInputx"); 
+
+const hideInputy = document.getElementById("hideInputy");
+const hideInputz = document.getElementById("hideInputz");
+
+const PaidToPro = document.getElementById("paidToPro"); 
+const PaidToPre = document.getElementById("paidToPre");
+
+const textContentId = document.getElementById("textContentId");
+const textContentIdx = document.getElementById("textContentIdx");
+
+const textContentId1 = document.getElementById("textContentId1");
+const textContentIdx1 = document.getElementById("textContentIdx1");
+
+checkbox.addEventListener("click", () => {
+  var accounter = false
+  // basic.textContent = basic.textContent === "$199.99" ? "$19.99" : "$199.99"; Abonnement Premieum Annuel
+  professional.textContent = professional.textContent === "$375" ? "$100" : "$375";
+  master.textContent = master.textContent ===   "$550" ? "$150 " : "$550"; 
+  hideInput.value = hideInput.value === "375" ? "100" : "375";
+  hideInputx.value = hideInputx.value === "Abonnement Professionel Annuel" ? "Abonnement Professionel trimestriel" : "Abonnement Professionel Annuel";
+
+  hideInputy.value = hideInputy.value ===  "550" ? "150 " : "550"; 
+  hideInputz.value = hideInputz.value === "Abonnement Premieum Annuel" ? "Abonnement Premieum trimestriel" : "Abonnement Premieum Annuel";
+  
+{/*  if(hideInput.value === "95"){
+    
+    textContentId1.style.display = "none"
+    textContentIdx1.style.display = "none"
+
+    textContentId.style.display = "block"
+    textContentIdx.style.display = "block"
+  }else{
+    textContentId.style.display = "none"
+    textContentIdx.style.display = "none"
+
+    textContentId1.style.display = "block"
+    textContentIdx1.style.display = "block"
+  }*/}
+   
+});
+// function to paid pro
+PaidToPro.addEventListener('click', function(){
+  console.log(hideInputy.value)
+  console.log(hideInputx.value)
+  var takeInputValue = hideInputy.value
+  var sommesPrice = 600 * takeInputValue
+    openKkiapayWidget({
+    amount: `${sommesPrice}`,
+    position: "center",
+    callback: "javascript:sendmycommandinCentremodale()",
+    data: "",
+    theme: "blue",
+    key: "878e7b7232e5a1e067f29d44816f4b801a029e09",
+    });
+    //la reponse du payement kkiapay
+    addSuccessListener((response) => {
+    //console.log(response);
+    var trans = response.transactionId;
+    //  console.log(trans);
+    if (trans) {
+    //localStorage.setItem("storageName", trans);
+
+    const userRef = firebase.database().ref('traducteurs/' + UserTraductoId);
+    // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+    userRef.update({
+    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+    ABONNEMENT: hideInputy.value,
+    TYPEABONNEMENT: hideInputx.value,
+      // ... ajoutez d'autres champs si nécessaire
+    }).then(() => {
+        
+         window.location.reload();
+        })
+        .catch((error) => {
+     alert("les données ne sont pas mise à jour " + error);
+    });
+    //window.location.href = "pricing.html";
+    } else {
+    alert(`quelque chose s'est mal passé`);
+    }
+    });
+  
+})
+
+// function to paid pre
+PaidToPre.addEventListener('click', function(){
+  console.log(hideInput.value)
+  console.log(hideInputz.value)
+
+  var takeInputValue = hideInput.value
+  var sommesPrice = 600 * takeInputValue
+    openKkiapayWidget({
+    amount: `${sommesPrice}`,
+    position: "center",
+    callback: "javascript:sendmycommandinCentremodale()",
+    data: "",
+    theme: "blue",
+    key: "878e7b7232e5a1e067f29d44816f4b801a029e09",
+    });
+    //la reponse du payement kkiapay
+    addSuccessListener((response) => {
+    //console.log(response);
+    var trans = response.transactionId;
+    //  console.log(trans);
+    if (trans) {
+    //localStorage.setItem("storageName", trans);
+
+    const userRef = firebase.database().ref('traducteurs/' + UserTraductoId);
+    // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+    userRef.update({
+    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+    ABONNEMENT: hideInput.value,
+    TYPEABONNEMENT: hideInputz.value,
+
+   
+      // ... ajoutez d'autres champs si nécessaire
+    }).then(() => {
+         window.location.reload();
+        })
+        .catch((error) => {
+     alert("les données ne sont pas mise à jour " + error);
+    });
+    //window.location.href = "pricing.html";
+    } else {
+    alert(`quelque chose s'est mal passé`);
+    }
+    });
+  
+})
+
+}else{
+alert("Vous n'avez pas encore de compte.")
+window.location.href = "../login.html"
+
+}
+
+}
+onStart()
+  </script>
+  <script src="pricing.js"></script>
+  <script src="https://cdn.kkiapay.me/k.js"></script>
+</body>
+</html>

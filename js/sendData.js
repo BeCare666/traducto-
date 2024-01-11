@@ -103,7 +103,8 @@ const emailInput = document.getElementById('login-email').value;
         Start : "",
         End : "",
         Description : "",
-
+        ABONNEMENT:"",
+        TYPEABONNEMENT:"",
         NUMBEROFMOT : "",
         FILETYPE : "",
         MONCOMPTESUSPENDU:false,

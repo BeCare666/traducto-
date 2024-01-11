@@ -48,6 +48,12 @@
            </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" style="cursor:pointer" target="_blank" id="abnComptId" href="./pricing/pricing.html">
+           
+           </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link"  style="cursor:pointer" id="logoutId">
           <i class="fa fa-sign-out"></i> Se deconnecter
            </a>
@@ -220,9 +226,11 @@ userRef.once('value')
     var takeTheUserM = userData.email
     var takeTheUserN = userData.username
     localStorage.setItem('userMailMy', takeTheUserM);
-    localStorage.setItem('userNameMy', takeTheUserN);
+    localStorage.setItem('userNameMy', takeTheUserN); 
     var ModalMyDropdown = document.getElementById('modalMyDropdownx');
     ModalMyDropdown.innerHTML = ` <i class="fa fa-home"></i> Email : ${userData.email}`
+    var abnComptId = document.getElementById('abnComptId');
+    abnComptId.innerHTML = `<i class="fa fa-key"></i> ${userData.TYPEABONNEMENT ? `${userData.TYPEABONNEMENT}` : 'Aucun abonnement'} `
     // Ajoutez la classe "active"
     if(userData.DOCSATUS1 == true){
       step1Element.classList.add('form-steps__step--active');
@@ -483,7 +491,7 @@ input.addEventListener("change", function (e) {
     });
     }).catch((error) => {
       Swal.fire("Erreur lors de l'envoi du fichier", "", "info");
-      console.log("Erreur lors de l'envoi du fichier")
+      //console.log("Erreur lors de l'envoi du fichier")
       console.log("voici le truc" + error)
     });
   
