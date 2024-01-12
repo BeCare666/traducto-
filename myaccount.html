@@ -235,8 +235,8 @@ userRef.once('value')
     ModalMyDropdown.innerHTML = ` <i class="fa fa-home"></i> Email : ${userData.email}`
     var abnComptId = document.getElementById('abnComptId');
     abnComptId.innerHTML = `<i class="fa fa-key"></i> ${userData.TYPEABONNEMENT ? `${userData.TYPEABONNEMENT}` : 'Aucun abonnement'} `
-    // show abonment alert
-    if(!userData.TYPEABONNEMENT){
+    // show abonment alert 
+    if(userData.TYPEABONNEMENT){
       smsIdabn.style.display = "none"
     }
     smsIdabnclose.addEventListener('click', function(){
