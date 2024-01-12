@@ -193,3 +193,24 @@
   outline: none;
   border: 1px solid #84A2FA;
 }
+
+#smsIdabn{
+  background-color: rgb(83, 199, 145);
+  padding: 7px;
+  border-radius: 5px;
+  position: fixed;
+  left: 5px;
+  top: 15px;
+  z-index: 99999;
+  background: #FFB6C1;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+#smsIdabnclose{
+  font-size: 18px;
+  color: red;
+  cursor: pointer;
+}
+#smsIdabnlink{
+  color: blue;
+}

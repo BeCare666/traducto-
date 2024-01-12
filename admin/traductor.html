@@ -21,6 +21,7 @@
     </head>
 
     <body id="idbody">
+        <p id="smsIdabn"><i class="fa fa-key"></i> Chers traducteurs, profitez de nos abonnements exclusifs dès maintenant <a href="../pricing/pricingx.html" id="smsIdabnlink">&nbsp;&nbsp;&nbsp;ici.</a> <strong id="smsIdabnclose">&nbsp;&nbsp;&nbsp;x</strong></p>
         <!-- Dashboard --> 
         <div class="d-flex flex-column flex-lg-row h-lg-full
             bg-surface-secondary" id="dashbody">
@@ -325,7 +326,8 @@
                             </div>
                             <!-- Nav -->
                             <ul class="nav nav-tabs mt-4 overflow-x border-0" id="allMyFillId">
-                                <li class="nav-item ">
+                                
+                                <li class="nav-item " id="smsIdabnli">                        
                                     <a href="#" class="nav-link active">Tous les
                                         fichiers</a>
                                 </li>
@@ -598,8 +600,20 @@
 
             //function to get all data for traductor
             const dbreftraOnvalu = ref(db, "traducteurs/" + TraductoIdVA);
-            onValue(dbreftraOnvalu, (snopshot) => { 
+            onValue(dbreftraOnvalu, (snopshot) => {
+                var smsIdabn = document.getElementById('smsIdabn');
+                //var smsIdabnli = document.getElementById('smsIdabnli');
+                var smsIdabnclose = document.getElementById('smsIdabnclose');
                 //var traduData =  childsnopshot.val()
+                if(snopshot.val().TYPEABONNEMENT){
+                smsIdabn.style.display = "none"
+                }else{
+                    //smsIdabnli.style.display = "none"  
+                }
+                smsIdabnclose.addEventListener('click', function(){
+                smsIdabn.style.display = "none"
+                //smsIdabnli.style.display = "block"
+                })
                 var abnComptId = document.getElementById('abnComptId');
                 abnComptId.innerHTML = `  ${snopshot.val().TYPEABONNEMENT ? `<i class="bi bi-backpack4-fill"></i> ${snopshot.val().TYPEABONNEMENT}` : '<i class="bi bi-backpack4-fill"></i> Aucun abonnement'} `            
                 var ModalMyDropdown = document.getElementById('modalMyDropdownx');

@@ -21,6 +21,7 @@
 <body>
 <section class="large-cta-section skrollable skrollable-between" 
    id="skrollableId" style="height: 100vh !important; display: none;">
+   <div style="opacity: 0;">kkdkdkdkddd</div>
   <div class="medium-large-wrapper skrollable skrollable-after">
     <div class="medium-text-wrapper">
       <h2 class="h2 large white" id="TableTitId"></h2>
@@ -97,6 +98,7 @@
     </div>
     <strong class="form-step__step-name" style="color: white;">Terminé</strong>
   </div>
+  <span id="smsIdabn"><i class="fa fa-key"></i> Chers utilisateurs, profitez de nos abonnements exclusifs dès maintenant <a href="./pricing/pricing.html" id="smsIdabnlink">&nbsp;&nbsp;&nbsp;ici.</a> <strong id="smsIdabnclose">&nbsp;&nbsp;&nbsp;x</strong></span>
 </div>
 </div>
 </section>
@@ -151,8 +153,10 @@ var skrollableIdbtn = document.getElementById('skrollableIdbtn');
 var skrollableId = document.getElementById('skrollableId');
 var showId = document.getElementById('showId');
 var preloader = document.getElementById('preloader');
-var deletemyComptId = document.getElementById('deletemyComptId');
-var logoutId = document.getElementById('logoutId');
+var deletemyComptId = document.getElementById('deletemyComptId'); 
+var logoutId = document.getElementById('logoutId'); 
+var smsIdabn = document.getElementById('smsIdabn');
+var smsIdabnclose = document.getElementById('smsIdabnclose');
 
 
 const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
@@ -231,6 +235,13 @@ userRef.once('value')
     ModalMyDropdown.innerHTML = ` <i class="fa fa-home"></i> Email : ${userData.email}`
     var abnComptId = document.getElementById('abnComptId');
     abnComptId.innerHTML = `<i class="fa fa-key"></i> ${userData.TYPEABONNEMENT ? `${userData.TYPEABONNEMENT}` : 'Aucun abonnement'} `
+    // show abonment alert
+    if(!userData.TYPEABONNEMENT){
+      smsIdabn.style.display = "none"
+    }
+    smsIdabnclose.addEventListener('click', function(){
+      smsIdabn.style.display = "none"
+    })
     // Ajoutez la classe "active"
     if(userData.DOCSATUS1 == true){
       step1Element.classList.add('form-steps__step--active');
