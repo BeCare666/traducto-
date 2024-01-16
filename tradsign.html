@@ -147,9 +147,10 @@
     messagingSenderId: "914618680771",
     appId: "1:914618680771:web:24eb2877454b80188ea976"
     };
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig); 
 
      const TraductoId = localStorage.getItem("TraductoId");
+     const IDAFILIATETRUE = localStorage.getItem("IDAFILIATETWO");
         // function to send candidate
         function sendData(){
         var name = document.getElementById('full-name').value;
@@ -193,13 +194,46 @@
                         timer: 1500
                         // footer: '<a href="">Why do I have this issue?</a>'
                         })
-                        setTimeout(()=>{
-                            window.location.href = "./admin/traductor.html"
-                        },2000)
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
+                setTimeout(()=>{
+                if(IDAFILIATETRUE){
+                  const userRef = firebase.database().ref('traducteurs/' + IDAFILIATETRUE);
+                  userRef.once('value')
+                  .then((snapshot) => {  
+                  // snapshot.val() contient les données de l'utilisateur  
+                  //const userData = snapshot.val();
+                  var COMMISSIONVALUE = snapshot.val().COMMISSION
+                  //var Userfullename = snapshot.val().fullname
+                  //var UserEmail =  snapshot.val().email
+                  var addCommission = "0,166"
+                  // Convertir les chaînes de caractères en nombres décimaux
+                  var commissionEnNombre = parseFloat(addCommission.replace(",", "."));
+                  var comptaConvertisEnNombre = parseFloat(COMMISSIONVALUE.replace(",", "."));                 
+                  //var myComptaConvertis = parseFloat(COMMISSIONVALUE);
+                  //var addCommissionConvertis = parseFloat(addCommission)
+                  var myCommissionAdd = commissionEnNombre + comptaConvertisEnNombre
+                  // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+                  userRef.update({
+                  // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+                  COMMISSION: myCommissionAdd,
+                  COMMISSIONID : UserTraductoId
+                    // ... ajoutez d'autres champs si nécessaire
+                  }).then(()=>{
+                    localStorage.removeItem("IDAFILIATETWO")
+                    window.location.href = "./admin/traductor.html"
+                  })
+                }).catch((error)=>{
+                  console.log(error)
+                })
+
+                }else{
+                    window.location.href = "./admin/traductor.html"
+                }
+                           
+                },2000)
+                })
+                .catch((error) => {
+                        console.log(error);
+                });
   
                }else{
                 Swal.fire({
@@ -213,7 +247,7 @@
 }
 }
     </script>
-    <script src="js/tradsign.js" defer></script>
+    <script src="js/tradsign.js" ></script>
     <!---<script src="js/sendData.js"></script>-->
 </body>
 

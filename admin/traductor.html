@@ -119,26 +119,57 @@
                             </li>
 
                             <li class="nav-item">
-                                  <span class="nav-item" id="affiliateID" >
-                                <a class="nav-link" style="cursor: pointer;"> Copie ton lien d'affiliation.</a>
-                                <form data-copy=true>
-                                <input id="linkInput" type="text" data-click-select-all style="border: none !important; cursor: pointer; border-radius: 5px !important;" />
-                                </form>
-                            </span>
-                            </li>
-
-                            <li class="nav-item">
                                 <a class="nav-link" id="accountID" href="../walletx/wallet.html">
                                     
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="display: none !important;">
                                 <a class="nav-link" href="./../logintrad.html"
                                     id="logoutid">
                                     <i class="bi bi-box-arrow-left"></i> Logout
                                 </a>
                             </li>
+                            <li class="nav-item ">
+                                <a style="cursor:pointer"  class="nav-link" id="modalMyDropdownwxc">
+                                 
+                                  </a>
+                              </li> 
+                          <li class="nav-item ">
+                            <a style="cursor:pointer; width: 25vh !important; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"  class="nav-link" id="modalMyDropdownx">
+                             
+                              </a>  
+                          </li>
+                          <li class="nav-item ">
+                            <a style="cursor:pointer"  class="nav-link" id="abnComptId">
+                             
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" data-dismiss="modal"
+                            aria-label="Close" style="cursor:pointer" data-toggle="modal" data-target="#exampleModalCenterIdpaid">
+                                <i class="bi bi-wallet2"></i> Paiement
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" style="cursor:pointer" target="_blank" id="deletemyComptId">
+                                <i class="bi bi-trash-fill"></i> Supprimer
+                               </a>
+                          </li>
+                          <li class="nav-item">
+                            <span class="nav-item" id="affiliateID" >
+                          <a class="nav-link" style="cursor: pointer;"> Copie ton lien d'affiliation.</a>
+                          <form data-copy=true>
+                          <input id="linkInput" type="text" data-click-select-all style="border: none !important; cursor: pointer; border-radius: 5px !important;" />
+                          </form>
+                        </span>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link"  style="cursor:pointer" id="logoutId">
+                                <i class="bi bi-box-arrow-left"></i> Se deconnecter
+                               </a>
+                          </li>
                         </ul>
+
                     </div>
                 </div>
             </nav>
@@ -468,7 +499,7 @@
                 </div>
             </div>
         </div>
-        <a data-toggle="modal" data-target="#exampleModalCenterId" class="back-to-top d-flex align-items-center justify-content-center" id="user-button"><i class="bi bi-person-fill"></i></a>
+        <a style="display: none !important;" data-toggle="modal" data-target="#exampleModalCenterId" class="back-to-top d-flex align-items-center justify-content-center" id="user-button"><i class="bi bi-person-fill"></i></a>
         
       
             <!-- Modal -->
@@ -477,39 +508,7 @@
             <div class="modal-content">
  
                 <div class="modal-body">
-                    <ul class="nav flex-column">
-                        <li class="nav-item ">
-                            <a style="cursor:pointer"  class="nav-link" id="modalMyDropdownwxc">
-                             
-                              </a>
-                          </li> 
-                      <li class="nav-item ">
-                        <a style="cursor:pointer"  class="nav-link" id="modalMyDropdownx">
-                         
-                          </a>
-                      </li>
-                      <li class="nav-item ">
-                        <a style="cursor:pointer"  class="nav-link" id="abnComptId">
-                         
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" data-dismiss="modal"
-                        aria-label="Close" style="cursor:pointer" data-toggle="modal" data-target="#exampleModalCenterIdpaid">
-                            <i class="bi bi-wallet2"></i> Paiement
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" style="cursor:pointer" target="_blank" id="deletemyComptId">
-                            <i class="bi bi-trash-fill"></i> Supprimer
-                           </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link"  style="cursor:pointer" id="logoutId">
-                            <i class="bi bi-box-arrow-left"></i> Se deconnecter
-                           </a>
-                      </li>
-                    </ul>
+
                 </div>
             </div>
             </div>
@@ -643,7 +642,7 @@
                 });
             var accountID = document.getElementById('accountID');
             // Start fuction to create account afiliate
-            accountID.innerHTML = ` <img src="../images/wallet.svg" alt="">&nbsp;&nbsp;Mon Solde : ${snopshot.val().COMMISSION} FCFA`
+            accountID.innerHTML = ` <img src="../images/wallet.svg" alt="">&nbsp;&nbsp;Mon Solde : ${snopshot.val().COMMISSION} $`
             // End fuction to create account afiliate
 
             // function to secure password
@@ -655,7 +654,7 @@
             }
 
                 var abnComptId = document.getElementById('abnComptId');
-                abnComptId.innerHTML = `  ${snopshot.val().TYPEABONNEMENT ? `<i class="bi bi-backpack4-fill"></i> ${snopshot.val().TYPEABONNEMENT}` : '<i class="bi bi-backpack4-fill"></i> Aucun abonnement'} `            
+                abnComptId.innerHTML = `  ${snopshot.val().TYPEABONNEMENT ? `<img src="abon.svg" alt="">&nbsp;&nbsp; ${snopshot.val().TYPEABONNEMENT}` : '<img src="abon.svg" alt="">&nbsp;&nbsp;Aucun abonnement'} `            
                 var ModalMyDropdown = document.getElementById('modalMyDropdownx');
                 ModalMyDropdown.innerHTML = ` <i class="bi bi-envelope-fill"></i> Email : ${snopshot.val().email}`
                 if(snopshot.val().GENDER){

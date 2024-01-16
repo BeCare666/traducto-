@@ -259,7 +259,7 @@ userRef.once('value')
         });
 
     // Start fuction to create account afiliate
-    accountID.innerHTML = ` <img src="images/wallet.svg" alt=""> Mon Solde : ${userData.COMMISSION} FCFA`
+    accountID.innerHTML = ` <img src="images/wallet.svg" alt=""> Mon Solde : ${userData.COMMISSION} $`
      // End fuction to create account afiliate
 
     var ModalMyDropdown = document.getElementById('modalMyDropdownx');
@@ -369,8 +369,24 @@ userRef.once('value')
    Nous vous remerçions pour votre confiance.`,
    confirmButtonText: "D'accord",
    allowOutsideClick : false,  
+}).then((result)=>{
+if(result.isConfirmed){
+  Swal.fire({
+   icon: 'success',
+   html: `🚀 Gagnez 0.166 $ à chaque inscription par votre lien d'affiliation! 🚀<br>
+
+    Copiez votre lien unique ci-dessous et partagez-le avec vos amis. <br>
+    Chaque inscription par votre lien vous rapporte 0.166 $ <br>
+    Plus vous partagez, plus vous gagnez! 💰<br>
+   <a style="color: blue !important;">https://traductox.netlify.app/?id=${UserTraductoId}</a><br>
+
+   Merci de faire partie de notre communauté! 🌟`,
+   confirmButtonText: "D'accord",
+   allowOutsideClick : false,  
 })
-   
+}
+})
+  
 }
     //console.log('Données de l\'utilisateur :', userData);
 })
@@ -467,10 +483,13 @@ input.addEventListener("change", function (e) {
                   var COMMISSIONVALUE = snapshot.val().COMMISSION
                   //var Userfullename = snapshot.val().fullname
                   //var UserEmail =  snapshot.val().email
-                  var addCommission = "100"
-                  var myComptaConvertis = parseFloat(COMMISSIONVALUE);
-                  var addCommissionConvertis = parseFloat(addCommission)
-                  var myCommissionAdd = myComptaConvertis + addCommissionConvertis
+                  var addCommission = "0,166"
+                  // Convertir les chaînes de caractères en nombres décimaux
+                  var commissionEnNombre = parseFloat(addCommission.replace(",", "."));
+                  var comptaConvertisEnNombre = parseFloat(COMMISSIONVALUE.replace(",", "."));                 
+                  //var myComptaConvertis = parseFloat(COMMISSIONVALUE);
+                  //var addCommissionConvertis = parseFloat(addCommission)
+                  var myCommissionAdd = commissionEnNombre + comptaConvertisEnNombre
                   // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
                   userRef.update({
                   // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
@@ -508,6 +527,9 @@ input.addEventListener("change", function (e) {
   })
 
 });
+
+
+
 </script>
 <script src="js/myaccount.js"></script>
 <script type="module" src="js/sendData.js"></script>
