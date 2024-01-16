@@ -172,6 +172,8 @@ var smsIdabnclose = document.getElementById('smsIdabnclose');
 
 const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
 
+alert(UserTraductoId)
+
 // function to commeback
 //if(!UserTraductoId){
 //  window.location.href = "login.html"
@@ -294,7 +296,7 @@ userRef.once('value')
       step4Element.classList.add('form-steps__step--active');
       titleYouId.innerHTML = `Traduction <span class="yellow">Terminé</span>.`
       skrollableIdbtn.addEventListener('click', function(){
-        Swal.fire({
+        Swal.fire({ 
           text: "Achiver ce projet avant une autre demande.",
         showDenyButton: true,
         showCancelButton: true,
@@ -376,6 +378,7 @@ userRef.once('value')
     console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
   });
 }getUserData()
+
 skrollableIdbtn.addEventListener('click', function(){
 showId.style.display = "none"
 skrollableId.style.display = "block"  
@@ -398,7 +401,7 @@ userButton.addEventListener('click', () => {
 
 const dropArea = document.querySelector(".drop_box")
 var button = document.querySelector(".btnx"),
- input = document.querySelector("input");
+ input = document.getElementById("fileID");
   var titleId = document.querySelector(".titleId"); 
  var btnIdx = document.getElementById('btnIdx');
  var fileID = document.getElementById('fileID');

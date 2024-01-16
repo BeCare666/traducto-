@@ -111,7 +111,9 @@ const emailInput = document.getElementById('login-email').value;
         COMPTEFACEBOOK:"",
         COMPTEINSATAGRAMME:"",
         USERCONNECT : false,
-
+        COMMISSION :0,
+        COMMISSIONID : "",
+        GETALLWALLET : "",
         DATETIME : `${day}/${month}/${year}`,
         GENDER:"TRADUCTOR"
     }).then(() => {

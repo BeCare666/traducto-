@@ -99,6 +99,9 @@ const emailInput = document.getElementById('login-email').value;
         COMPTEINSATAGRAMME:"",
         ABONNEMENT:"",
         TYPEABONNEMENT:"",
+        COMMISSION :0,
+        COMMISSIONID : "",
+        GETALLWALLET : "",
         USERCONNECT : false,
         DATETIME : `${day}/${month}/${year}`,
     }).then(() => {
