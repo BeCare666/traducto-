@@ -25,7 +25,7 @@
   <div class="medium-large-wrapper skrollable skrollable-after">
     <div class="medium-text-wrapper">
       <h2 class="h2 large white" id="TableTitId"></h2>
-      <h3 class="h3 white" style="display: none !important;">Material Design delivers a cleaner and flatter user interface</h3>
+      <h3 class="h3 white" style="display: none !important;">Material Design delivers a cleaner and flatter user interface</h3><br>
       <a class="cta-link footer-cta-link" style="cursor: pointer;" alt="Try NeverBounce for free"    id="skrollableIdbtn">Nouvelle traduction</a>
     </div>
   </div>
@@ -44,7 +44,7 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" style="cursor:pointer" target="_blank" id="deletemyComptId">
+        <a class="nav-link" style="cursor:pointer;" target="_blank" id="deletemyComptId">
           <i class="fa fa-trash"></i> Supprimer
            </a>
       </li>
@@ -53,7 +53,12 @@
            
            </a>
       </li>
-
+      
+      <li class="nav-item">
+        <a class="nav-link"   id="accountID" href="wallet/wallet.html">
+         
+        </a>
+      </li>
       <li class="nav-item">
         <a class="nav-link"  style="cursor:pointer" id="logoutId">
           <i class="fa fa-sign-out"></i> Se deconnecter
@@ -98,6 +103,12 @@
     </div>
     <strong class="form-step__step-name" style="color: white;">Terminé</strong>
   </div>
+  <span class="nav-item" id="affiliateID" >
+    <a class="nav-link" style="cursor: pointer; color: white !important;"> Copier ici votre lien d'affiliation.</a>
+     <form data-copy=true>
+       <input id="linkInput" type="text" data-click-select-all style="border: none !important; cursor: pointer; border-radius: 5px !important;" />
+     </form>
+   </span>
   <span id="smsIdabn"><i class="fa fa-key"></i> Chers utilisateurs, profitez de nos abonnements exclusifs dès maintenant <a href="./pricing/pricing.html" id="smsIdabnlink">&nbsp;&nbsp;&nbsp;ici.</a> <strong id="smsIdabnclose">&nbsp;&nbsp;&nbsp;x</strong></span>
 </div>
 </div>
@@ -225,12 +236,30 @@ userRef.once('value')
     var step1Element = document.getElementById('step1');
     var step2Element = document.getElementById('step2');
     var step3Element = document.getElementById('step3');
-    var step4Element = document.getElementById('step4');
+    var step4Element = document.getElementById('step4'); 
     var titleYouId = document.getElementById('TableTitId');
+    var accountID = document.getElementById('accountID');
     var takeTheUserM = userData.email
     var takeTheUserN = userData.username
     localStorage.setItem('userMailMy', takeTheUserM);
     localStorage.setItem('userNameMy', takeTheUserN); 
+
+
+      //function to generate affilition link
+      const linkInput = document.getElementById('linkInput');
+        const copyButton = document.getElementById('affiliateID');
+        //linkInput.value = `Copier ici votre lien d'affiliation.`
+        // function to hide border when you click
+        copyButton.addEventListener('click', () => {
+        linkInput.value = `https://traductox.netlify.app/?id=${UserTraductoId}`
+        linkInput.select(); // Sélectionne le texte dans l'input
+        document.execCommand('copy'); // Copie le texte sélectionné dans le presse-papiers
+        });
+
+    // Start fuction to create account afiliate
+    accountID.innerHTML = ` <img src="images/wallet.svg" alt=""> Mon Solde : ${userData.COMMISSION} FCFA`
+     // End fuction to create account afiliate
+
     var ModalMyDropdown = document.getElementById('modalMyDropdownx');
     ModalMyDropdown.innerHTML = ` <i class="fa fa-home"></i> Email : ${userData.email}`
     var abnComptId = document.getElementById('abnComptId');
@@ -242,6 +271,13 @@ userRef.once('value')
     smsIdabnclose.addEventListener('click', function(){
       smsIdabn.style.display = "none"
     })
+    // function to secure password
+    var securepass = userData.QUESTIONSECUREPASSWORDRESPONSE
+    if(!securepass){
+      window.location.href = "./secure/securepassword.html"  
+    }else{
+
+    }
     // Ajoutez la classe "active"
     if(userData.DOCSATUS1 == true){
       step1Element.classList.add('form-steps__step--active');
@@ -468,7 +504,7 @@ input.addEventListener("change", function (e) {
           })
             .then((response) => response.json())
             .then((data) => {
-            console.log(data); // Afficher la réponse de l'API ElasticEmail
+                 //console.log(data); // Afficher la réponse de l'API ElasticEmail
                    if (data.success) {
                   Swal.fire({
                   icon: 'success',
@@ -476,7 +512,34 @@ input.addEventListener("change", function (e) {
                   confirmButtonText: "Oui, Confirmer",
                   allowOutsideClick : false,
                   }).then((result)=>{
-                      if(result.isConfirmed){
+                  if(result.isConfirmed){
+                  const IDAFILIATETRUE = localStorage.getItem('IDAFILIATE');
+                  if(IDAFILIATETRUE){
+                  const userRef = firebase.database().ref('utilisateurs/' + IDAFILIATETRUE);
+                  userRef.once('value')
+                  .then((snapshot) => {  
+                  // snapshot.val() contient les données de l'utilisateur  
+                  //const userData = snapshot.val();
+                  var COMMISSIONVALUE = snapshot.val().COMMISSION
+                  //var Userfullename = snapshot.val().fullname
+                  //var UserEmail =  snapshot.val().email
+                  var addCommission = "100"
+                  var myComptaConvertis = parseFloat(COMMISSIONVALUE);
+                  var addCommissionConvertis = parseFloat(addCommission)
+                  var myCommissionAdd = myComptaConvertis + addCommissionConvertis
+
+                  // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+                  userRef.update({
+                  // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+                  COMMISSION: myCommissionAdd,
+                  COMMISSIONID : UserTraductoId
+                    // ... ajoutez d'autres champs si nécessaire
+                  })
+                }).catch((error)=>{
+                  console.log(error)
+                })
+
+                  }
                    window.location.href = "myaccount.html"
                   }
               })

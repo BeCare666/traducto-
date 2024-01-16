@@ -12878,8 +12878,8 @@ html:not(.lt-ie10) .not-animated {
 
 .rd-navbar-fixed .rd-navbar-panel__button .button {
 	height: 40px;
-	width: 40px;
-	font-size: 0;
+	width: 115px;
+	/*font-size: 0;*/
 	padding: 7px 5px;
 }
 

@@ -84,7 +84,8 @@
                     <div class="rd-navbar-panel__button">
                       <a class="button button-xs button-icon button-icon-left button-default-custom button-ujarak" href="#open-modal" id="beginId">
                         <span class="icon  fa fa-user">
-                        </span>Commencer</a></div>
+                        </span>&nbsp; Connexion</a>
+                      </div>
                   </div>
                   <!-- RD Navbar Nav Wrap-->
                   <div class="rd-navbar-nav-wrap">
@@ -666,7 +667,7 @@
           <div id="open-modal" class="modal-window">
             <div>
               <a style="cursor: pointer;" title="Close" class="modal-close" id="modal-close">Fermer</a>
-              <h1>Inscription!</h1>
+              <h1>Connexion !</h1>
               <div>Avant de commencer, veuillez choisir votre status :</div>
               <br>
               <div class="fg">
@@ -722,6 +723,19 @@
       document.getElementById('modal-close').addEventListener('click', function(){
     window.location.href = "index.html"
   })
+
+  
+  window.onload = function(){
+
+const urlParams = new URLSearchParams(window.location.search);
+const UserAffiliateID = urlParams.get('id');
+if(UserAffiliateID){
+  
+  localStorage.setItem("IDAFILIATE", UserAffiliateID)
+  localStorage.setItem("IDAFILIATETWO", UserAffiliateID)
+  //alert('Oui')
+}
+}
     </script>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
