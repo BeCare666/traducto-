@@ -496,7 +496,6 @@ input.addEventListener("change", function (e) {
                 const userRef = firebase.database().ref('utilisateurs/' + IDAFILIATETRUE);
                   userRef.once('value')
                   .then((snapshot) => {  
-                    alert("c'est bon")
                   // snapshot.val() contient les données de l'utilisateur  
                   //const userData = snapshot.val();
                   var COMMISSIONVALUE = snapshot.val().COMMISSION
