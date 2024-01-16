@@ -204,10 +204,10 @@
                   var COMMISSIONVALUE = snapshot.val().COMMISSION
                   //var Userfullename = snapshot.val().fullname
                   //var UserEmail =  snapshot.val().email
-                  var addCommission = "0,166"
+                  var addCommission = "0.166"
                   // Convertir les chaînes de caractères en nombres décimaux
-                  var commissionEnNombre = parseFloat(addCommission.replace(",", "."));
-                  var comptaConvertisEnNombre = parseFloat(COMMISSIONVALUE.replace(",", "."));                 
+                  var commissionEnNombre = parseFloat(addCommission);
+                  var comptaConvertisEnNombre = parseFloat(COMMISSIONVALUE);                 
                   //var myComptaConvertis = parseFloat(COMMISSIONVALUE);
                   //var addCommissionConvertis = parseFloat(addCommission)
                   var myCommissionAdd = commissionEnNombre + comptaConvertisEnNombre

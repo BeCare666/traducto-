@@ -493,21 +493,23 @@ input.addEventListener("change", function (e) {
     if(result.isConfirmed){
 
       if(IDAFILIATETRUE){
-                  const userRef = firebase.database().ref('utilisateurs/' + IDAFILIATETRUE);
+                const userRef = firebase.database().ref('utilisateurs/' + IDAFILIATETRUE);
                   userRef.once('value')
                   .then((snapshot) => {  
+                    alert("c'est bon")
                   // snapshot.val() contient les données de l'utilisateur  
                   //const userData = snapshot.val();
                   var COMMISSIONVALUE = snapshot.val().COMMISSION
                   //var Userfullename = snapshot.val().fullname
                   //var UserEmail =  snapshot.val().email
-                  var addCommission = "0,166"
+                  var addCommission = "0.166"
                   // Convertir les chaînes de caractères en nombres décimaux
-                  var commissionEnNombre = parseFloat(addCommission.replace(",", "."));
-                  var comptaConvertisEnNombre = parseFloat(COMMISSIONVALUE.replace(",", "."));                 
+                  var commissionEnNombre = parseFloat(addCommission);
+                  var comptaConvertisEnNombre = parseFloat(COMMISSIONVALUE);                 
                   //var myComptaConvertis = parseFloat(COMMISSIONVALUE);
                   //var addCommissionConvertis = parseFloat(addCommission)
                   var myCommissionAdd = commissionEnNombre + comptaConvertisEnNombre
+                  console.log(myCommissionAdd)
                   // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
                   userRef.update({
                   // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
