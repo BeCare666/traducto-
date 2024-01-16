@@ -650,7 +650,7 @@
                 });
                 if (userArray.length != 0) {
                     return userArray.forEach((k) => {
-                    if(!k.COMMISSIONID){
+                    if(k.COMMISSIONID){
                         let trow = document.createElement("tr");
                     trow.addEventListener('click', function () {                  
                     trow.id = `${k.userId}`

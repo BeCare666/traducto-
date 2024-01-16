@@ -142,13 +142,17 @@
                                     Clients
                                 </a>
 
-                                <a class="nav-link" href="adminx.html" style="color: blue !important;">
+                                <a class="nav-link" href="adminx.html" >
                                     <i class="bi bi-person-square"></i>
                                     Traducteurs
                                 </a>
                                 <a class="nav-link" href="adminkeyx.html">
                                     <i class="bi bi-person-square"></i>
                                    Abonnés Traducteurs
+                                </a>
+                                <a class="nav-link" href="traductorafi.html" style="color: blue !important;">
+                                    <i class="bi bi-person-square"></i>
+                                     Traducteurs affiliés
                                 </a>
                                 <a class="nav-link" href="./../index.html">
                                     <i class="bi bi-person-square"></i>Visiter
@@ -640,12 +644,8 @@
                 if (userArray.length != 0) {
                     return userArray.forEach((k) => {
                     let trow = document.createElement("tr");
-                    if(!k.MYTRADUCTORID){
-                        
-                    }else{
-                        trow.style.backgroundColor ="lemonchiffon"
-                    } 
-                    trow.addEventListener('click', function () {                   
+                    if(k.COMMISSIONID){
+                        trow.addEventListener('click', function () {                   
                     trow.id = `${k.userId}`
                     var theUserIdAfi = k.userId
                     localStorage.setItem('userIdAF', theUserIdAfi)
@@ -695,6 +695,9 @@
                     </td>                                                          
                     `
                     div.append(trow)
+                    }else{
+                        alert("Pas encore d'affiliés")
+                    }
                     })
                     } else {
                         document.getElementById('preloader').style.display = "none"
