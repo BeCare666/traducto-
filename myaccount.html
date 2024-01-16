@@ -157,7 +157,7 @@ firebase.initializeApp(firebaseConfig);
 // Initialiser Firebase Storage
 const storage = firebase.storage();
 const UserTraductoId = localStorage.getItem('userTraductoIdpId');
-//alert(UserTraductoId)
+const IDAFILIATETRUE = localStorage.getItem('IDAFILIATE');
 // Récupérer une référence vers le dossier de stockage (par exemple, 'documents')
 const storageRef = storage.ref('documents');
 var skrollableIdbtn = document.getElementById('skrollableIdbtn');
@@ -172,7 +172,7 @@ var smsIdabnclose = document.getElementById('smsIdabnclose');
 
 const userRef = firebase.database().ref('utilisateurs/' + UserTraductoId);
 
-alert(UserTraductoId)
+//alert(UserTraductoId)
 
 // function to commeback
 //if(!UserTraductoId){
@@ -457,67 +457,8 @@ input.addEventListener("change", function (e) {
     allowOutsideClick : false,  
     }).then((result)=>{
     if(result.isConfirmed){
-    var UserMailMy = localStorage.getItem('userMailMy')
-    var UserNameMy = localStorage.getItem('userNameMy')
-       //  envoi de mail de suspension
-       const apiKey = "785B4029FA0EA1FB573C09903D5D557568F868BD402BE1746D1852EDFBC87D0249E623331ADD62923850AE601C019743";
-          const apiUrl = "https://api.elasticemail.com/v2/email/send";
-          // Définir les paramètres de l'e-mail
-          const emailParams = {
-            apiKey: apiKey ,
-            subject: "Document à Traduire Envoyé",
-            from: UserMailMy,
-            fromName: UserNameMy,
-            to: "traducto.inter@gmail.com",
-            bodyHtml: `
-            <table cellpadding="10" cellspacing="0" style="background-color: #f1f1f1; padding: 20px;">
-            <tr>
-                <td>
-                <strong style="color: #333; text-align: center !important;">Document à Traduire Envoyé</strong>
-                <p style="font-size: 16px; color: #666;">
-                  Chère équipe de traducto,
-                  J'espère que ce message vous trouve bien. Je vous informe par la présente que 
-                  j'ai envoyé le document à traduire. Merci de confirmer la réception et de me 
-                  faire part des prochaines étapes.
-                </p>
-             
-                <p style="font-size: 16px; color: #666;">
-                  Restant à votre disposition pour toute information supplémentaire.
-                </p>
-                  
-                <p style="font-size: 14px; color: #999;">
-                    Cordialement,     
-                </p>
-                <p style="font-size: 14px; color: #999;">
-                  ${UserNameMy}.
-                </p>
-                </td>
-            </tr>
-            </table>
-            `
-          };
 
-          // Effectuer une requête POST vers l'API ElasticEmail
-          fetch(apiUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: new URLSearchParams(emailParams)
-          })
-            .then((response) => response.json())
-            .then((data) => {
-                 //console.log(data); // Afficher la réponse de l'API ElasticEmail
-                   if (data.success) {
-                  Swal.fire({
-                  icon: 'success',
-                  text: 'Votre Email envoyé avec succès.',
-                  confirmButtonText: "Oui, Confirmer",
-                  allowOutsideClick : false,
-                  }).then((result)=>{
-                  if(result.isConfirmed){
-                  const IDAFILIATETRUE = localStorage.getItem('IDAFILIATE');
-                  if(IDAFILIATETRUE){
+      if(IDAFILIATETRUE){
                   const userRef = firebase.database().ref('utilisateurs/' + IDAFILIATETRUE);
                   userRef.once('value')
                   .then((snapshot) => {  
@@ -530,31 +471,23 @@ input.addEventListener("change", function (e) {
                   var myComptaConvertis = parseFloat(COMMISSIONVALUE);
                   var addCommissionConvertis = parseFloat(addCommission)
                   var myCommissionAdd = myComptaConvertis + addCommissionConvertis
-
                   // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
                   userRef.update({
                   // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
                   COMMISSION: myCommissionAdd,
                   COMMISSIONID : UserTraductoId
                     // ... ajoutez d'autres champs si nécessaire
+                  }).then(()=>{
+                    localStorage.removeItem("IDAFILIATE")
+                    window.location.href = "myaccount.html"
                   })
                 }).catch((error)=>{
                   console.log(error)
                 })
 
-                  }
-                   window.location.href = "myaccount.html"
-                  }
-              })
-              
-              } else {
-                 window.location.href = "myaccount.html"
-              } 
-            })
-            .catch((error) => {
-              window.location.href = "myaccount.html"
-            });
-           // end envoi de mail de suspension
+                }else{
+                window.location.href = "myaccount.html"
+                }
 
 }
      
