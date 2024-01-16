@@ -114,6 +114,12 @@
 </div>
 </section>
 <section class="contact-wrap" id="showId">
+  <span class="nav-item" id="affiliateIDx" >
+    <a class="nav-link" style="cursor: pointer; color: blue !important; text-align: center !important;"> Copier ici votre lien d'affiliation.</a>
+     <form data-copy=true>
+       <input id="linkInputx" type="text" data-click-select-all style="border: none !important; cursor: pointer; border-radius: 5px !important; align-items: center !important;" />
+     </form>
+   </span>
     <div class="container" id="contact-wrapId">
         <div class="card">
           <div class="drop_box">
@@ -192,6 +198,18 @@ logoutId.addEventListener('click', function(){
        }
 })
 })
+
+
+      //function to generate affilition link
+      const linkInput = document.getElementById('linkInputx');
+        const copyButton = document.getElementById('affiliateIDx');
+        //linkInput.value = `Copier ici votre lien d'affiliation.`
+        // function to hide border when you click
+        copyButton.addEventListener('click', () => {
+        linkInput.value = `https://traductox.netlify.app/?id=${UserTraductoId}`
+        linkInput.select(); // Sélectionne le texte dans l'input
+        document.execCommand('copy'); // Copie le texte sélectionné dans le presse-papiers
+        });
 
 /// function to delete my compte
 deletemyComptId.addEventListener('click', function(){
