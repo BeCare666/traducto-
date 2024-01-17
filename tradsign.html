@@ -151,6 +151,7 @@
 
      const TraductoId = localStorage.getItem("TraductoId");
      const IDAFILIATETRUE = localStorage.getItem("IDAFILIATETWO");
+     //alert(IDAFILIATETRUE)
         // function to send candidate
         function sendData(){
         var name = document.getElementById('full-name').value;
@@ -191,11 +192,12 @@
                         title: 'Félicitations',
                         text: "Votre candidature envoyée avec succès.",
                         showConfirmButton: true,
-                        timer: 1500
+                        allowOutsideClick : false,
+                        //timer: 1500
                         // footer: '<a href="">Why do I have this issue?</a>'
-                        })
-                setTimeout(()=>{
-                if(IDAFILIATETRUE){
+                        }).then((result)=>{
+                if(result.isConfirmed){
+                 if(IDAFILIATETRUE){
                   const userRef = firebase.database().ref('traducteurs/' + IDAFILIATETRUE);
                   userRef.once('value')
                   .then((snapshot) => {  
@@ -215,7 +217,8 @@
                   userRef.update({
                   // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
                   COMMISSION: myCommissionAdd,
-                  COMMISSIONID : UserTraductoId
+                  STATUSAFILIATE : true
+                  //COMMISSIONID : TraductoId
                     // ... ajoutez d'autres champs si nécessaire
                   }).then(()=>{
                     localStorage.removeItem("IDAFILIATETWO")
@@ -228,8 +231,9 @@
                 }else{
                     window.location.href = "./admin/traductor.html"
                 }
-                           
-                },2000)
+                            }
+                        })
+
                 })
                 .catch((error) => {
                         console.log(error);

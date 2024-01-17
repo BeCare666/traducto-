@@ -190,6 +190,22 @@
         // La saisie est correcte, vous pouvez ajouter votre logique ici
       }
     }
+    function toDetectlinkvalue(){
+      const showid = localStorage.getItem('IDAFILIATE');
+      const myNumberX = localStorage.getItem('myNumber');
+      if(showid && myNumberX === "client"){
+      }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Ooops..',
+            text: "Ce lien est un lien d'affiliation traducteur.",
+            showConfirmButton: false,
+            allowOutsideClick : false,
+           footer: '<a href="logintrad.html">Connectez-vous au compte traducteur.</a>'
+          })
+      }
+    }
+    toDetectlinkvalue()
     </script>`
    
     <script src="js/core.min.js"></script>

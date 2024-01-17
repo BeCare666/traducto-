@@ -726,12 +726,33 @@
 
   
   window.onload = function(){
-
   const urlParams = new URLSearchParams(window.location.search);
-  const UserAffiliateID = urlParams.get('id');
+  const UserAffiliateID = urlParams.get('client-id');
   localStorage.setItem("IDAFILIATE", UserAffiliateID)
-  localStorage.setItem("IDAFILIATETWO", UserAffiliateID)
-   
+  //console.log("client id ", UserAffiliateID)
+  const urlParamsx = new URLSearchParams(window.location.search);
+  const UserAffiliateIDx = urlParamsx.get('traducteur-id');
+  localStorage.setItem("IDAFILIATETWO", UserAffiliateIDx)
+  //console.log("traducteur id ", UserAffiliateIDx)
+  if(UserAffiliateID){
+    var num = "client"
+    localStorage.setItem("myNumber", num)
+    const showid = localStorage.getItem('IDAFILIATE');
+    const showidx = localStorage.getItem('IDAFILIATETWO');
+    console.log("client id ", showid)
+    console.log("traducteur id ", showidx)
+    const myNumberX = localStorage.getItem('myNumber');
+    console.log("Je suis client", myNumberX)
+  }else if(UserAffiliateIDx){
+    var num = "traducteur"
+    localStorage.setItem("myNumber", num)
+    const showid = localStorage.getItem('IDAFILIATE');
+    const showidx = localStorage.getItem('IDAFILIATETWO');
+    console.log("client id ", showid)
+    console.log("traducteur id ", showidx)
+    const myNumberX = localStorage.getItem('myNumber');
+    console.log("Je suis traducteur", myNumberX)
+  }
 }
     </script>
     <script src="js/core.min.js"></script>

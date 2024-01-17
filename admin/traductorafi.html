@@ -644,7 +644,7 @@
                 if (userArray.length != 0) {
                     return userArray.forEach((k) => {
                     let trow = document.createElement("tr");
-                    if(k.COMMISSIONID){
+                    if(k.STATUSAFILIATE == true){
                         trow.addEventListener('click', function () {                   
                     trow.id = `${k.userId}`
                     var theUserIdAfi = k.userId
@@ -696,7 +696,14 @@
                     `
                     div.append(trow)
                     }else{
-                        alert("Pas encore d'affiliés")
+                        Swal.fire({
+                        icon: 'info',
+                        title: 'Ooops..',
+                        text: "Vous n'avez pas encore d'affiliés.",
+                        showConfirmButton: false,
+                        allowOutsideClick : false,
+                       footer: '<a href="../admin/admin.html">Retour</a>'
+                    })
                     }
                     })
                     } else {
