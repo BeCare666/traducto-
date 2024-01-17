@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="images/Traducto1-1.png" type="image/x-icon"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+    <title>iworkx</title>
+</head>
+<body>
+<script>
+        function toDetectlinkvalue(){
+    const TraductoIdVA = localStorage.getItem("TraductoId"); 
+
+    if (!TraductoIdVA) {  
+        Swal.fire({
+            icon: 'info',
+            title: 'Ooops..',
+            text: "Vous n'avez pas encore de compte tracteur. Créer un compte avant de postuler.",
+            showConfirmButton: false,
+            allowOutsideClick : false,
+           footer: '<a href="index.html" >Retour</a>  &nbsp; &nbsp; &nbsp;<a href="logintrad.html">Créer votre compte ici.</a>'
+          })
+     }else{
+        Swal.fire({
+            icon: 'success',
+            title: 'Bravoo..',
+            text: "Nous vous informons de contacter le support traducto pour en savoir plus.",
+            showConfirmButton: false,
+            allowOutsideClick : false,
+           footer: '<a href="index.html" >Retour</a> &nbsp; &nbsp; &nbsp;<a href="mailto:traducto.inter@gmail.com">Contacter</a>'
+          })
+     }
+     
+    }
+    toDetectlinkvalue()
+</script>
+</body>
+</html>

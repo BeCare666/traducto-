@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <script src="js/JNM.js"></script>
-    <link rel="icon" href="images/Traducto1-1.png" type="image/x-icon"> 
+    <link rel="icon" href="images/Traducto1-1.png" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
@@ -195,6 +195,22 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </section>
+            <!-- Our Clients-->
+            <section class="section section-md bg-gray-light text-center" style="display: block;">
+              <div class="container">
+                <h2>Des travaux disponible.</h2>
+                <h4>Nous recherchons des traducteurs qualifié pour nos projets disponible.</h4>
+                <!-- Owl Carousel -->
+                <div class="owl-outer-navigation-wrap owl-carousel_nav-modern wow fadeIn">
+                  <div class="owl-carousel quote-creative-carousel" data-items="1" data-lg-items="2" 
+                  data-dots="true" data-nav="true" data-stage-padding="0" data-loop="true" data-margin="30" 
+                  data-mouse-drag="false" data-navigation-container="#owl-carousel-nav" data-dots-each="1" id="createAllwork">
+
+                  </div>
+                  <div class="owl-outer-navigation" id="owl-carousel-nav"></div>
+                </div>
+              </div>
+            </section>
       <style>
         .headerId{
           background-color: #21212123 !important;
@@ -508,66 +524,7 @@
          </div>
         </div>
       </section>
-      <!-- Our Clients-->
-      <section class="section section-md bg-gray-light text-center" style="display: none;">
-        <div class="container">
-          <h2>Our Clients</h2>
-          <!-- Owl Carousel -->
-          <div class="owl-outer-navigation-wrap owl-carousel_nav-modern wow fadeIn">
-            <div class="owl-carousel quote-creative-carousel" data-items="1" data-lg-items="2" data-dots="true" data-nav="true" data-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false" data-navigation-container="#owl-carousel-nav" data-dots-each="1">
-              <div class="item">
-                <!-- Quote Creative-->
-                <article class="quote-creative"> 
-                  <div class="quote-creative__header">
-                    <div class="quote-creative__media"><img src="images/client-1-112x99.jpg" alt="" width="112" height="99"/>
-                    </div>
-                    <div class="quote-creative__info">
-                      <p class="quote-creative__title">Patrick Wilson</p>
-                      <p class="quote-creative__subtitle">Regular Client</p>
-                    </div>
-                  </div>
-                  <div class="quote-creative__main">
-                    <div class="quote-creative__mark">
-                      <svg version="1.1" x="0px" y="0px" width="39px" height="21px" style="fill: url(#MyGradient)" viewbox="0 0 39 21">
-                        <polyline points="8.955,21 0,14.031 0.002,0.001 15.984,0.001 15.984,13.984 8.969,14.016 "></polyline>
-                        <polyline points="31.97,20.999 23.016,14.031 23.018,0.001 39,0.001 39,13.984 31.984,14.015 "></polyline>
-                      </svg>
-                    </div>
-                    <div class="quote-creative__main-text">
-                      <p>The experts at traducto are incredibly professional and patient. They helped me with some challenging material over a period of hours with a great attitude and put my client at ease.</p>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="item">
-                <!-- Quote Creative-->
-                <article class="quote-creative">
-                  <div class="quote-creative__header">
-                    <div class="quote-creative__media"><img src="images/client-2-112x99.jpg" alt="" width="112" height="99"/>
-                    </div>
-                    <div class="quote-creative__info">
-                      <p class="quote-creative__title">Kate Williams</p>
-                      <p class="quote-creative__subtitle">Regular Client</p>
-                    </div>
-                  </div>
-                  <div class="quote-creative__main">
-                    <div class="quote-creative__mark">
-                      <svg version="1.1" x="0px" y="0px" width="39px" height="21px" style="fill: url(#MyGradient)" viewbox="0 0 39 21">
-                        <polyline points="8.955,21 0,14.031 0.002,0.001 15.984,0.001 15.984,13.984 8.969,14.016 "></polyline>
-                        <polyline points="31.97,20.999 23.016,14.031 23.018,0.001 39,0.001 39,13.984 31.984,14.015 "></polyline>
-                      </svg>
-                    </div>
-                    <div class="quote-creative__main-text">
-                      <p>I’m delighted to be working with traducto. Their team turns around projects on time and with accuracy taking into account the context. All their projects have been delivered on time.</p>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-            <div class="owl-outer-navigation" id="owl-carousel-nav"></div>
-          </div>
-        </div>
-      </section>
+
 
       <!-- Partners-->
       <section class="section section-md bg-white text-center" style="display: none;">
@@ -739,22 +696,139 @@
     localStorage.setItem("myNumber", num)
     const showid = localStorage.getItem('IDAFILIATE');
     const showidx = localStorage.getItem('IDAFILIATETWO');
-    console.log("client id ", showid)
-    console.log("traducteur id ", showidx)
+   // console.log("client id ", showid)
+   // console.log("traducteur id ", showidx)
     const myNumberX = localStorage.getItem('myNumber');
-    console.log("Je suis client", myNumberX)
+   // console.log("Je suis client", myNumberX)
   }else if(UserAffiliateIDx){
     var num = "traducteur"
     localStorage.setItem("myNumber", num)
     const showid = localStorage.getItem('IDAFILIATE');
     const showidx = localStorage.getItem('IDAFILIATETWO');
-    console.log("client id ", showid)
-    console.log("traducteur id ", showidx)
+   // console.log("client id ", showid)
+   // console.log("traducteur id ", showidx)
     const myNumberX = localStorage.getItem('myNumber');
-    console.log("Je suis traducteur", myNumberX)
+   // console.log("Je suis traducteur", myNumberX)
   }
 }
     </script>
+      <script type="module">
+ 
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+            authDomain: "traducto-2fab6.firebaseapp.com",
+            databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+            projectId: "traducto-2fab6",
+            storageBucket: "traducto-2fab6.appspot.com",
+            messagingSenderId: "914618680771",
+            appId: "1:914618680771:web:24eb2877454b80188ea976"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        import {
+            getDatabase,
+            ref,
+            set,
+            update,
+            child,
+            onValue,
+            remove,
+            get,
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        import { getStorage, getDownloadURL 
+        
+        } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"
+
+        const db = getDatabase(); 
+
+          // function to get all messages in Real Time 
+          function getAllDataRealtime() {
+            var div = document.getElementById('createAllwork');
+            var myalldatas = [];
+           // const UserConnectIdToBuy = localStorage.getItem("storageName");
+
+           // if (!UserConnectIdToBuy) {  
+             //   window.location.href = "loginadmin.html"
+           // }
+            const dbref = ref(db, "Thedatas");
+            onValue(dbref, (snopshot) => {
+                snopshot.forEach((childsnopshot) => {
+                    myalldatas.push(childsnopshot.val());
+                   // document.querySelector('.preloader').style.display = "none"
+                });
+                if (myalldatas.length != 0) {
+                    return myalldatas.forEach((k) => {
+                      var photoDataUrl = 'data:image/png;base64,' + k.RollNo;
+                    let trow = document.createElement("div");
+
+                    trow.addEventListener('mouseover', function () {
+                    trow.id = `${k.Idproduct}`
+                    //tableTakeIdproduct.push(trow.id)
+                    //alert(trow.id)
+                    })
+                    trow.style.cursor = "pointer"
+                    trow.innerHTML =
+                            `
+                      <div class="item">
+                      <!-- Quote Creative-->
+                      <article class="quote-creative"> 
+                        <div class="quote-creative__header">
+                          <div class="quote-creative__media"><img src="${photoDataUrl}" alt="" width="112" height="99"/>
+                          </div>
+                          <div class="quote-creative__info">
+                            <p class="quote-creative__title">${k.Category}</p>
+                            <p class="quote-creative__subtitle">Travail vérifié
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                              </svg>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="quote-creative__main">
+                          <div class="quote-creative__mark">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-body-text" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5m0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+                            </svg>
+                          </div>
+                          <div class="quote-creative__main-text">  
+                            <p>${k.Genboxtextarea}</p><br>
+                            <button class="btn btn-secondary">Budget : ${k.PrixNormo} $</button> <a href="iwork.html" style="cursor: pointer !important;"><buttonstyle="cursor: pointer !important;"  class="btn btn-primary">Postuler</button></a>
+                          <p>Publié le ${k.Datetime}</p>
+                          </div>
+                        </div>
+                      </article>
+                    </div> <br> <br>
+                                       
+                            `
+            div.append(trow)
+            })
+            } else {
+                //document.getElementById('preloader').style.display = "none"
+                var CreateAllproductnodata = document.getElementById('createAllwork')
+                    CreateAllproductnodata.innerHTML = ` 
+                    <div style = "display: flex; justify-content: center; margin: auto;">
+                    <img src="../images/no_data.svg" alt="" style = "width: 100%; height: 20vh;">
+                    </div> 
+                <p style="text-align: center;">Pas de travaux.</p>
+             `
+            }
+            });
+ 
+        }
+
+        window.onload = getAllDataRealtime;
+
+</script> 
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
 	
