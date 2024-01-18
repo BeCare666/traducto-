@@ -418,7 +418,7 @@
                                         <tr>
                                             <th scope="col">Nom</th>
                                             <th scope="col">Date</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Fichier</th>
                                            <th scope="col">Traducteur</th>
                                             <th scope="col">Texte</th>
                                             <th scope="col">Nom du fichier</th>
@@ -646,11 +646,30 @@
                 userArray.sort((a, b) => {
                 // Mettre les comptes validés en bas
                 document.getElementById('preloader').style.display ="none"
-                if (a.VALIDERMONCOMPTE && !b.VALIDERMONCOMPTE) {
+
+                if (a.FILETYPE && !b.FILETYPE) {
                     return 1;
                 }
                 // Mettre les comptes non validés en haut
-                if (!a.VALIDERMONCOMPTE && b.VALIDERMONCOMPTE) {
+                if (!a.FILETYPE && b.FILETYPE) {
+                    return -1;
+                }
+
+                if (a.DOCSATUS4 && !b.DOCSATUS4) {
+                    return 1;
+                  
+                }
+                // Mettre les comptes non validés en haut
+                if (!a.DOCSATUS4 && b.DOCSATUS4) {
+                    return -1;
+               
+                     
+                }
+                if (a.MYTRADUCTORID && !b.MYTRADUCTORID) {
+                    return 1;
+                }
+                // Mettre les comptes non validés en haut
+                if (!a.MYTRADUCTORID && b.MYTRADUCTORID) {
                     return -1;
                 }
                 // Garder l'ordre actuel si les deux utilisateurs ont la même valeur pour "comptValidé"
@@ -666,7 +685,8 @@
                     }
                     if(k.DOCSATUS4 == false){
                     
-                    trow.addEventListener('click', function () {                   
+                    trow.addEventListener('click', function () {   
+                              
                     trow.id = `${k.userId}`
                     var theUserId = k.userId
                     var URLUSERV = k.MONPAYSDEPUBLICATION
@@ -684,7 +704,7 @@
                     //localStorage.setItem('userId', theUserId)
                     //window.location.href = "./../statusvalidate.html"
                      // Affiche le modal au chargement de la page
-                     if(k.MYTRADUCTORID){
+                     if(k.MYTRADUCTORID && k.FILETYPE){
                       var docDownloadIdx2 = document.getElementById("docDownloadIdx2");
                       document.getElementById('getAllTraductorId').style.display = "none"
                       document.getElementById('getAllTraductorIdx2').style.display = "block "
@@ -694,7 +714,7 @@
                       })
                      }
                     if(k.MONPAYSDEPUBLICATION ){
-                    $('#exampleModalCenter').modal('show');
+                    //$('#exampleModalCenter').modal('show');
             
                     // Empêche la fermeture du modal en cliquant à l'extérieur
                     $('#exampleModalCenter').modal({
@@ -731,13 +751,16 @@
                     animation: false,
                     position: 'top',
                     showConfirmButton: false,
-                    timer: 3000,
+                    timer: 2000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                     })
+                    setTimeout(()=>{
+                    window.location.href = "admin.html"
+                  },2000)
                     }) 
                     }
                     trow.style.cursor = "pointer"
@@ -755,12 +778,12 @@
                         ${k.DATETIME}
                     </td>
                     <td>
-                        <img alt="..."
-                            src="https://preview.webpixels.io/web/img/other/logos/logo-1.png"
-                            class="avatar avatar-xs rounded-circle me-2">
-                        <a class="text-heading font-semibold" href="#">
-                            ${k.VALIDERMONCOMPTE} 
-                        </a>
+                            ${k.FILETYPE ? `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                            <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
+                            </svg>` : `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                            <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
+                            </svg>`}
+                        
                     </td>
                     <td>
                         ${k.MYTRADUCTORID ? `${k.MYTRADUCTORID}` : 'Pas encore'}
