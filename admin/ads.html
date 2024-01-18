@@ -146,6 +146,7 @@
              remove(ref(db, "traducteurs/" + UserIdxxx))
             .then(() => {
             Swal.fire("Supprimer!", "", "success");
+            window.location.href = "adminx.html"
             })
             .catch((error) => {
             Swal.fire("Erreur lors de la suppression.", "", "error");
