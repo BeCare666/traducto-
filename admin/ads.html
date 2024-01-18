@@ -26,7 +26,6 @@
         </div>
       </div>
     </div>
-    
   <div class="spacer"></div>
   <a class="back-to-top d-flex align-items-center justify-content-center" id="user-button">
     <i class="fa fa-user"></i></a>
@@ -84,12 +83,14 @@
                //console.log(userDataMyId , UserIdxxx)
                //alert(UserIdxxx)
                if(userDataMyId === UserIdxxx){
+
                 userDataElement.innerHTML = `
                     <div class="col-12">
                     <h1><i class="fa fa-diamond animated infinite jello" aria-hidden="true"></i>  Personnelles
                     </h1>
                     <hr> 
                     <ul>
+
                         <li><strong>Nom et prénoms : </strong> ${childsnopshot.val().Fullname} </li>
                         <li><strong>Address : </strong> ${childsnopshot.val().Adress}</li>
                         <li><strong>Date de naissance :</strong>${childsnopshot.val().Naissance}</li>
@@ -125,16 +126,18 @@
         document.getElementById('user-button').addEventListener('click', function(){
             Swal.fire({
             title: "Voulez vous apporter de changements ?",
-            //showDenyButton: true,
+            showDenyButton: true,
             icon:"info",
             showCancelButton: true,
             confirmButtonText: "Supprimer",
-            //denyButtonText: `Suspendre`,
+            denyButtonText: `Suspendre`,
+            cancelButtonText:"Valider",
+            cancelButtonColore:"green"
             }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
              // Supprime l'utilisateur de la base de données
-             dbreftra.remove()
+             remove(ref(db, "traducteurs/" + UserIdxxx))
             .then(() => {
             Swal.fire("Supprimer!", "", "success");
             })
@@ -144,11 +147,16 @@
             });
                
             } else if (result.isDenied) {
-            dbreftra.update({
-            isDefaultAccount: true, // Nouvelle valeur              
+                update(ref(db, "traducteurs/" + UserIdxxx), {
+                    isDefaultAccount: false, // Nouvelle valeur        
             })
-                        
+                     
             Swal.fire("Suspendre", "", "info");
+            }else{
+                update(ref(db, "traducteurs/" + UserIdxxx), {
+                    isDefaultAccount: true, // Nouvelle valeur        
+            })
+            Swal.fire("Validation", "", "info");
             }
             });
         })

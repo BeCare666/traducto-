@@ -657,7 +657,7 @@
                 abnComptId.innerHTML = `  ${snopshot.val().TYPEABONNEMENT ? `<img src="abon.svg" alt="">&nbsp;&nbsp; ${snopshot.val().TYPEABONNEMENT}` : '<img src="abon.svg" alt="">&nbsp;&nbsp;Aucun abonnement'} `            
                 var ModalMyDropdown = document.getElementById('modalMyDropdownx');
                 ModalMyDropdown.innerHTML = ` <i class="bi bi-envelope-fill"></i> Email : ${snopshot.val().email}`
-                if(snopshot.val().GENDER){
+                if(snopshot.val().isDefaultAccount == true){
                      //var traduData =  childsnopshot.val()            
                 var modalMyDropdownwxc = document.getElementById('modalMyDropdownwxc');
                 modalMyDropdownwxc.innerHTML = ` <i class="bi bi-person-fill" style="color:green"></i> Actif `
@@ -665,6 +665,15 @@
                 //var traduData =  childsnopshot.val()            
                 var modalMyDropdownwxc = document.getElementById('modalMyDropdownwxc');
                 modalMyDropdownwxc.innerHTML = ` <i class="bi bi-person-fill" style="color:red"></i> inactif`
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ooops..',
+                    text: "Nous desolé de vous informer que votre compte est inactif. Connectez traducto pour en savoir plus. Merci !",
+                    showConfirmButton: false,
+                    allowOutsideClick : false,
+                footer: '<a href="mailto:traducto.inter@gmail.com">Connectez-nous </a>'
+                })
                 }
 
             var btnpaieMymoney =  document.getElementById('btnpaieMymoney');
