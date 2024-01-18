@@ -90,6 +90,10 @@
                     </h1>
                     <hr> 
                     <ul>
+                        <li>
+                        <i class="bi bi-person-fill" style="color:${childsnopshot.val().isDefaultAccount ? 'green' : 'red'}"></i>
+                        ${childsnopshot.val().isDefaultAccount ? 'Actif' : 'Inactif'}
+                        </li>
 
                         <li><strong>Nom et prénoms : </strong> ${childsnopshot.val().Fullname} </li>
                         <li><strong>Address : </strong> ${childsnopshot.val().Adress}</li>
@@ -145,18 +149,26 @@
             Swal.fire("Erreur lors de la suppression.", "", "error");
                             
             });
-               
+            setTimeout(()=>{
+                window.location.href = "ads.html"
+            },700) 
             } else if (result.isDenied) {
                 update(ref(db, "traducteurs/" + UserIdxxx), {
                     isDefaultAccount: false, // Nouvelle valeur        
             })
                      
             Swal.fire("Suspendre", "", "info");
+            setTimeout(()=>{
+                window.location.href = "ads.html"
+            },700)
             }else{
                 update(ref(db, "traducteurs/" + UserIdxxx), {
                     isDefaultAccount: true, // Nouvelle valeur        
             })
             Swal.fire("Validation", "", "info");
+            setTimeout(()=>{
+                window.location.href = "ads.html"
+            },700)
             }
             });
         })
