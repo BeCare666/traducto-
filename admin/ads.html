@@ -136,7 +136,9 @@
             confirmButtonText: "Supprimer",
             denyButtonText: `Suspendre`,
             cancelButtonText:"Valider",
-            cancelButtonColore:"green"
+            cancelButtonColore:"green",
+            allowOutsideClick : false,
+            footer: '<a href="ads.html">Fermer</a>'
             }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {

@@ -657,7 +657,12 @@
                     //pour se diriger vers ads.hml
                     window.location.href = "ads.html"
                     }else{
-                        Swal.fire("Cet traducteur n'as pas encore envoyé de candidature", "", "error");
+                        //Swal.fire("Cet traducteur n'as pas encore envoyé de candidature", "", "error");
+                        trow.id = `${k.userId}`
+                    var theUserId = k.userId
+                    localStorage.setItem('userIdxxx', theUserId)
+                    //pour se diriger vers ads.hml
+                    window.location.href = "ads.html"
                     }
                     
                     })
