@@ -210,7 +210,7 @@ function submitmyx(){
             userRef.once('value')
            .then((snapshot) => { 
             const userData = snapshot.val();
-            var myStausCompt = userData.isDefaultAccount
+            var myStausCompt = userData.Naissance
             //alert(myStausCompt)
             if(myStausCompt){
                 window.location.href = "tradsign.html"
