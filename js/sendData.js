@@ -213,9 +213,10 @@ function submitmyx(){
             var myStausCompt = userData.Naissance
             //alert(myStausCompt)
             if(myStausCompt){
-                window.location.href = "tradsign.html"
+              window.location.href = "./admin/traductor.html"
+                
                 }else{
-               window.location.href = "./admin/traductor.html"
+                  window.location.href = "tradsign.html"
                }
            }).catch((error)=>{
             console.log(error)
