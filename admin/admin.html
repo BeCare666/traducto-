@@ -28,8 +28,7 @@
            <div class="modal-content">
                <div class="modal-header">
                 <h5>Traducteurs</h5>
-               
-                 <input type="text" id="SearchId" placeholder="Recherche" style="display: none;"> 
+                
                </div>
                <div class="modal-body" style="display: none; " id="getAllTraductorIdx2">
                 <p style="color: red; text-align: center;" id="smsIdTradAsso" >Nous vous avertissons qu'un traducteur est déjà associé à ce client. Mais si vous voulez changer,
@@ -384,8 +383,7 @@
                             <!-- Nav -->
                             <ul class="nav nav-tabs mt-4 overflow-x border-0" id="allMyFillId">
                                 <li class="nav-item ">
-                                    <a href="#" class="nav-link active">Tous les
-                                        fichiers</a>
+                                    <a href="#" class="nav-link active">Tous les fichiers</a>
                                 </li>
                         <!--  <li class="nav-item">
                         <a href="#" class="nav-link font-regular">Shared</a>
@@ -393,6 +391,12 @@
                         <li class="nav-item">
                         <a href="#" class="nav-link font-regular">File requests</a>
                         </li>-->
+
+                        <li class="nav-item ">
+                        <a href="#" class="nav-link active">
+                            <input type="text" id="SearchId" placeholder="Recherche" oninput="validerSaisie(this)">
+                        </a>
+                        </li>
                             </ul>
                         </div>
                     </div>
@@ -526,6 +530,21 @@
         textarea.classList.add("invalid-input");
         }
       }
+
+      function validerSaisie(input) {
+                    const valeurSaisie = input.value;
+                    
+
+                    if (valeurSaisie ==="Soudeur") {
+                        // Effacez la saisie incorrecte
+                       // input.value = input.value.replace(/[^A-Za-z]/g, ''); // Remplace tous les caractères non alphabétiques
+                        var divElement = document.getElementById('createAllproduct');
+                        var baliseInterne = divElement.querySelector('tr');
+                        baliseInterne.style.display = "none"
+                    } else {
+                        // La saisie est correcte, vous pouvez ajouter votre logique ici
+                    }
+                    }
         </script>
         <script type="module">
 
@@ -577,7 +596,7 @@
             const UserConnectIdToBuy = localStorage.getItem("storageName");
 
             if (!UserConnectIdToBuy) {
-                window.location.href = "../login.html"
+                window.location.href = "loginadmin.html"
             }
             // start function to get all traductor
             const dbreftraductor = ref(db, "traducteurs");
@@ -675,9 +694,13 @@
                 // Garder l'ordre actuel si les deux utilisateurs ont la même valeur pour "comptValidé"
                 return 0;
                 });
+
+                var searchval = false
+
                 if (userArray.length != 0) {
                     return userArray.forEach((k) => {
                     let trow = document.createElement("tr");
+
                     if(!k.MYTRADUCTORID){
                         
                     }else{
@@ -825,7 +848,6 @@
 
                 window.onload = getAllDataRealtime;
 
-      
         </script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
