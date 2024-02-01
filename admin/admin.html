@@ -394,7 +394,7 @@
 
                         <li class="nav-item ">
                         <a href="#" class="nav-link active">
-                            <input type="text" id="SearchId" placeholder="Recherche" oninput="validerSaisie(this)">
+                            <input type="text" id="SearchId" placeholder="Recherche">
                         </a>
                         </li>
                             </ul>
@@ -530,21 +530,6 @@
         textarea.classList.add("invalid-input");
         }
       }
-
-      function validerSaisie(input) {
-                    const valeurSaisie = input.value;
-                    
-
-                    if (valeurSaisie ==="Soudeur") {
-                        // Effacez la saisie incorrecte
-                       // input.value = input.value.replace(/[^A-Za-z]/g, ''); // Remplace tous les caractères non alphabétiques
-                        var divElement = document.getElementById('createAllproduct');
-                        var baliseInterne = divElement.querySelector('tr');
-                        baliseInterne.style.display = "none"
-                    } else {
-                        // La saisie est correcte, vous pouvez ajouter votre logique ici
-                    }
-                    }
         </script>
         <script type="module">
 
