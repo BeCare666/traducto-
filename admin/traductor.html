@@ -118,11 +118,18 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item ">
+                                <a style="cursor:pointer"  class="nav-link" id="abnComptIdwork">
+                                 
+                                </a>
+                              </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" id="accountID" href="../walletx/wallet.html">
                                     
                                 </a>
                             </li>
+
                             <li class="nav-item" style="display: none !important;">
                                 <a class="nav-link" href="./../logintrad.html"
                                     id="logoutid">
@@ -145,11 +152,6 @@
                             </a>
                           </li>
 
-                          <li class="nav-item ">
-                            <a style="cursor:pointer"  class="nav-link" id="abnComptIdwork">
-                             
-                            </a>
-                          </li>
 
                           <li class="nav-item">
                             <a class="nav-link" data-dismiss="modal"
@@ -649,7 +651,7 @@
                 });
             var accountID = document.getElementById('accountID');
             // Start fuction to create account afiliate
-            accountID.innerHTML = ` <img src="../images/wallet.svg" alt="">&nbsp;&nbsp;Mon Solde : ${snopshot.val().COMMISSION} $`
+            accountID.innerHTML = ` <img src="../images/wallet.svg" alt="">&nbsp;&nbsp; Solde Af: ${snopshot.val().COMMISSION} $`
             // End fuction to create account afiliate
 
             // function to secure password
@@ -665,7 +667,7 @@
                 
                 // founction to show work money <img src="../images/wallet.svg" alt="">&nbsp;&nbsp;Mon Solde
                 var AbnComptIdwork = document.getElementById('abnComptIdwork');
-                AbnComptIdwork.innerHTML = `<img src="../images/wallet.svg" alt="">&nbsp;&nbsp; ${snopshot.val().MYWORKMONEY} $ de travail.`
+                AbnComptIdwork.innerHTML = `<img src="../images/wallet.svg" alt="">&nbsp;&nbsp; Solde Principal : ${snopshot.val().MYWORKMONEY} $`
 
                 var ModalMyDropdown = document.getElementById('modalMyDropdownx');
                 ModalMyDropdown.innerHTML = ` <i class="bi bi-envelope-fill"></i> Email : ${snopshot.val().email}`
