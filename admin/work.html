@@ -261,7 +261,7 @@
                                                         style="height: 50px;">
                                                         <option selected></option>
                                                        <option value="La traduction">La traduction</option>
-                                                       <option value="La Relecture">La Relecture</option>
+                                                       <option value="La Relecture">L'interprétation</option>
                                                        <option value="La Correction">La Correction</option>
                                                        
                                                     </select>
@@ -613,12 +613,13 @@
         const idproduct = id();
 
         function insertData() {
-         
+        const URlImage = urlImage.slice(-1).pop();
+        const updatedValue = URlImage ? URlImage : "";
         const idproduct = id()
         set(ref(db, "Thedatas/" + idproduct), {
         Idproduct: idproduct,
         NameOfstd: namebox.value,
-        RollNo: urlImage[0],  
+        RollNo: updatedValue,  
         //Prix: genbox.value,
         //PrixPromo: nameboxPromo.value,
         PrixNormo: rollboxPrix.value,

@@ -1,28 +1,28 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
-  authDomain: "traducto-2fab6.firebaseapp.com",
-  databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
-  projectId: "traducto-2fab6",
-  storageBucket: "traducto-2fab6.appspot.com",
-  messagingSenderId: "914618680771",
-  appId: "1:914618680771:web:24eb2877454b80188ea976"
+    apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+    authDomain: "traducto-2fab6.firebaseapp.com",
+    databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+    projectId: "traducto-2fab6",
+    storageBucket: "traducto-2fab6.appspot.com",
+    messagingSenderId: "914618680771",
+    appId: "1:914618680771:web:24eb2877454b80188ea976"
 };
 firebase.initializeApp(firebaseConfig);
 
 // Référence Firebase contenant les adresses e-mails
 // Écoute de l'événement "click" sur le bouton de recherche
-//var submitId1 = document.getElementById('submitId1');
-var submitId2 = document.getElementById('submitId2')
-submitId2.addEventListener('click', submitmy)
-//submitId1.addEventListener('click', submitmyx)
+var submitId1 = document.getElementById('submitId1');
+//var submitId2 = document.getElementById('submitId2')
+//submitId2.addEventListener('click', submitmy)
+submitId1.addEventListener('click', submitmyx)
 function submitmy(){ 
-const emailRef = firebase.database().ref('utilisateurs');
+const emailRef = firebase.database().ref('traducteurs');
 const email = document.getElementById('login-email').value;
 var password = document.getElementById('login-password').value
 var loginusername = document.getElementById('login-username').value
 //alert(numberphoneuser)
-console.log(email)
-console.log(password)
+//console.log(email)
+//console.log(password)
 // Ajoutez un gestionnaire d'événements pour l'événement "input"
 const emailInput = document.getElementById('login-email').value;
 
@@ -78,32 +78,44 @@ const emailInput = document.getElementById('login-email').value;
     const hours = currentDate.getHours(); // Heures (de 0 à 23)
     const minutes = currentDate.getMinutes(); // Minutes (de 0 à 59)
     const seconds = currentDate.getSeconds(); // Secondes (de 0 à 59)
-    firebase.database().ref('utilisateurs/' + userID).set({
+    firebase.database().ref('traducteurs/' + userID).set({
         userId : userID,
         email: email,
         username:loginusername,
-        MYTRADUCTORID:"",
         password : password,
         DOCSATUS1: true,
         DOCSATUS2: false,
         DOCSATUS3: false,
         DOCSATUS4: false, 
+        CANDIDATURESTATUS: false, 
         isDefaultAccount: true,
         isPaidAccount: false,
         MONPAYSDEPUBLICATION:"",
         VALIDERMONCOMPTE:false,
+        Adress : "",
+        Naissance : "",
+        Fllname : "",
+        Email : "",
+        Phone : "",
+        Profil : "",
+        Langues : "",
+        Campany : "",
+        Start : "",
+        End : "",
+        Description : "",
+        ABONNEMENT:"",
+        TYPEABONNEMENT:"",
         NUMBEROFMOT : "",
         FILETYPE : "",
         MONCOMPTESUSPENDU:false,
         COMPTEFACEBOOK:"",
         COMPTEINSATAGRAMME:"",
-        ABONNEMENT:"",
-        TYPEABONNEMENT:"",
+        USERCONNECT : false,
         COMMISSION :0,
         COMMISSIONID : "",
         GETALLWALLET : "",
-        USERCONNECT : false,
         DATETIME : `${day}/${month}/${year}`,
+        GENDER:"TRADUCTOR"
     }).then(() => {
       document.getElementById('login-email').value = ""
       document.getElementById('login-password').value = ""
@@ -117,9 +129,6 @@ const emailInput = document.getElementById('login-email').value;
       // footer: '<a href="">Why do I have this issue?</a>'
       })
       //submitId2.style.display = "none"
-      setTimeout(()=>{
-        window.location.href = "loginc.html"
-      },1500)
     }).catch((error) => {
       Swal.fire({
       icon: 'error',
@@ -139,8 +148,8 @@ const emailInput = document.getElementById('login-email').value;
   }
   }
 
-  function submitmyx(){ 
-    const emailRef = firebase.database().ref('utilisateurs');
+function submitmyx(){ 
+    const emailRef = firebase.database().ref('traducteurs');
     const email = document.getElementById('login-email').value;
     var password = document.getElementById('login-password').value
     //alert(numberphoneuser)
@@ -148,9 +157,9 @@ const emailInput = document.getElementById('login-email').value;
     // Ajoutez un gestionnaire d'événements pour l'événement "input"
     const emailInput = document.getElementById('login-email').value;
     const usernameKEy = document.getElementById('login-username').value;
-    console.log(email)
-    console.log(password)
-    console.log(usernameKEy)
+   // console.log(email)
+   // console.log(password)
+   // console.log(usernameKEy)
       if(email  && password && usernameKEy){
       let emailKey = null;
       let passwordkey = null;
@@ -169,7 +178,7 @@ const emailInput = document.getElementById('login-email').value;
         for (const keyphoneuser in emails) {
             if (emails.hasOwnProperty(keyphoneuser) && emails[keyphoneuser].username === usernameKEy ) {
                 loginusernameKy  = keyphoneuser;
-              break; 
+              break;
             }
           }
           
@@ -181,21 +190,38 @@ const emailInput = document.getElementById('login-email').value;
           }
           
         if (emailKey && passwordkey && loginusernameKy) {
+          localStorage.setItem("TraductoId", emailKey)
           document.getElementById('login-email').value = ""
           document.getElementById('login-password').value = ""
           document.getElementById('login-username').value = ""
-          Swal.fire({
+
+        const userRef = firebase.database().ref('traducteurs/' + emailKey);
+        Swal.fire({
             icon: 'success',
-            title: 'Connexion',
-            text: "Vous êtes connecté avec succèss",
-            showConfirmButton: false,
-            timer: 1500
+           title: 'Connexion',
+           text: "Vous êtes connecté avec succèss",
+            showConfirmButton: true,
+           timer: 1500
            // footer: '<a href="">Why do I have this issue?</a>'
-          })
-          setTimeout(()=>{
-             localStorage.setItem("userTraductoIdpId", emailKey)
-            window.location.href = "myaccount.html"      
-          },2000)
+           })
+
+        setTimeout(()=>{
+            const userRef = firebase.database().ref('traducteurs/' + emailKey);
+            userRef.once('value')
+           .then((snapshot) => { 
+            const userData = snapshot.val();
+            var myStausCompt = userData.Naissance
+            //alert(myStausCompt)
+            if(myStausCompt){
+              window.location.href = "./admin/traductor.html"
+                
+                }else{
+                  window.location.href = "tradsign.html"
+               }
+           }).catch((error)=>{
+            console.log(error)
+           })
+        },2000)
         } else {
           
           document.getElementById('login-email').value = ""

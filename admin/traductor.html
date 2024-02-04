@@ -142,8 +142,15 @@
                           <li class="nav-item ">
                             <a style="cursor:pointer"  class="nav-link" id="abnComptId">
                              
-                              </a>
+                            </a>
                           </li>
+
+                          <li class="nav-item ">
+                            <a style="cursor:pointer"  class="nav-link" id="abnComptIdwork">
+                             
+                            </a>
+                          </li>
+
                           <li class="nav-item">
                             <a class="nav-link" data-dismiss="modal"
                             aria-label="Close" style="cursor:pointer" data-toggle="modal" data-target="#exampleModalCenterIdpaid">
@@ -654,7 +661,12 @@
             }
 
                 var abnComptId = document.getElementById('abnComptId');
-                abnComptId.innerHTML = `  ${snopshot.val().TYPEABONNEMENT ? `<img src="abon.svg" alt="">&nbsp;&nbsp; ${snopshot.val().TYPEABONNEMENT}` : '<img src="abon.svg" alt="">&nbsp;&nbsp;Aucun abonnement'} `            
+                abnComptId.innerHTML = `  ${snopshot.val().TYPEABONNEMENT ? `<img src="abon.svg" alt="">&nbsp;&nbsp; ${snopshot.val().TYPEABONNEMENT}` : '<img src="abon.svg" alt="">&nbsp;&nbsp;Aucun abonnement'} ` 
+                
+                // founction to show work money 
+                var AbnComptIdwork = document.getElementById('abnComptIdwork');
+                AbnComptIdwork.innerHTML = `${snopshot.val().MYWORKMONEY ? `${snopshot.val().MYWORKMONEY} $ en cours` : '0$'} `
+
                 var ModalMyDropdown = document.getElementById('modalMyDropdownx');
                 ModalMyDropdown.innerHTML = ` <i class="bi bi-envelope-fill"></i> Email : ${snopshot.val().email}`
                 if(snopshot.val().isDefaultAccount == true){

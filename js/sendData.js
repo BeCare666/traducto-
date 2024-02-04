@@ -11,10 +11,10 @@ firebase.initializeApp(firebaseConfig);
 
 // Référence Firebase contenant les adresses e-mails
 // Écoute de l'événement "click" sur le bouton de recherche
-var submitId1 = document.getElementById('submitId1');
+//var submitId1 = document.getElementById('submitId1');
 var submitId2 = document.getElementById('submitId2')
 submitId2.addEventListener('click', submitmy)
-submitId1.addEventListener('click', submitmyx)
+//submitId1.addEventListener('click', submitmyx)
 function submitmy(){ 
 const emailRef = firebase.database().ref('traducteurs');
 const email = document.getElementById('login-email').value;
@@ -128,6 +128,9 @@ const emailInput = document.getElementById('login-email').value;
       timer: 1500
       // footer: '<a href="">Why do I have this issue?</a>'
       })
+      setTimeout(()=>{
+        window.location.href = "logintax.html"
+      },1500)
       //submitId2.style.display = "none"
     }).catch((error) => {
       Swal.fire({
