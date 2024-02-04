@@ -221,7 +221,7 @@ function submitmyx(){
            }).catch((error)=>{
             console.log(error)
            })
-        },2000)
+        },1500)
         } else {
           
           document.getElementById('login-email').value = ""
