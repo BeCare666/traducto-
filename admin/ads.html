@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="ads.css">
     <link rel="stylesheet" href="admin.css">
     <title>ads</title>
@@ -47,6 +48,7 @@
            
         </div>
         <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal" id="accountAzeroId">Mise à zéro</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
           <button type="button" class="btn btn-primary" id="sendunityforuser"  data-dismiss="modal">Envoyer</button>
         </div>
@@ -56,7 +58,23 @@
 
   <a class="back-to-top d-flex align-items-center justify-content-center" id="user-button">
     <i class="fa fa-user"></i></a>
-    <div id="preloader"></div> 
+    <div id="preloader"></div>
+
+    <script>
+        function validerSaisie(input) {
+        const valeurSaisie = input.value;
+        const regexLettresAvecEspaces = /^\d+$/;
+    
+        if (!regexLettresAvecEspaces.test(valeurSaisie)) {
+          //alert("ne fait pas ça")
+          // Effacez la saisie incorrecte
+          input.value = input.value.replace(/\D/g, '');
+         
+        } else {
+        }
+      }
+        </script>
+
   <script type="module">
  
         // Import the functions you need from the SDKs you need
@@ -106,11 +124,14 @@
             onValue(dbreftra, (snopshot) => {
                 snopshot.forEach((childsnopshot) => {
                 var userDataMyId = childsnopshot.val().userId
+
                document.getElementById('preloader').style.display = "none"
                //console.log(userDataMyId , UserIdxxx)
-               //alert(UserIdxxx)
                if(userDataMyId === UserIdxxx){
-
+                   
+                var unityUser = childsnopshot.val().MYWORKMONEY
+                localStorage.setItem("taketheSolde", unityUser)
+                 //alert(unityUser)
                 userDataElement.innerHTML = `
                     <div class="col-12">
                     <h1><i class="fa fa-diamond animated infinite jello" aria-hidden="true"></i>  Personnelles
@@ -202,16 +223,40 @@
             }
             });
         })
-
-
+          
+             document.getElementById('accountAzeroId').addEventListener('click', function(){
+                update(ref(db, "traducteurs/" + UserIdxxx), {
+                MYWORKMONEY : 0,
+              }).then(() => {
+               Swal.fire({
+               title: "Succès",
+               text: "Les montants ont été ajoutés avec succès",
+               icon: 'success',
+               allowOutsideClick : false,
+              }).then((result)=>{
+                if(result.isConfirmed){
+                  window.location.reload();
+                }
+              })
+            }).catch((error) => {
+                  Swal.fire({
+                  title: "Oops",
+                  text: "La mise a échoué !",
+                  icon: 'error'
+                });
+                // alert("les données ne sont pas supprimées " + error);
+                });
+              })
               // start function to add or give unity for user
               document.getElementById('sendunityforuser').addEventListener('click', function(){
               const db = getDatabase();
               // var OneUserID = localStorage.getItem("userIdTake").toString();
               var variableunity = document.getElementById('recipient-name').value;
-              var myCompta = parseFloat(unityUser);
+              const TaketheSolde = localStorage.getItem("taketheSolde")
+              var myCompta = parseFloat(TaketheSolde);
               var addunityForuser = parseFloat(variableunity)
               var sommesUnity = myCompta + addunityForuser
+              //alert(TaketheSolde)
               update(ref(db, "traducteurs/" + UserIdxxx), {
                 MYWORKMONEY : sommesUnity,
               }).then(() => {
@@ -225,8 +270,7 @@
                   window.location.reload();
                 }
               })
-
-                }).catch((error) => {
+            }).catch((error) => {
                   Swal.fire({
                   title: "Oops",
                   text: "La mise a échoué !",
@@ -239,6 +283,9 @@
               })
     }
     getUser()
-</script>  
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

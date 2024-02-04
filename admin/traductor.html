@@ -526,7 +526,7 @@
             <div class="modal-content">
  
                 <div class="modal-body" style="display: flex !important;">
-                    <input type="text" class="form-control" placeholder="Mettez le montant." id="paieMymoney" oninput="validerSaisie(this)"> 
+                    <input type="text" class="form-control" placeholder=" Mettez le montant." id="paieMymoney" oninput="validerSaisie(this)" disabled> 
                     <button type="button" class="btn btn-primary" style="margin-left: 3px;"  id="btnpaieMymoney" data-dismiss="modal">Envoyer</button>
                 </div>
             </div>
@@ -663,9 +663,9 @@
                 var abnComptId = document.getElementById('abnComptId');
                 abnComptId.innerHTML = `  ${snopshot.val().TYPEABONNEMENT ? `<img src="abon.svg" alt="">&nbsp;&nbsp; ${snopshot.val().TYPEABONNEMENT}` : '<img src="abon.svg" alt="">&nbsp;&nbsp;Aucun abonnement'} ` 
                 
-                // founction to show work money 
+                // founction to show work money <img src="../images/wallet.svg" alt="">&nbsp;&nbsp;Mon Solde
                 var AbnComptIdwork = document.getElementById('abnComptIdwork');
-                AbnComptIdwork.innerHTML = `${snopshot.val().MYWORKMONEY ? `${snopshot.val().MYWORKMONEY} $ en cours` : '0$'} `
+                AbnComptIdwork.innerHTML = `<img src="../images/wallet.svg" alt="">&nbsp;&nbsp; ${snopshot.val().MYWORKMONEY} $ de travail.`
 
                 var ModalMyDropdown = document.getElementById('modalMyDropdownx');
                 ModalMyDropdown.innerHTML = ` <i class="bi bi-envelope-fill"></i> Email : ${snopshot.val().email}`
@@ -689,10 +689,13 @@
                 }
 
             var btnpaieMymoney =  document.getElementById('btnpaieMymoney');
-            
+            var MyAccountV = snopshot.val().MYWORKMONEY
+            document.getElementById('paieMymoney').value = MyAccountV
             btnpaieMymoney.addEventListener('click', function(){
+            var MyAccountV = snopshot.val().MYWORKMONEY
                // alert(snopshot.val().email),
                // alert(snopshot.val().username);
+            if(MyAccountV >= 50){
             var  paieMymoney =  document.getElementById('paieMymoney').value;
             if(paieMymoney){
              //  envoi de mail de suspension
@@ -712,7 +715,7 @@
                       <strong style="color: #333; text-align: center !important;">Demande de paiement.</strong>
                       <p style="font-size: 16px; color: #666;">
                         Chère traducto,
-                        J'espère que ce message vous trouve bien. Je souhaite attirer votre attention sur le paiement d'un montant de ${paieMymoney} FCFA.
+                        J'espère que ce message vous trouve bien. Je souhaite attirer votre attention sur le paiement d'un montant de ${paieMymoney} $.
                       </p>
                    
                       <p style="font-size: 16px; color: #666;">
@@ -797,8 +800,24 @@
     toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   }); }
+}else{
+    Swal.fire({
+         toast: true,
+        icon: 'error',
+        title:`Le montant 50$ n'est disponible `,
+      animation: false,
+     position: 'top',
+     showConfirmButton: false,
+    timer: 6000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });   
+}
 })
-            })
+    })
 
             const dbref = ref(db, "utilisateurs");
             const dbreftra = ref(db, "traducteurs");

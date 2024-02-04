@@ -113,6 +113,7 @@ const emailInput = document.getElementById('login-email').value;
         USERCONNECT : false,
         COMMISSION :0,
         COMMISSIONID : "",
+        MYWORKMONEY : 0,
         GETALLWALLET : "",
         DATETIME : `${day}/${month}/${year}`,
         GENDER:"TRADUCTOR"
