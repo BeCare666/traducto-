@@ -699,7 +699,7 @@ function displayUsers(userArray) {
             trow.id = k.username
             trow.className = "userMyClassName"
 
-            if(!k.MYTRADUCTORID){
+                 if(!k.MYTRADUCTORID){
                         
                     }else{
                         trow.style.backgroundColor ="lemonchiffon"
@@ -796,7 +796,7 @@ function displayUsers(userArray) {
                     <td class="text-end"><a class="neutralMyclass">${k.userId}</a></td>
                 `;
             } else {
-                trow.style.backgroundColor = "lemonchiffon";
+                //trow.style.backgroundColor = "lemonchiffon";
                 trow.innerHTML = `
                     <td>${k.email}</td>
                     <td>${k.DATETIME}</td>
@@ -813,7 +813,7 @@ function displayUsers(userArray) {
                             // Par exemple, afficher une modale, rediriger l'utilisateur, etc.
                 });
 
-                        tableBody.appendChild(trow);
+                tableBody.appendChild(trow);
                     });
                 } else {
                     var row = document.createElement("tr");
