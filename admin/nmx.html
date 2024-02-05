@@ -20,7 +20,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Modal content goes here -->
+                   <input type="text" id="myInput">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -45,6 +45,32 @@
                 keyboard: false
             });
         });
+
+        // Tableau de données
+    var myData = [
+        { name: 'John', age: 30 },
+        { name: 'Alice', age: 25 },
+        { name: 'Bob', age: 35 }
+    ];
+
+    // Fonction de filtrage du tableau
+    function filterTable() {
+        var input, filter, filteredData;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+
+        // Filtrer les données en fonction de la saisie
+        filteredData = myData.filter(function(item) {
+            return item.name.toUpperCase().indexOf(filter) > -1;
+        });
+
+        // Afficher les données filtrées (vous pouvez faire ce que vous voulez avec les données)
+        console.log(filteredData);
+    }
+
+    // Appeler la fonction de filtrage à chaque fois qu'il y a un changement dans le champ d'entrée
+    document.getElementById("myInput").addEventListener("input", filterTable);
+
     </script>
 
 </body>
