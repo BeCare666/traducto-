@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paiement</title>
+    <script
+    src="https://api.feexpay.me/feexpay-javascript-sdk/index.js"></script>
+    <link rel="icon" href="../images/Traducto1-1.png" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-storage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div id="render"
+    style="width: 40vh !important; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+    class="custom-btn btn-3">
+  </div>
+  <script type="module">
+        // Configurer votre projet Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCwoswwJrsbu7LhoBVnkyaCAwIOtZmHbpY",
+  authDomain: "traducto-2fab6.firebaseapp.com",
+  databaseURL: "https://traducto-2fab6-default-rtdb.firebaseio.com",
+  projectId: "traducto-2fab6",
+  storageBucket: "traducto-2fab6.appspot.com",
+  messagingSenderId: "914618680771",
+  appId: "1:914618680771:web:24eb2877454b80188ea976"
+};
+
+// Initialiser Firebase
+firebase.initializeApp(firebaseConfig);
+const UserTraductoIdX = localStorage.getItem('userTraductoIdpId');
+  const Formyprcex = localStorage.getItem('Formyprce');
+  const TakeInputValuex = localStorage.getItem('TakeInputValue');
+  const SommesPricex = localStorage.getItem('SommesPrice');
+  alert("ABONNEMENT:" + TakeInputValuex)
+  alert("TYPEABONNEMENT" + Formyprcex)
+const userRef = firebase.database().ref('utilisateurs/' + UserTraductoIdX);
+    //alert(UserConnectuser) `${variablenx}`
+    FeexPayButton.init("render",{
+    id: "64b7a5536efe766ee1327ad8",
+    amount: `${SommesPricex}`,
+    case: "CARD",
+    token:"fp_hdL0LQPAKXx3RzBkjK3nmeoW3fURHK2UxetQBZ7AMP9nGrRyx33FEq2UjlckXok5",
+    callback: () => {
+    // Appeler la fonction définie dans le DOM
+    paymentCallback();
+  },
+    mode:'live',
+    description: "Test",
+  })
+
+  Swal.fire({
+      icon: 'info',
+      title: 'Paiement',
+      text: `Vous êtes sur le point de faire un paiement de ${TakeInputValuex}$, ce qui fait ${SommesPricex}XOF. Merci !`,
+      showConfirmButton: true,
+      allowOutsideClick : false,
+    // footer: '<a href="">Why do I have this issue?</a>'
+    })
+
+  function paymentCallback() { 
+    const userRef = firebase.database().ref('utilisateurs/' + UserTraductoIdX);
+    // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
+    userRef.update({
+    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
+    ABONNEMENT: TakeInputValuex,
+    TYPEABONNEMENT: Formyprcex ,
+      // ... ajoutez d'autres champs si nécessaire
+    }).then(() => {
+        
+         window.location.reload();
+    }).catch((error) => {
+     alert("les données ne sont pas mise à jour " + error);
+    });
+  }
+
+  const renderDiv = document.getElementById('render');
+    renderDiv.addEventListener('click', function() {
+    renderDiv.style.position = '';
+    renderDiv.style.top = '';
+    renderDiv.style.left = '';
+    renderDiv.style.transform = '';
+    });
+
+  </script>
+</body>
+</html>

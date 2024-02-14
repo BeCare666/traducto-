@@ -170,91 +170,30 @@ checkbox.addEventListener("click", () => {
 });
 // function to paid pro
 PaidToPro.addEventListener('click', function(){
-  console.log(hideInputy.value)
-  console.log(hideInputx.value)
+  var formyprce = hideInputx.value
   var takeInputValue = hideInputy.value
   var sommesPrice = 600 * takeInputValue
-    openKkiapayWidget({
-    amount: `${sommesPrice}`,
-    position: "center",
-    callback: "javascript:sendmycommandinCentremodale()",
-    data: "",
-    theme: "blue",
-    key: "878e7b7232e5a1e067f29d44816f4b801a029e09",
-    });
-    //la reponse du payement kkiapay
-    addSuccessListener((response) => {
-    //console.log(response);
-    var trans = response.transactionId;
-    //  console.log(trans);
-    if (trans) {
-    //localStorage.setItem("storageName", trans);
-
-    const userRef = firebase.database().ref('traducteurs/' + UserTraductoId);
-    // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
-    userRef.update({
-    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
-    ABONNEMENT: hideInputy.value,
-    TYPEABONNEMENT: hideInputx.value,
-      // ... ajoutez d'autres champs si nécessaire
-    }).then(() => {
-        
-         window.location.reload();
-        })
-        .catch((error) => {
-     alert("les données ne sont pas mise à jour " + error);
-    });
-    //window.location.href = "pricing.html";
-    } else {
-    alert(`quelque chose s'est mal passé`);
-    }
-    });
+  localStorage.setItem("Formyprce", formyprce);
+  localStorage.setItem("TakeInputValue", takeInputValue);
+  localStorage.setItem("SommesPrice", sommesPrice);
+  setTimeout(()=>{
+    window.location.href = "xpx.html"
+  },300)
   
 })
 
 // function to paid pre
 PaidToPre.addEventListener('click', function(){
-  console.log(hideInput.value)
-  console.log(hideInputz.value)
-
-  var takeInputValue = hideInput.value
   var sommesPrice = 600 * takeInputValue
-    openKkiapayWidget({
-    amount: `${sommesPrice}`,
-    position: "center",
-    callback: "javascript:sendmycommandinCentremodale()",
-    data: "",
-    theme: "blue",
-    key: "878e7b7232e5a1e067f29d44816f4b801a029e09",
-    });
-    //la reponse du payement kkiapay
-    addSuccessListener((response) => {
-    //console.log(response);
-    var trans = response.transactionId;
-    //  console.log(trans);
-    if (trans) {
-    //localStorage.setItem("storageName", trans);
-
-    const userRef = firebase.database().ref('traducteurs/' + UserTraductoId);
-    // Après avoir envoyé le fichier, mettez à jour les données de l'utilisateur
-    userRef.update({
-    // Mettez à jour les champs nécessaires dans l'objet de données de l'utilisateur
-    ABONNEMENT: hideInput.value,
-    TYPEABONNEMENT: hideInputz.value,
-
-   
-      // ... ajoutez d'autres champs si nécessaire
-    }).then(() => {
-         window.location.reload();
-        })
-        .catch((error) => {
-     alert("les données ne sont pas mise à jour " + error);
-    });
-    //window.location.href = "pricing.html";
-    } else {
-    alert(`quelque chose s'est mal passé`);
-    }
-    });
+  var formyprce = hideInputz.value
+  var takeInputValue = hideInput.value 
+  var sommesPrice = 600 * takeInputValue
+  localStorage.setItem("Formyprce", formyprce);
+  localStorage.setItem("TakeInputValue", takeInputValue);
+  localStorage.setItem("SommesPrice", sommesPrice);
+  setTimeout(()=>{
+    window.location.href = "xpx.html"
+  },300)
   
 })
 
